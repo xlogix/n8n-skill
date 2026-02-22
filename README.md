@@ -1,44 +1,46 @@
-# n8n-skill (The Agent-First Standard)
+# n8n-skill
 
-**This repository is not for humans.** It is an Open Standard Knowledge Base designed specifically to be added as a "skill" to AI Agents (like Codex, Antigravity, Cursor, Windsurf, ChatGPT, and Claude). By giving your agent this skill, it gains the ability to build, debug, and architect [n8n](https://n8n.io) workflows perfectly, without any bugs or hallucinated JSON properties.
+This repository is a **custom skill** designed specifically for AI Agents (like Codex, Antigravity, Cursor, Windsurf, ChatGPT, and Claude). 
 
-## The Problem
+By giving your AI agent this skill, it learns exactly how to build, debug, and design [n8n](https://n8n.io) workflows perfectly.
 
-n8n has over 500+ built-in nodes and a constantly shifting API. AI models hallucinate parameter names, misconfigure triggers, and guess JSON structures, leading to broken workflows.
+## Why do you need this?
+
+n8n has over 500+ built-in nodes. When you ask an AI to build a workflow, it usually guesses how the nodes work, which leads to broken code and frustration.
 
 ## The Solution
 
-**n8n-skill** solves this by providing the complete n8n node catalog, architectural patterns, and execution concepts in a machine-readable REST-like pattern optimized *exclusively* for AI consumption. It strips away human-centric visual guides and replaces them with strict JSON declarations and behavioral contracts.
+**n8n-skill** fixes this by giving the AI the actual instruction manual for every single n8n node. Instead of guessing, the AI reads the exact node requirements directly from this repository and builds the workflow exactly as you intended.
 
-## Zero-Friction Integration
+## How to add this skill to your AI
 
 We've made it effortless to make your AI an n8n expert:
 
-### 1. IDE Integration (Cursor / Windsurf)
+### 1. For IDEs (Cursor / Windsurf)
 
-Simply clone or download this repository (`https://github.com/xlogix/n8n-skill`) and place it alongside your project folder in your IDE, or drop the `.cursorrules` file into your workspace. The IDE will automatically instruct the AI on how to index and read the n8n knowledge base when you ask it questions.
+Simply clone or download this repository (`https://github.com/xlogix/n8n-skill`) and place it alongside your project folder in your IDE, or drop the `.cursorrules` file into your workspace. That's it. The IDE will now automatically read the n8n knowledge base whenever you ask it to build something.
 
-### 2. Chat UI Integration (ChatGPT / Claude Web)
+### 2. For Chat Apps (ChatGPT / Claude Web)
 
-Copy the prompt found in `.agents/system-prompt.md` and paste it as the "Custom Instructions" or the initial system prompt in your chat session.
+Copy the text found in `.agents/system-prompt.md` and paste it as the "Custom Instructions" or the initial system prompt in your chat session.
 
-### 3. Model Context Protocol (MCP)
+### 3. For Claude Desktop
 
-This repository includes an `mcp-manifest.json` outlining how MCP servers can mount the `/knowledge` directory to expose n8n capabilities dynamically to Claude Desktop and other MCP clients.
+This repository includes an `mcp-manifest.json` file. You can configure your Claude Desktop app to use this file so it can natively read the n8n manual directly from your computer.
 
-### 4. Autonomous Agents (Codex / Antigravity)
+### 4. For Autonomous Agents (Codex / Antigravity)
 
-For autonomous coding agents like Codex, you can simply clone this repository into the workspace and provide the following instruction:
-> *"I want you to use the local `n8n-skill` folder as your primary knowledge base. Read `knowledge/use-cases/workflow-needs.json` to map my instructions, and literally read the node markdown definitions in `knowledge/reference/node-catalog/nodes/` before writing n8n json."*
+For autonomous coding agents like Codex, you can simply clone this repository into your workspace and provide the following text prompt:
+> *"I want you to use the local `n8n-skill` folder as your main knowledge base. Read the `knowledge/use-cases/workflow-needs.json` file to understand what I am trying to build, and read the node rules in `knowledge/reference/node-catalog/nodes/` before you write any code."*
 
-## Directory Structure
+## What is inside?
 
-- `/knowledge/`: The raw intelligence of the skill (derived directly from the open standard).
-  - `/concepts/`: Core n8n execution models.
-  - `/patterns/`: Reusable, production-grade logic.
-  - `/reference/`: The sprawling catalog of every n8n node.
-- `/.agents/`: Pre-written system prompts for various AI platforms.
-- `/website/`: (WIP) An upcoming interactive AI playground.
+- `/knowledge/`: The actual instruction manuals for how all the nodes work.
+  - `/concepts/`: Basic n8n rules.
+  - `/patterns/`: Common, reusable workflow designs.
+  - `/reference/`: The catalog of every single n8n node.
+- `/.agents/`: Setup instructions for different AI platforms.
+- `/website/`: The source code for the landing page.
 
 ## License
 

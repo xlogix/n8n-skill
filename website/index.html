@@ -18,11 +18,11 @@
         <p style="font-size: 1.5rem; font-weight: 800; max-width: 800px; margin-bottom: 40px; text-transform: uppercase;">A native skill you add to Codex or Antigravity to enable them to build perfect, bug-free n8n workflows.</p>
         
         <div class="tilted-box tilt-left bg-light-green">
-            <h2>DESIGNED FOR MACHINES. OPEN FOR ALL.</h2>
+            <h2>THE INSTRUCTION MANUAL FOR AI AGENTS.</h2>
         </div>
         
         <div class="tilted-box tilt-right bg-dark-green text-light">
-            <h2>THE AGENTIC N8N STANDARD.</h2>
+            <h2>NO GUESSING. NO BROKEN CODE.</h2>
         </div>
         
         <div class="action-grid">
@@ -40,43 +40,43 @@
     <main class="container" id="integrations">
         
         <div class="brutal-box section-title bg-yellow">
-            <h2>INTEGRATE INSTANTLY</h2>
+            <h2>HOW TO ADD THIS SKILL TO YOUR AI</h2>
         </div>
 
         <div class="brutal-box">
-            <h3>1. IDE Integration (Cursor / Windsurf)</h3>
-            <p>Drop this into your project root as <code>.cursorrules</code> to make your IDE an n8n expert. No more guessing node properties.</p>
+            <h3>1. For IDEs (Cursor / Windsurf)</h3>
+            <p>Drop this into your project folder as a <code>.cursorrules</code> file. Your IDE will now read the actual node manuals before writing any code.</p>
             <div class="code-container">
                 <button class="copy-btn" onclick="copyText('cursor-code')">COPY</button>
-                <pre><code id="cursor-code">You are an expert n8n workflow automation engineer and AI agent.
-When assisting the user with n8n tasks or building workflows:
-1. DO NOT guess the properties, parameters, or schema of n8n nodes.
-2. ALWAYS consult the Open Standard Knowledge Base mounted in this repository.
-3. START by reading `knowledge/use-cases/workflow-needs.json`.
-4. THEN search `knowledge/reference/indexes/nodes-by-capability.json`.
-5. FINALLY, safely read the node contract inside `knowledge/reference/node-catalog/nodes/<nodeName>.md`.
-6. Your code output should strictly follow the JSON definitions found in the node documentation.</code></pre>
+                <pre><code id="cursor-code">You are an expert n8n workflow builder and AI agent.
+When helping the user build workflows:
+1. DO NOT guess how the n8n nodes work.
+2. ALWAYS read the knowledge base in this repository first.
+3. START by reading `knowledge/use-cases/workflow-needs.json` to understand what I want.
+4. THEN look for the right nodes in `knowledge/reference/indexes/nodes-by-capability.json`.
+5. FINALLY, read the exact instructions for that node in `knowledge/reference/node-catalog/nodes/<nodeName>.md`.
+6. Your code output must perfectly match the JSON instructions found in those files.</code></pre>
             </div>
         </div>
 
         <div class="brutal-box">
-            <h3>2. Chat UI Integration (ChatGPT / Claude Web)</h3>
-            <p>Paste this as the "Custom Instructions" or system prompt in your AI chat UI.</p>
+            <h3>2. For Chat Apps (ChatGPT / Claude Web)</h3>
+            <p>Paste this text into your "Custom Instructions" or system prompt in your AI chat window.</p>
             <div class="code-container">
                 <button class="copy-btn" onclick="copyText('prompt-code')">COPY</button>
-                <pre><code id="prompt-code"># n8n Workflow Architect Persona
-You are an expert n8n Workflow Automation Architect.
+                <pre><code id="prompt-code"># n8n Workflow Expert Persona
+You are an expert n8n Workflow Builder.
 
-## Core Directives
-1. No Hallucinations: Never guess JSON structures or parameters for an n8n node.
-2. Consult the Knowledge Base: Ask the user to provide the exact JSON structure for a node from the n8n-skill library, or use file access tools to read the `/knowledge` directory.
-When providing n8n JSON snippets, output only valid JSON representing the n8n nodes.</code></pre>
+## Core Rules
+1. No Guessing: Never guess what a node requires.
+2. Use the Knowledge Base: Ask the user to upload the exact node instructions from the n8n-skill library, or use your internet/file tools to read the `/knowledge` folder.
+Only give the user correct, working n8n code based on those files.</code></pre>
             </div>
         </div>
 
         <div class="brutal-box">
-            <h3>3. MCP Integration (Claude Desktop / Antigravity)</h3>
-            <p>Mount the repository using MCP to natively query the vast node catalog.</p>
+            <h3>3. For Claude Desktop App</h3>
+            <p>Add this file to your MCP config so Claude Desktop can read the n8n manual directly from your computer.</p>
             <div class="code-container">
                 <button class="copy-btn" onclick="copyText('mcp-code')">COPY</button>
                 <pre><code id="mcp-code">{
@@ -95,13 +95,13 @@ When providing n8n JSON snippets, output only valid JSON representing the n8n no
         </div>
 
         <div class="brutal-box">
-            <h3>4. AI Agent Workflow (Codex / Antigravity)</h3>
-            <p>For autonomous agents like Codex, provide this prompt to explicitly instruct them to use their file-system tools to index the repository as a native skill.</p>
+            <h3>4. For Autonomous Agents (Codex / Antigravity)</h3>
+            <p>Give your coding agent this explicit text command to force it to read the manual before it builds anything.</p>
             <div class="code-container">
                 <button class="copy-btn" onclick="copyText('agent-code')">COPY</button>
-                <pre><code id="agent-code">I want you to use the n8n-skill repository located at `https://github.com/xlogix/n8n-skill` as your primary knowledge base for all workflow requests.
+                <pre><code id="agent-code">I want you to use the n8n-skill repository located at `https://github.com/xlogix/n8n-skill` as your main knowledge base.
 
-Please read `knowledge/use-cases/workflow-needs.json` to map my instructions, and then use your file reading tools to look up the exact node definitions in the `knowledge/reference/node-catalog/nodes/` directory before writing any code. Do not guess n8n schema properties.</code></pre>
+Please read `knowledge/use-cases/workflow-needs.json` to understand what I am trying to build, and then use your file reading tools to read the actual node instructions in `knowledge/reference/node-catalog/nodes/` before you write any code for me. Do not guess how n8n works.</code></pre>
             </div>
         </div>
 

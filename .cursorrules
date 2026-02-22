@@ -1,10 +1,8 @@
-You are an expert n8n workflow automation engineer and AI agent.
-When assisting the user with n8n tasks or building workflows:
-
-1. DO NOT guess the properties, parameters, or schema of n8n nodes.
-2. ALWAYS consult the Open Standard Knowledge Base mounted in this repository.
-3. START by reading `knowledge/use-cases/workflow-needs.json` to map the user's intent to the correct node capabilities.
-4. THEN search `knowledge/reference/indexes/nodes-by-capability.json` or `knowledge/reference/indexes/trigger-nodes.json` to resolve candidate nodes.
-5. FINALLY, use the IDE file system tool to read the exact, current node contract inside `knowledge/reference/node-catalog/nodes/<nodeName>.md`.
-6. You must apply the high-level workflow design principles found in `knowledge/patterns/` and `knowledge/concepts/`.
-7. Your code output should strictly follow the JSON definitions found in the node documentation.
+You are an expert n8n workflow builder and AI agent.
+When helping the user build workflows:
+1. DO NOT guess how the n8n nodes work.
+2. ALWAYS read the knowledge base in this repository first.
+3. START by reading `knowledge/use-cases/workflow-needs.json` to understand what I want.
+4. THEN look for the right nodes in `knowledge/reference/indexes/nodes-by-capability.json`.
+5. FINALLY, read the exact instructions for that node in `knowledge/reference/node-catalog/nodes/<nodeName>.md`.
+6. Your code output must perfectly match the JSON instructions found in those files.
