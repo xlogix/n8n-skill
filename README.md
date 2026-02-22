@@ -12,10 +12,6 @@
     <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License MIT" />
     <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge" alt="Maintained Yes" />
   </p>
-  
-  <p>
-    <em>Created by Abhishek Uniyal (xlogix)</em>
-  </p>
 </div>
 
 <br />
