@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>n8n Skill - The Open Standard for AI Agents</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">n8n Skill</div>
+            <a href="https://github.com/synergyboat/n8n-skill" class="btn btn-primary">GitHub</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>The Open Standard n8n Skill</h1>
+            <p>Empower your AI (Cursor, Windsurf, Claude, ChatGPT) to build, debug, and architect n8n workflows autonomously.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="integrations">
+            <h2>Zero-Friction Integrations</h2>
+            
+            <div class="card">
+                <h3>1. IDE Integration (Cursor / Windsurf)</h3>
+                <p>Drop this into your project root as <code>.cursorrules</code> or <code>.windsurfrules</code> to make your IDE an n8n expert.</p>
+                <div class="code-block">
+                    <pre><code id="cursor-code">You are an expert n8n workflow automation engineer and AI agent.
+When assisting the user with n8n tasks or building workflows:
+1. DO NOT guess the properties, parameters, or schema of n8n nodes.
+2. ALWAYS consult the Open Standard Knowledge Base mounted in this repository.
+3. START by reading `knowledge/use-cases/workflow-needs.json` to map the user's intent.
+4. THEN search `knowledge/reference/indexes/nodes-by-capability.json`.
+5. FINALLY, use the IDE file system tool to read the node contract inside `knowledge/reference/node-catalog/nodes/<nodeName>.md`.
+6. You must apply the high-level workflow design principles found in `knowledge/patterns/`.
+7. Your code output should strictly follow the JSON definitions found in the node documentation.</code></pre>
+                    <button class="copy-btn" onclick="copyText('cursor-code')">Copy</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>2. Chat UI Integration (ChatGPT / Claude Web)</h3>
+                <p>Paste this as the "Custom Instructions" or system prompt in your AI chat UI.</p>
+                <div class="code-block">
+                    <pre><code id="prompt-code"># n8n Workflow Architect Persona
+You are an expert n8n Workflow Automation Architect. Your responsibility is to design, debug, and optimize n8n workflows.
+
+## Core Directives
+1. No Hallucinations: You must never guess the JSON structure, parameter names, or options for an n8n node.
+2. Consult the Knowledge Base: You have access to the n8n-skill Open Standard Knowledge base.
+   - Ask the user to provide the exact JSON structure for a node from the n8n-skill library if you do not have native file access.
+   - If you have file access tools, you must search the `/knowledge` directory to resolve the node capabilities.
+
+When providing n8n JSON snippets, output only valid JSON representing the n8n nodes and connections.</code></pre>
+                    <button class="copy-btn" onclick="copyText('prompt-code')">Copy</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>3. MCP Integration (Claude Desktop / Antigravity)</h3>
+                <p>Mount the repository using MCP to natively query the 500+ node catalog without copy-pasting code.</p>
+                <div class="code-block">
+                    <pre><code id="mcp-code">{
+  "mcpServers": {
+    "n8n-skill": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/absolute/path/to/n8n-skill/knowledge"
+      ]
+    }
+  }
+}</code></pre>
+                    <button class="copy-btn" onclick="copyText('mcp-code')">Copy</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="playground">
+            <h2>AI Assistant Playground</h2>
+            <p>See how an AI agent uses the n8n-skill to interact with users.</p>
+            <div class="chat-window">
+                <div class="chat-message user">
+                    <div class="avatar">U</div>
+                    <div class="bubble">Can you build me a workflow that triggers on a Stripe webhook and sends a Slack message?</div>
+                </div>
+                <div class="chat-message ai">
+                    <div class="avatar">🤖</div>
+                    <div class="bubble">
+                        <p><i>Searching <code>knowledge/use-cases/workflow-needs.json</code> for "webhook"...</i></p>
+                        <p><i>Reading <code>knowledge/reference/node-catalog/nodes/webhook.md</code>...</i></p>
+                        <p><i>Reading <code>knowledge/reference/node-catalog/nodes/slack.md</code>...</i></p>
+                        <br>
+                        <p>I have built the workflow based on the official n8n-skill node schemas. Here is the JSON you can paste directly into your n8n canvas:</p>
+                        <pre><code>{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "stripe-trigger",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    }
+  ]
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Built with ❤️ for the n8n Community.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

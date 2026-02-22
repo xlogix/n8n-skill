@@ -1,0 +1,24 @@
+{
+    "mcpVersion": "1.0",
+    "name": "n8n-skill-knowledge",
+    "version": "1.0.0",
+    "description": "Exposes the n8n workflow open standard knowledge base as an MCP resource strategy.",
+    "resources": {
+        "n8n-catalog": {
+            "uri": "file://./knowledge/reference/node-catalog/all-nodes.json",
+            "mimeType": "application/json",
+            "description": "The complete index of all n8n nodes."
+        },
+        "n8n-capabilities": {
+            "uri": "file://./knowledge/use-cases/workflow-needs.json",
+            "mimeType": "application/json",
+            "description": "Mapping of human intents to n8n node types."
+        }
+    },
+    "prompts": {
+        "architect": {
+            "file": "file://./.agents/system-prompt.md",
+            "description": "System persona for an n8n architect."
+        }
+    }
+}

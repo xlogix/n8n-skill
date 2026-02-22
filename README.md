@@ -1,0 +1,40 @@
+# n8n-skill
+
+An Open Standard Knowledge Base to empower AI Agents (Antigravity, Cursor, Windsurf, ChatGPT, Claude) to build, debug, and architect [n8n](https://n8n.io) workflows autonomously.
+
+## The Problem
+
+n8n has over 500+ built-in nodes and a constantly shifting API. AI models hallucinate parameter names, misconfigure triggers, and guess JSON structures, leading to broken workflows.
+
+## The Solution
+
+**n8n-skill** solves this by providing the complete n8n node catalog, architectural patterns, and execution concepts in a machine-readable format optimized exclusively for AI consumption.
+
+## Zero-Friction Integration
+
+We've made it effortless to make your AI an n8n expert:
+
+### 1. IDE Integration (Cursor / Windsurf)
+
+Simply clone or download this repository and place it alongside your project folder in your IDE, or drop the `.cursorrules` file into your workspace. The IDE will automatically instruct the AI on how to index and read the n8n knowledge base when you ask it questions.
+
+### 2. Chat UI Integration (ChatGPT / Claude Web)
+
+Copy the prompt found in `.agents/system-prompt.md` and paste it as the "Custom Instructions" or the initial system prompt in your chat session.
+
+### 3. Model Context Protocol (MCP)
+
+This repository includes an `mcp-manifest.json` outlining how MCP servers can mount the `/knowledge` directory to expose n8n capabilities dynamically to Claude Desktop and other MCP clients.
+
+## Directory Structure
+
+- `/knowledge/`: The raw intelligence of the skill (derived directly from the open standard).
+  - `/concepts/`: Core n8n execution models.
+  - `/patterns/`: Reusable, production-grade logic.
+  - `/reference/`: The sprawling catalog of every n8n node.
+- `/.agents/`: Pre-written system prompts for various AI platforms.
+- `/website/`: (WIP) An upcoming interactive AI playground.
+
+## License
+
+MIT License. See `LICENSE` for details.
