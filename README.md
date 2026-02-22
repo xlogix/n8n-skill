@@ -24,7 +24,7 @@ Simply clone or download this repository (`https://github.com/xlogix/n8n-skill`)
 
 ### 2. For Claude Desktop
 
-This repository includes an `mcp-manifest.json` file. You can configure your Claude Desktop app to use this file so it can natively read the n8n manual directly from your computer.
+First, clone or download this repository to your machine. Then, configure your Claude Desktop app to use this `mcp-manifest.json` file so it can natively read the n8n manual directly from your computer.
 
 ### 3. For Autonomous Agents (Codex / Antigravity)
 
