@@ -1,0 +1,14 @@
+{
+    "name": "n8n-skill-generator",
+    "version": "1.0.0",
+    "description": "Minimalist custom generator for extracting n8n node schemas into AI-readable markdown.",
+    "main": "generate.js",
+    "scripts": {
+        "generate": "node generate.js"
+    },
+    "dependencies": {
+        "n8n-nodes-base": "^1.121.6",
+        "@n8n/n8n-nodes-langchain": "^1.122.7",
+        "n8n-workflow": "^1.120.4"
+    }
+}
