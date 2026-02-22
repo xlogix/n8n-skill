@@ -26,6 +26,11 @@ Copy the prompt found in `.agents/system-prompt.md` and paste it as the "Custom 
 
 This repository includes an `mcp-manifest.json` outlining how MCP servers can mount the `/knowledge` directory to expose n8n capabilities dynamically to Claude Desktop and other MCP clients.
 
+### 4. Autonomous Agents (Codex / Antigravity)
+
+For autonomous coding agents like Codex, you can simply clone this repository into the workspace and provide the following instruction:
+> *"I want you to use the local `n8n-skill` folder as your primary knowledge base. Read `knowledge/use-cases/workflow-needs.json` to map my instructions, and literally read the node markdown definitions in `knowledge/reference/node-catalog/nodes/` before writing n8n json."*
+
 ## Directory Structure
 
 - `/knowledge/`: The raw intelligence of the skill (derived directly from the open standard).

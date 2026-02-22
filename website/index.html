@@ -92,6 +92,17 @@ When providing n8n JSON snippets, output only valid JSON representing the n8n no
             </div>
         </div>
 
+        <div class="brutal-box">
+            <h3>4. AI Agent Workflow (Codex / Antigravity)</h3>
+            <p>For autonomous agents like Codex, provide this prompt to explicitly instruct them to use their file-system tools to index the repository as a native skill.</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyText('agent-code')">COPY</button>
+                <pre><code id="agent-code">I want you to use the n8n-skill repository located at `https://github.com/xlogix/n8n-skill` as your primary knowledge base for all workflow requests.
+
+Please read `knowledge/use-cases/workflow-needs.json` to map my instructions, and then use your file reading tools to look up the exact node definitions in the `knowledge/reference/node-catalog/nodes/` directory before writing any code. Do not guess n8n schema properties.</code></pre>
+            </div>
+        </div>
+
         <div class="brutal-box bg-light-green ai-demo">
             <h3>AI PLAYGROUND SIMULATION</h3>
             <div class="chat-mockup">
