@@ -4,8 +4,8 @@
     "description": "The Open Standard n8n Skill Knowledge Base for AI Agents",
     "private": true,
     "scripts": {
-        "dev": "npx live-server website",
-        "serve": "npx serve website"
+        "dev": "npx live-server docs",
+        "serve": "npx serve docs"
     },
     "repository": {
         "type": "git",
