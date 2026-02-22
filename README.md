@@ -16,7 +16,7 @@ We've made it effortless to make your AI an n8n expert:
 
 ### 1. IDE Integration (Cursor / Windsurf)
 
-Simply clone or download this repository and place it alongside your project folder in your IDE, or drop the `.cursorrules` file into your workspace. The IDE will automatically instruct the AI on how to index and read the n8n knowledge base when you ask it questions.
+Simply clone or download this repository (`https://github.com/xlogix/n8n-skill`) and place it alongside your project folder in your IDE, or drop the `.cursorrules` file into your workspace. The IDE will automatically instruct the AI on how to index and read the n8n knowledge base when you ask it questions.
 
 ### 2. Chat UI Integration (ChatGPT / Claude Web)
 
