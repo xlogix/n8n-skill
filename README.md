@@ -16,7 +16,7 @@ n8n has over 500+ built-in nodes. When you ask an AI to build a workflow, it usu
 
 ## How to add this skill to your AI
 
-I've made it effortless to make your AI an n8n expert. You don't need to be a developer to do this.
+I've made it effortless to make your AI an n8n expert.
 
 ### Step 0: Get the Instruction Manual
 Before giving the skill to your AI, you need to save it to your computer:
