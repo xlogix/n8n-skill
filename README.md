@@ -16,20 +16,28 @@ n8n has over 500+ built-in nodes. When you ask an AI to build a workflow, it usu
 
 ## How to add this skill to your AI
 
-I've made it effortless to make your AI an n8n expert:
+I've made it effortless to make your AI an n8n expert. You don't need to be a developer to do this.
+
+### Step 0: Get the Instruction Manual
+Before giving the skill to your AI, you need to save it to your computer:
+1. Scroll to the top of this GitHub page and click the green **"<> Code"** button.
+2. Click **"Download ZIP"**.
+3. Find the ZIP file in your `Downloads` folder and double-click it to unzip it. You should now have a folder called `n8n-skill-main`.
+
+---
 
 ### 1. For IDEs (Cursor / Windsurf)
 
-Simply clone or download this repository (`https://github.com/xlogix/n8n-skill`) and place it alongside your project folder in your IDE, or drop the `.cursorrules` file into your workspace. That's it. The IDE will now automatically read the n8n knowledge base whenever you ask it to build something.
+Open the `n8n-skill-main` folder you just unzipped. Inside, you will see a file named `.cursorrules`. Drag and drop that file directly into whatever project folder you are working in. That's it. The IDE will now automatically read the n8n knowledge base whenever you ask it to build something.
 
 ### 2. For Claude Desktop
 
-First, clone or download this repository to your machine. Then, configure your Claude Desktop app to use this `mcp-manifest.json` file so it can natively read the n8n manual directly from your computer.
+You can configure your Claude Desktop app to use the `mcp-manifest.json` file inside the downloaded folder so it can natively read the n8n manual directly from your computer. If you unzipped the folder into your Downloads directory, your config path to the knowledge base will look like this: `/Users/your-username/Downloads/n8n-skill-main/knowledge`
 
 ### 3. For Autonomous Agents (Codex / Antigravity)
 
-For autonomous coding agents like Codex, you can simply clone this repository into your workspace and provide the following text prompt:
-> *"I want you to use the local `n8n-skill` folder as your main knowledge base. Read the `knowledge/use-cases/workflow-needs.json` file to understand what I am trying to build, and read the node rules in `knowledge/reference/node-catalog/nodes/` before you write any code."*
+For autonomous coding agents like Codex, you provide them a text prompt that points them exactly to where you unzipped the folder:
+> *"I want you to use the local `n8n-skill-main` folder in my Downloads directory as your main knowledge base. Read the `knowledge/use-cases/workflow-needs.json` file inside it to understand what I am trying to build, and read the node rules in `knowledge/reference/node-catalog/nodes/` before you write any code."*
 
 ## What is inside?
 
