@@ -14,7 +14,7 @@ n8n has over 500+ built-in nodes. When you ask an AI to build a workflow, it usu
 
 ## How to add this skill to your AI
 
-We've made it effortless to make your AI an n8n expert:
+I (Abhishek Uniyal / xlogix) have made it effortless to make your AI an n8n expert:
 
 ### 1. For IDEs (Cursor / Windsurf)
 
