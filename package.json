@@ -4,7 +4,8 @@
     "description": "Minimalist custom generator for extracting n8n node schemas into AI-readable markdown.",
     "main": "generate.js",
     "scripts": {
-        "generate": "node generate.js"
+        "generate": "node generate.js",
+        "publish-nodes": "bash publish.sh"
     },
     "dependencies": {
         "n8n-nodes-base": "^1.121.6",
