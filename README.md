@@ -1,6 +1,6 @@
-# n8n-skill
+# n8n-skill (The Agent-First Standard)
 
-An Open Standard Knowledge Base to empower AI Agents (Antigravity, Cursor, Windsurf, ChatGPT, Claude) to build, debug, and architect [n8n](https://n8n.io) workflows autonomously.
+**This repository is not for humans.** It is an Open Standard Knowledge Base designed specifically to empower AI Agents (Antigravity, Cursor, Windsurf, ChatGPT, Claude) to build, debug, and architect [n8n](https://n8n.io) workflows autonomously.
 
 ## The Problem
 
@@ -8,7 +8,7 @@ n8n has over 500+ built-in nodes and a constantly shifting API. AI models halluc
 
 ## The Solution
 
-**n8n-skill** solves this by providing the complete n8n node catalog, architectural patterns, and execution concepts in a machine-readable format optimized exclusively for AI consumption.
+**n8n-skill** solves this by providing the complete n8n node catalog, architectural patterns, and execution concepts in a machine-readable REST-like pattern optimized *exclusively* for AI consumption. It strips away human-centric visual guides and replaces them with strict JSON declarations and behavioral contracts.
 
 ## Zero-Friction Integration
 
