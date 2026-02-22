@@ -1,6 +1,6 @@
 # n8n-skill (The Agent-First Standard)
 
-**This repository is not for humans.** It is an Open Standard Knowledge Base designed specifically to empower AI Agents (Antigravity, Cursor, Windsurf, ChatGPT, Claude) to build, debug, and architect [n8n](https://n8n.io) workflows autonomously.
+**This repository is not for humans.** It is an Open Standard Knowledge Base designed specifically to be added as a "skill" to AI Agents (like Codex, Antigravity, Cursor, Windsurf, ChatGPT, and Claude). By giving your agent this skill, it gains the ability to build, debug, and architect [n8n](https://n8n.io) workflows perfectly, without any bugs or hallucinated JSON properties.
 
 ## The Problem
 
