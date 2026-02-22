@@ -53,17 +53,18 @@ You can configure your Claude Desktop app to use the `mcp-manifest.json` file in
 ### 3. For Autonomous Agents (Codex / Antigravity)
 
 For autonomous coding agents like Codex, you provide them a text prompt that points them exactly to where you unzipped the folder:
-> *"I want you to use the local `n8n-skill-main` folder in my Downloads directory as your main knowledge base. Read the `knowledge/use-cases/workflow-needs.json` file inside it to understand what I am trying to build, and read the node rules in `knowledge/reference/node-catalog/nodes/` before you write any code."*
+> *"I want you to use the local `n8n-skill-main` folder in my Downloads directory as your main knowledge base. Read the `SKILL.md` file inside it to understand how to navigate the documentation, then read the node rules in `references/node-catalog/nodes/` before you write any code."*
 
 <br />
 
 ## 📂 What is inside?
 
-- `/knowledge/`: The actual instruction manuals for how all the nodes work.
+- `SKILL.md`: The official instruction manual teaching AI agents how to use this skill.
+- `/references/`: The actual instruction manuals for how all the nodes work.
   - `/concepts/`: Basic n8n rules.
   - `/patterns/`: Common, reusable workflow designs.
-  - `/reference/`: The catalog of every single n8n node.
-- `/.agents/`: Setup instructions for different AI platforms.
+  - `/node-catalog/`: The catalog of every single n8n node.
+- `/assets/`: Supporting files, like `workflow-needs.json` mapping.
 - `/docs/`: The source code for the landing page.
 
 <br />
