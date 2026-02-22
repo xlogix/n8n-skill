@@ -60,22 +60,7 @@ When helping the user build workflows:
         </div>
 
         <div class="brutal-box">
-            <h3>2. For Chat Apps (ChatGPT / Claude Web)</h3>
-            <p>Paste this text into your "Custom Instructions" or system prompt in your AI chat window. When you ask the AI to build a workflow, it will pause and ask you to upload the instruction manuals. Simply download the specific node <code>.md</code> files from this repository and upload them to the chat!</p>
-            <div class="code-container">
-                <button class="copy-btn" onclick="copyText('prompt-code')">COPY</button>
-                <pre><code id="prompt-code"># n8n Workflow Expert Persona
-You are an expert n8n Workflow Builder.
-
-## Core Rules
-1. No Guessing: Never guess what a node requires.
-2. Use the Knowledge Base: Ask the user to upload the exact node instructions from the n8n-skill library, or use your internet/file tools to read the `/knowledge` folder.
-Only give the user correct, working n8n code based on those files.</code></pre>
-            </div>
-        </div>
-
-        <div class="brutal-box">
-            <h3>3. For Claude Desktop App</h3>
+            <h3>2. For Claude Desktop App</h3>
             <p>Add this file to your MCP config so Claude Desktop can read the n8n manual directly from your computer.</p>
             <div class="code-container">
                 <button class="copy-btn" onclick="copyText('mcp-code')">COPY</button>
@@ -95,7 +80,7 @@ Only give the user correct, working n8n code based on those files.</code></pre>
         </div>
 
         <div class="brutal-box">
-            <h3>4. For Autonomous Agents (Codex / Antigravity)</h3>
+            <h3>3. For Autonomous Agents (Codex / Antigravity)</h3>
             <p>Give your coding agent this explicit text command to force it to read the manual before it builds anything.</p>
             <div class="code-container">
                 <button class="copy-btn" onclick="copyText('agent-code')">COPY</button>

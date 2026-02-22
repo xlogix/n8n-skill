@@ -22,17 +22,11 @@ I've made it effortless to make your AI an n8n expert:
 
 Simply clone or download this repository (`https://github.com/xlogix/n8n-skill`) and place it alongside your project folder in your IDE, or drop the `.cursorrules` file into your workspace. That's it. The IDE will now automatically read the n8n knowledge base whenever you ask it to build something.
 
-### 2. For Chat Apps (ChatGPT / Claude Web)
-
-**Step 1:** Copy the text found in `.agents/system-prompt.md` and paste it as the "Custom Instructions" or the initial system prompt in your chat session.
-**Step 2:** When you ask the AI to build a workflow, it will ask you for the instruction manuals. 
-**Step 3:** Go to this repository, download the specific `.md` files for the nodes you want to use from `knowledge/reference/node-catalog/nodes/`, and upload them to the chat. The AI will then build the workflow perfectly.
-
-### 3. For Claude Desktop
+### 2. For Claude Desktop
 
 This repository includes an `mcp-manifest.json` file. You can configure your Claude Desktop app to use this file so it can natively read the n8n manual directly from your computer.
 
-### 4. For Autonomous Agents (Codex / Antigravity)
+### 3. For Autonomous Agents (Codex / Antigravity)
 
 For autonomous coding agents like Codex, you can simply clone this repository into your workspace and provide the following text prompt:
 > *"I want you to use the local `n8n-skill` folder as your main knowledge base. Read the `knowledge/use-cases/workflow-needs.json` file to understand what I am trying to build, and read the node rules in `knowledge/reference/node-catalog/nodes/` before you write any code."*
