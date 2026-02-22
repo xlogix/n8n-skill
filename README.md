@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/assets/n8n-skills-icon.png" alt="n8n-skill Logo" width="120" />
+  <img src="https://raw.githubusercontent.com/xlogix/n8n-skill/main/docs/assets/n8n-skills-icon.png" alt="n8n-skill Logo" width="120" />
 
   <h1>n8n-skill</h1>
 
