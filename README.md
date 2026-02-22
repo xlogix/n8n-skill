@@ -9,14 +9,16 @@
     <a href="https://xlogix.github.io/n8n-skill/">
       <img src="https://img.shields.io/badge/Website-Live-brightgreen.svg?style=for-the-badge" alt="Website Live" />
     </a>
+    <a href="https://agentskills.io/">
+      <img src="https://img.shields.io/badge/AgentSkills-Compatible-blueviolet.svg?style=for-the-badge" alt="AgentSkills Compatible" />
+    </a>
     <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License MIT" />
-    <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge" alt="Maintained Yes" />
   </p>
 </div>
 
 <br />
 
-This repository is a **custom skill** designed specifically for AI Agents (like Codex, Antigravity, Cursor, Windsurf, ChatGPT, and Claude). 
+This repository is a **custom skill** designed specifically for AI Agents (like Codex, Antigravity, Cursor, Windsurf, ChatGPT, and Claude). It is built to strictly adhere to the [AgentSkills Open Format](https://agentskills.io) specification.
 
 By giving your AI agent this skill, it learns exactly how to build, debug, and design [n8n](https://n8n.io) workflows perfectly.
 

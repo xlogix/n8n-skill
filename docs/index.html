@@ -62,9 +62,9 @@
 When helping the user build workflows:
 1. DO NOT guess how the n8n nodes work.
 2. ALWAYS read the knowledge base in this repository first.
-3. START by reading `knowledge/use-cases/workflow-needs.json` to understand what I want.
-4. THEN look for the right nodes in `knowledge/reference/indexes/nodes-by-capability.json`.
-5. FINALLY, read the exact instructions for that node in `knowledge/reference/node-catalog/nodes/<nodeName>.md`.
+3. START by reading `SKILL.md` and `assets/workflow-needs.json` to understand what I want.
+4. THEN look for the right nodes in `references/indexes/nodes-by-capability.json`.
+5. FINALLY, read the exact instructions for that node in `references/node-catalog/nodes/<nodeName>.md`.
 6. Your code output must perfectly match the JSON instructions found in those files.</code></pre>
             </div>
         </div>
@@ -81,7 +81,7 @@ When helping the user build workflows:
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/Users/your-username/Downloads/n8n-skill-main/knowledge"
+        "/Users/your-username/Downloads/n8n-skill-main/references"
       ]
     }
   }
@@ -96,7 +96,7 @@ When helping the user build workflows:
                 <button class="copy-btn" onclick="copyText('agent-code')">COPY</button>
                 <pre><code id="agent-code">I want you to use the `n8n-skill-main` folder located in my Downloads directory as your main knowledge base.
 
-Please read `knowledge/use-cases/workflow-needs.json` to understand what I am trying to build, and then use your file reading tools to read the actual node instructions in `knowledge/reference/node-catalog/nodes/` before you write any code for me. Do not guess how n8n works.</code></pre>
+Please read `SKILL.md` to understand how to navigate the documentation, and then use your file reading tools to read the actual node instructions in `references/node-catalog/nodes/` before you write any code for me. Do not guess how n8n works.</code></pre>
             </div>
         </div>
 
