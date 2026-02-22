@@ -1,39 +1,45 @@
+---
+title: "RSS Feed Trigger"
+description: "Starts a workflow when an RSS feed is updated"
+---
+
 # RSS Feed Trigger
+**Node Type:** nodes-base.rssFeedReadTrigger
 
-- Node name: `rssFeedReadTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/RssFeedRead/RssFeedReadTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Starts a workflow when an RSS feed is updated
+## Description
+Starts a workflow when an RSS feed is updated
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- None
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Feed URL | `feedUrl` | `string` | yes | `https://blog.n8n.io/rss/` | URL of the RSS feed to poll |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Feed URL",
-    "name": "feedUrl",
-    "type": "string",
-    "default": "https://blog.n8n.io/rss/",
-    "required": true,
-    "description": "URL of the RSS feed to poll"
-  }
-]
+{
+  "displayName": "RSS Feed Trigger",
+  "name": "rssFeedReadTrigger",
+  "icon": "fa:rss",
+  "iconColor": "orange-red",
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "description": "Starts a workflow when an RSS feed is updated",
+  "subtitle": "={{$parameter[\"event\"]}}",
+  "defaults": {
+    "name": "RSS Feed Trigger",
+    "color": "#b02020"
+  },
+  "polling": true,
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "properties": [
+    {
+      "displayName": "Feed URL",
+      "name": "feedUrl",
+      "type": "string",
+      "default": "https://blog.n8n.io/rss/",
+      "required": true,
+      "description": "URL of the RSS feed to poll"
+    }
+  ]
+}
 ```

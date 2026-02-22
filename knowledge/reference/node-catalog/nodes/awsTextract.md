@@ -1,94 +1,119 @@
+---
+title: "AWS Textract"
+description: "Sends data to Amazon Textract"
+---
+
 # AWS Textract
+**Node Type:** nodes-base.awsTextract
 
-- Node name: `awsTextract`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Aws/Textract/AwsTextract.node.js`
-- Node version: `1`
-- Groups: `output`
-- Description: Sends data to Amazon Textract
+## Description
+Sends data to Amazon Textract
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `aws` (required)
-- `awsAssumeRole` (required)
-
-## Resource and Operation Coverage
-### Operations
-- default/all resources: `analyzeExpense`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Authentication | `authentication` | `options` | no | `iam` |  |
-| Operation | `operation` | `options` | no | `analyzeExpense` |  |
-| Input Data Field Name | `binaryPropertyName` | `string` | yes | `data` | The name of the input field containing the binary file data to be uploaded. Supported file types: PNG, JPEG. |
-| Simplify | `simple` | `boolean` | no | `true` | Whether to return a simplified version of the response instead of the raw data |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Authentication",
-    "name": "authentication",
-    "type": "options",
-    "options": [
-      {
-        "name": "AWS (IAM)",
-        "value": "iam"
+{
+  "displayName": "AWS Textract",
+  "name": "awsTextract",
+  "icon": "file:textract.svg",
+  "group": [
+    "output"
+  ],
+  "version": 1,
+  "subtitle": "={{$parameter[\"operation\"]}}",
+  "description": "Sends data to Amazon Textract",
+  "defaults": {
+    "name": "AWS Textract"
+  },
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "aws",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "iam"
+          ]
+        }
+      }
+    },
+    {
+      "name": "awsAssumeRole",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "assumeRole"
+          ]
+        }
+      }
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Authentication",
+      "name": "authentication",
+      "type": "options",
+      "options": [
+        {
+          "name": "AWS (IAM)",
+          "value": "iam"
+        },
+        {
+          "name": "AWS (Assume Role)",
+          "value": "assumeRole"
+        }
+      ],
+      "default": "iam"
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "Analyze Receipt or Invoice",
+          "value": "analyzeExpense"
+        }
+      ],
+      "default": "analyzeExpense"
+    },
+    {
+      "displayName": "Input Data Field Name",
+      "name": "binaryPropertyName",
+      "type": "string",
+      "default": "data",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "analyzeExpense"
+          ]
+        }
       },
-      {
-        "name": "AWS (Assume Role)",
-        "value": "assumeRole"
-      }
-    ],
-    "default": "iam"
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "Analyze Receipt or Invoice",
-        "value": "analyzeExpense"
-      }
-    ],
-    "default": "analyzeExpense"
-  },
-  {
-    "displayName": "Input Data Field Name",
-    "name": "binaryPropertyName",
-    "type": "string",
-    "default": "data",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "analyzeExpense"
-        ]
-      }
+      "required": true,
+      "description": "The name of the input field containing the binary file data to be uploaded. Supported file types: PNG, JPEG."
     },
-    "required": true,
-    "description": "The name of the input field containing the binary file data to be uploaded. Supported file types: PNG, JPEG."
-  },
-  {
-    "displayName": "Simplify",
-    "name": "simple",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "analyzeExpense"
-        ]
-      }
-    },
-    "default": true,
-    "description": "Whether to return a simplified version of the response instead of the raw data"
-  }
-]
+    {
+      "displayName": "Simplify",
+      "name": "simple",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "analyzeExpense"
+          ]
+        }
+      },
+      "default": true,
+      "description": "Whether to return a simplified version of the response instead of the raw data"
+    }
+  ]
+}
 ```

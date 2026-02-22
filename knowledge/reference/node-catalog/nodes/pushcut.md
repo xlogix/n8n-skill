@@ -1,143 +1,148 @@
+---
+title: "Pushcut"
+description: "Consume Pushcut API"
+---
+
 # Pushcut
+**Node Type:** nodes-base.pushcut
 
-- Node name: `pushcut`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Pushcut/Pushcut.node.js`
-- Node version: `1`
-- Groups: `input`
-- Description: Consume Pushcut API
+## Description
+Consume Pushcut API
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `pushcutApi` (required)
-
-## Resource and Operation Coverage
-### Resources
-- Notification (`notification`)
-
-### Operations
-- resource `notification`: `send`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Resource | `resource` | `options` | no | `notification` |  |
-| Operation | `operation` | `options` | no | `send` |  |
-| Notification Name or ID | `notificationName` | `options` | no |  | Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a> |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Resource",
-    "name": "resource",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "Notification",
-        "value": "notification"
-      }
-    ],
-    "default": "notification"
+{
+  "displayName": "Pushcut",
+  "name": "pushcut",
+  "icon": "file:pushcut.png",
+  "group": [
+    "input"
+  ],
+  "version": 1,
+  "subtitle": "={{$parameter[\"operation\"] + \": \" + $parameter[\"resource\"]}}",
+  "description": "Consume Pushcut API",
+  "defaults": {
+    "name": "Pushcut"
   },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "notification"
-        ]
-      }
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "pushcutApi",
+      "required": true
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Resource",
+      "name": "resource",
+      "type": "options",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "Notification",
+          "value": "notification"
+        }
+      ],
+      "default": "notification"
     },
-    "options": [
-      {
-        "name": "Send",
-        "value": "send",
-        "description": "Send a notification",
-        "action": "Send a notification"
-      }
-    ],
-    "default": "send"
-  },
-  {
-    "displayName": "Notification Name or ID",
-    "name": "notificationName",
-    "type": "options",
-    "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-    "typeOptions": {
-      "loadOptionsMethod": "getNotifications"
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "notification"
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "Send",
+          "value": "send",
+          "description": "Send a notification",
+          "action": "Send a notification"
+        }
+      ],
+      "default": "send"
     },
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "notification"
-        ],
-        "operation": [
-          "send"
-        ]
-      }
+    {
+      "displayName": "Notification Name or ID",
+      "name": "notificationName",
+      "type": "options",
+      "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+      "typeOptions": {
+        "loadOptionsMethod": "getNotifications"
+      },
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "notification"
+          ],
+          "operation": [
+            "send"
+          ]
+        }
+      },
+      "default": ""
     },
-    "default": ""
-  },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "send"
-        ],
-        "resource": [
-          "notification"
-        ]
-      }
-    },
-    "default": {},
-    "options": [
-      {
-        "displayName": "Device Names or IDs",
-        "name": "devices",
-        "type": "multiOptions",
-        "typeOptions": {
-          "loadOptionsMethod": "getDevices"
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "send"
+          ],
+          "resource": [
+            "notification"
+          ]
+        }
+      },
+      "default": {},
+      "options": [
+        {
+          "displayName": "Device Names or IDs",
+          "name": "devices",
+          "type": "multiOptions",
+          "typeOptions": {
+            "loadOptionsMethod": "getDevices"
+          },
+          "default": [],
+          "description": "List of devices this notification is sent to. (default is all devices). Choose from the list, or specify IDs using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
         },
-        "default": [],
-        "description": "List of devices this notification is sent to. (default is all devices). Choose from the list, or specify IDs using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-      },
-      {
-        "displayName": "Input",
-        "name": "input",
-        "type": "string",
-        "default": "",
-        "description": "Value that is passed as input to the notification action"
-      },
-      {
-        "displayName": "Text",
-        "name": "text",
-        "type": "string",
-        "default": "",
-        "description": "Text that is used instead of the one defined in the app"
-      },
-      {
-        "displayName": "Title",
-        "name": "title",
-        "type": "string",
-        "default": "",
-        "description": "Title that is used instead of the one defined in the app"
-      }
-    ]
-  }
-]
+        {
+          "displayName": "Input",
+          "name": "input",
+          "type": "string",
+          "default": "",
+          "description": "Value that is passed as input to the notification action"
+        },
+        {
+          "displayName": "Text",
+          "name": "text",
+          "type": "string",
+          "default": "",
+          "description": "Text that is used instead of the one defined in the app"
+        },
+        {
+          "displayName": "Title",
+          "name": "title",
+          "type": "string",
+          "default": "",
+          "description": "Title that is used instead of the one defined in the app"
+        }
+      ]
+    }
+  ]
+}
 ```

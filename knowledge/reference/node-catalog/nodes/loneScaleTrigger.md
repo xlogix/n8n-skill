@@ -1,43 +1,62 @@
+---
+title: "LoneScale Trigger"
+description: "Trigger LoneScale Workflow"
+---
+
 # LoneScale Trigger
+**Node Type:** nodes-base.loneScaleTrigger
 
-- Node name: `loneScaleTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/LoneScale/LoneScaleTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Trigger LoneScale Workflow
+## Description
+Trigger LoneScale Workflow
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `loneScaleApi` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Workflow Name | `workflow` | `options` | yes |  | Select one workflow. Choose from the list |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Workflow Name",
-    "name": "workflow",
-    "type": "options",
-    "noDataExpression": true,
-    "typeOptions": {
-      "loadOptionsMethod": "getWorkflows"
-    },
-    "default": "",
-    "description": "Select one workflow. Choose from the list",
-    "required": true
-  }
-]
+{
+  "displayName": "LoneScale Trigger",
+  "name": "loneScaleTrigger",
+  "icon": {
+    "light": "file:loneScale.svg",
+    "dark": "file:loneScale.dark.svg"
+  },
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "description": "Trigger LoneScale Workflow",
+  "defaults": {
+    "name": "LoneScale Trigger"
+  },
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "loneScaleApi",
+      "required": true
+    }
+  ],
+  "webhooks": [
+    {
+      "name": "default",
+      "httpMethod": "POST",
+      "responseMode": "onReceived",
+      "path": "webhook"
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Workflow Name",
+      "name": "workflow",
+      "type": "options",
+      "noDataExpression": true,
+      "typeOptions": {
+        "loadOptionsMethod": "getWorkflows"
+      },
+      "default": "",
+      "description": "Select one workflow. Choose from the list",
+      "required": true
+    }
+  ]
+}
 ```

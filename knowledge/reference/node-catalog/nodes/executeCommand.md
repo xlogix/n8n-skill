@@ -1,51 +1,57 @@
+---
+title: "Execute Command"
+description: "Executes a command on the host"
+---
+
 # Execute Command
+**Node Type:** nodes-base.executeCommand
 
-- Node name: `executeCommand`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/ExecuteCommand/ExecuteCommand.node.js`
-- Node version: `1`
-- Groups: `transform`
-- Description: Executes a command on the host
+## Description
+Executes a command on the host
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- None
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Execute Once | `executeOnce` | `boolean` | no | `true` | Whether to execute only once instead of once for each entry |
-| Command | `command` | `string` | yes |  | The command to execute |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Execute Once",
-    "name": "executeOnce",
-    "type": "boolean",
-    "default": true,
-    "description": "Whether to execute only once instead of once for each entry"
+{
+  "displayName": "Execute Command",
+  "name": "executeCommand",
+  "icon": "fa:terminal",
+  "iconColor": "crimson",
+  "group": [
+    "transform"
+  ],
+  "version": 1,
+  "description": "Executes a command on the host",
+  "defaults": {
+    "name": "Execute Command",
+    "color": "#886644"
   },
-  {
-    "displayName": "Command",
-    "name": "command",
-    "typeOptions": {
-      "rows": 5
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "properties": [
+    {
+      "displayName": "Execute Once",
+      "name": "executeOnce",
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to execute only once instead of once for each entry"
     },
-    "type": "string",
-    "default": "",
-    "placeholder": "echo \"test\"",
-    "description": "The command to execute",
-    "required": true
-  }
-]
+    {
+      "displayName": "Command",
+      "name": "command",
+      "typeOptions": {
+        "rows": 5
+      },
+      "type": "string",
+      "default": "",
+      "placeholder": "echo \"test\"",
+      "description": "The command to execute",
+      "required": true
+    }
+  ]
+}
 ```

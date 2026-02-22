@@ -1,271 +1,286 @@
+---
+title: "RabbitMQ Trigger"
+description: "Listens to RabbitMQ messages"
+---
+
 # RabbitMQ Trigger
+**Node Type:** nodes-base.rabbitmqTrigger
 
-- Node name: `rabbitmqTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/RabbitMQ/RabbitMQTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Listens to RabbitMQ messages
+## Description
+Listens to RabbitMQ messages
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `rabbitmq` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Queue / Topic | `queue` | `string` | no |  | The name of the queue to read from |
-| Options | `options` | `collection` | no | `{}` |  |
-| To delete an item from the queue, insert a RabbitMQ node later in the workflow and use the 'Delete from queue' operation | `laterMessageNode` | `notice` | no |  |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Queue / Topic",
-    "name": "queue",
-    "type": "string",
-    "default": "",
-    "placeholder": "queue-name",
-    "description": "The name of the queue to read from"
+{
+  "displayName": "RabbitMQ Trigger",
+  "name": "rabbitmqTrigger",
+  "icon": "file:rabbitmq.svg",
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "description": "Listens to RabbitMQ messages",
+  "eventTriggerDescription": "",
+  "defaults": {
+    "name": "RabbitMQ Trigger"
   },
-  {
-    "displayName": "Options",
-    "name": "options",
-    "type": "collection",
-    "default": {},
-    "placeholder": "Add option",
-    "options": [
-      {
-        "displayName": "Arguments",
-        "name": "arguments",
-        "placeholder": "Add Argument",
-        "description": "Arguments to add",
-        "type": "fixedCollection",
-        "typeOptions": {
-          "multipleValues": true
-        },
-        "default": {},
-        "options": [
-          {
-            "name": "argument",
-            "displayName": "Argument",
-            "values": [
-              {
-                "displayName": "Key",
-                "name": "key",
-                "type": "string",
-                "default": ""
-              },
-              {
-                "displayName": "Value",
-                "name": "value",
-                "type": "string",
-                "default": ""
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "displayName": "Assert Exchange",
-        "name": "assertExchange",
-        "type": "boolean",
-        "default": true,
-        "description": "Whether to assert the exchange exists before sending"
-      },
-      {
-        "displayName": "Assert Queue",
-        "name": "assertQueue",
-        "type": "boolean",
-        "default": true,
-        "description": "Whether to assert the queue exists before sending"
-      },
-      {
-        "displayName": "Auto Delete Queue",
-        "name": "autoDelete",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether the queue will be deleted when the number of consumers drops to zero"
-      },
-      {
-        "displayName": "Binding",
-        "name": "binding",
-        "placeholder": "Add Binding",
-        "description": "Add binding to queu",
-        "type": "fixedCollection",
-        "typeOptions": {
-          "multipleValues": true
-        },
-        "default": {},
-        "options": [
-          {
-            "name": "bindings",
-            "displayName": "Binding",
-            "values": [
-              {
-                "displayName": "Exchange",
-                "name": "exchange",
-                "type": "string",
-                "default": "",
-                "placeholder": "exchange"
-              },
-              {
-                "displayName": "RoutingKey",
-                "name": "routingKey",
-                "type": "string",
-                "default": "",
-                "placeholder": "routing-key"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "displayName": "Content Is Binary",
-        "name": "contentIsBinary",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether to save the content as binary"
-      },
-      {
-        "displayName": "Delete From Queue When",
-        "name": "acknowledge",
-        "type": "options",
-        "options": [
-          {
-            "name": "Execution Finishes",
-            "value": "executionFinishes",
-            "description": "After the workflow execution finished. No matter if the execution was successful or not."
-          },
-          {
-            "name": "Execution Finishes Successfully",
-            "value": "executionFinishesSuccessfully",
-            "description": "After the workflow execution finished successfully"
-          },
-          {
-            "name": "Immediately",
-            "value": "immediately",
-            "description": "As soon as the message got received"
-          },
-          {
-            "name": "Specified Later in Workflow",
-            "value": "laterMessageNode",
-            "description": "Using a RabbitMQ node to remove the item from the queue"
-          }
-        ],
-        "default": "immediately",
-        "description": "When to acknowledge the message"
-      },
-      {
-        "displayName": "Durable",
-        "name": "durable",
-        "type": "boolean",
-        "default": true,
-        "description": "Whether the queue will survive broker restarts"
-      },
-      {
-        "displayName": "Exclusive",
-        "name": "exclusive",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether to scope the queue to the connection"
-      },
-      {
-        "displayName": "Headers",
-        "name": "headers",
-        "placeholder": "Add Header",
-        "description": "Headers to add",
-        "type": "fixedCollection",
-        "typeOptions": {
-          "multipleValues": true
-        },
-        "default": {},
-        "options": [
-          {
-            "name": "header",
-            "displayName": "Header",
-            "values": [
-              {
-                "displayName": "Key",
-                "name": "key",
-                "type": "string",
-                "default": ""
-              },
-              {
-                "displayName": "Value",
-                "name": "value",
-                "type": "string",
-                "default": ""
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "displayName": "JSON Parse Body",
-        "name": "jsonParseBody",
-        "type": "boolean",
-        "displayOptions": {
-          "hide": {
-            "contentIsBinary": [
-              true
-            ]
-          }
-        },
-        "default": false,
-        "description": "Whether to parse the body to an object"
-      },
-      {
-        "displayName": "Only Content",
-        "name": "onlyContent",
-        "type": "boolean",
-        "displayOptions": {
-          "hide": {
-            "contentIsBinary": [
-              true
-            ]
-          }
-        },
-        "default": false,
-        "description": "Whether to return only the content property"
-      },
-      {
-        "displayName": "Parallel Message Processing Limit",
-        "name": "parallelMessages",
-        "type": "number",
-        "default": -1,
-        "displayOptions": {
-          "hide": {
-            "acknowledge": [
-              "immediately"
-            ]
-          }
-        },
-        "description": "Max number of executions at a time. Use -1 for no limit."
-      }
-    ]
-  },
-  {
-    "displayName": "To delete an item from the queue, insert a RabbitMQ node later in the workflow and use the 'Delete from queue' operation",
-    "name": "laterMessageNode",
-    "type": "notice",
-    "displayOptions": {
-      "show": {
-        "/options.acknowledge": [
-          "laterMessageNode"
-        ]
-      }
+  "triggerPanel": {
+    "header": "",
+    "executionsHelp": {
+      "inactive": "<b>While building your workflow</b>, click the 'execute step' button, then trigger a Rabbit MQ event. This will trigger an execution, which will show up in this editor.<br /> <br /><b>Once you're happy with your workflow</b>, <a data-key='activate'>activate</a> it. Then every time a change is detected, the workflow will execute. These executions will show up in the <a data-key='executions'>executions list</a>, but not in the editor.",
+      "active": "<b>While building your workflow</b>, click the 'execute step' button, then trigger a Rabbit MQ event. This will trigger an execution, which will show up in this editor.<br /> <br /><b>Your workflow will also execute automatically</b>, since it's activated. Every time a change is detected, this node will trigger an execution. These executions will show up in the <a data-key='executions'>executions list</a>, but not in the editor."
     },
-    "default": ""
-  }
-]
+    "activationHint": "Once you’ve finished building your workflow, <a data-key='activate'>activate</a> it to have it also listen continuously (you just won’t see those executions here)."
+  },
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "rabbitmq",
+      "required": true
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Queue / Topic",
+      "name": "queue",
+      "type": "string",
+      "default": "",
+      "placeholder": "queue-name",
+      "description": "The name of the queue to read from"
+    },
+    {
+      "displayName": "Options",
+      "name": "options",
+      "type": "collection",
+      "default": {},
+      "placeholder": "Add option",
+      "options": [
+        {
+          "displayName": "Arguments",
+          "name": "arguments",
+          "placeholder": "Add Argument",
+          "description": "Arguments to add",
+          "type": "fixedCollection",
+          "typeOptions": {
+            "multipleValues": true
+          },
+          "default": {},
+          "options": [
+            {
+              "name": "argument",
+              "displayName": "Argument",
+              "values": [
+                {
+                  "displayName": "Key",
+                  "name": "key",
+                  "type": "string",
+                  "default": ""
+                },
+                {
+                  "displayName": "Value",
+                  "name": "value",
+                  "type": "string",
+                  "default": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Assert Exchange",
+          "name": "assertExchange",
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to assert the exchange exists before sending"
+        },
+        {
+          "displayName": "Assert Queue",
+          "name": "assertQueue",
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to assert the queue exists before sending"
+        },
+        {
+          "displayName": "Auto Delete Queue",
+          "name": "autoDelete",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the queue will be deleted when the number of consumers drops to zero"
+        },
+        {
+          "displayName": "Binding",
+          "name": "binding",
+          "placeholder": "Add Binding",
+          "description": "Add binding to queu",
+          "type": "fixedCollection",
+          "typeOptions": {
+            "multipleValues": true
+          },
+          "default": {},
+          "options": [
+            {
+              "name": "bindings",
+              "displayName": "Binding",
+              "values": [
+                {
+                  "displayName": "Exchange",
+                  "name": "exchange",
+                  "type": "string",
+                  "default": "",
+                  "placeholder": "exchange"
+                },
+                {
+                  "displayName": "RoutingKey",
+                  "name": "routingKey",
+                  "type": "string",
+                  "default": "",
+                  "placeholder": "routing-key"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Content Is Binary",
+          "name": "contentIsBinary",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to save the content as binary"
+        },
+        {
+          "displayName": "Delete From Queue When",
+          "name": "acknowledge",
+          "type": "options",
+          "options": [
+            {
+              "name": "Execution Finishes",
+              "value": "executionFinishes",
+              "description": "After the workflow execution finished. No matter if the execution was successful or not."
+            },
+            {
+              "name": "Execution Finishes Successfully",
+              "value": "executionFinishesSuccessfully",
+              "description": "After the workflow execution finished successfully"
+            },
+            {
+              "name": "Immediately",
+              "value": "immediately",
+              "description": "As soon as the message got received"
+            },
+            {
+              "name": "Specified Later in Workflow",
+              "value": "laterMessageNode",
+              "description": "Using a RabbitMQ node to remove the item from the queue"
+            }
+          ],
+          "default": "immediately",
+          "description": "When to acknowledge the message"
+        },
+        {
+          "displayName": "Durable",
+          "name": "durable",
+          "type": "boolean",
+          "default": true,
+          "description": "Whether the queue will survive broker restarts"
+        },
+        {
+          "displayName": "Exclusive",
+          "name": "exclusive",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to scope the queue to the connection"
+        },
+        {
+          "displayName": "Headers",
+          "name": "headers",
+          "placeholder": "Add Header",
+          "description": "Headers to add",
+          "type": "fixedCollection",
+          "typeOptions": {
+            "multipleValues": true
+          },
+          "default": {},
+          "options": [
+            {
+              "name": "header",
+              "displayName": "Header",
+              "values": [
+                {
+                  "displayName": "Key",
+                  "name": "key",
+                  "type": "string",
+                  "default": ""
+                },
+                {
+                  "displayName": "Value",
+                  "name": "value",
+                  "type": "string",
+                  "default": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "JSON Parse Body",
+          "name": "jsonParseBody",
+          "type": "boolean",
+          "displayOptions": {
+            "hide": {
+              "contentIsBinary": [
+                true
+              ]
+            }
+          },
+          "default": false,
+          "description": "Whether to parse the body to an object"
+        },
+        {
+          "displayName": "Only Content",
+          "name": "onlyContent",
+          "type": "boolean",
+          "displayOptions": {
+            "hide": {
+              "contentIsBinary": [
+                true
+              ]
+            }
+          },
+          "default": false,
+          "description": "Whether to return only the content property"
+        },
+        {
+          "displayName": "Parallel Message Processing Limit",
+          "name": "parallelMessages",
+          "type": "number",
+          "default": -1,
+          "displayOptions": {
+            "hide": {
+              "acknowledge": [
+                "immediately"
+              ]
+            }
+          },
+          "description": "Max number of executions at a time. Use -1 for no limit."
+        }
+      ]
+    },
+    {
+      "displayName": "To delete an item from the queue, insert a RabbitMQ node later in the workflow and use the 'Delete from queue' operation",
+      "name": "laterMessageNode",
+      "type": "notice",
+      "displayOptions": {
+        "show": {
+          "/options.acknowledge": [
+            "laterMessageNode"
+          ]
+        }
+      },
+      "default": ""
+    }
+  ]
+}
 ```

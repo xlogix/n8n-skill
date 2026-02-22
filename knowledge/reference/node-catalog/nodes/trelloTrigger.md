@@ -1,40 +1,62 @@
+---
+title: "Trello Trigger"
+description: "Starts the workflow when Trello events occur"
+---
+
 # Trello Trigger
+**Node Type:** nodes-base.trelloTrigger
 
-- Node name: `trelloTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Trello/TrelloTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Starts the workflow when Trello events occur
+## Description
+Starts the workflow when Trello events occur
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `trelloApi` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Model ID | `id` | `string` | yes |  | ID of the model of which to subscribe to events |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Model ID",
-    "name": "id",
-    "type": "string",
-    "default": "",
-    "placeholder": "4d5ea62fd76aa1136000000c",
-    "required": true,
-    "description": "ID of the model of which to subscribe to events"
-  }
-]
+{
+  "displayName": "Trello Trigger",
+  "name": "trelloTrigger",
+  "icon": "file:trello.svg",
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "description": "Starts the workflow when Trello events occur",
+  "defaults": {
+    "name": "Trello Trigger"
+  },
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "trelloApi",
+      "required": true
+    }
+  ],
+  "webhooks": [
+    {
+      "name": "setup",
+      "httpMethod": "HEAD",
+      "responseMode": "onReceived",
+      "path": "webhook"
+    },
+    {
+      "name": "default",
+      "httpMethod": "POST",
+      "responseMode": "onReceived",
+      "path": "webhook"
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Model ID",
+      "name": "id",
+      "type": "string",
+      "default": "",
+      "placeholder": "4d5ea62fd76aa1136000000c",
+      "required": true,
+      "description": "ID of the model of which to subscribe to events"
+    }
+  ]
+}
 ```

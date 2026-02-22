@@ -1,139 +1,142 @@
+---
+title: "OpenThesaurus"
+description: "Get synonmns for German words using the OpenThesaurus API"
+---
+
 # OpenThesaurus
+**Node Type:** nodes-base.openThesaurus
 
-- Node name: `openThesaurus`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/OpenThesaurus/OpenThesaurus.node.js`
-- Node version: `1`
-- Groups: `output`
-- Description: Get synonmns for German words using the OpenThesaurus API
+## Description
+Get synonmns for German words using the OpenThesaurus API
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- None
-
-## Resource and Operation Coverage
-### Operations
-- default/all resources: `getSynonyms`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Operation | `operation` | `options` | no | `getSynonyms` |  |
-| Text | `text` | `string` | yes |  | The word to get synonyms for |
-| Options | `options` | `collection` | no | `{}` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "Get Synonyms",
-        "value": "getSynonyms",
-        "description": "Get synonyms for a German word in German",
-        "action": "Get synonyms"
-      }
-    ],
-    "default": "getSynonyms"
+{
+  "displayName": "OpenThesaurus",
+  "name": "openThesaurus",
+  "icon": "file:openthesaurus.png",
+  "group": [
+    "output"
+  ],
+  "version": 1,
+  "subtitle": "={{$parameter[\"operation\"] + \": \" + $parameter[\"resource\"]}}",
+  "description": "Get synonmns for German words using the OpenThesaurus API",
+  "defaults": {
+    "name": "OpenThesaurus"
   },
-  {
-    "displayName": "Text",
-    "name": "text",
-    "type": "string",
-    "default": "",
-    "description": "The word to get synonyms for",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getSynonyms"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Options",
-    "name": "options",
-    "type": "collection",
-    "placeholder": "Add option",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getSynonyms"
-        ]
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "properties": [
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "Get Synonyms",
+          "value": "getSynonyms",
+          "description": "Get synonyms for a German word in German",
+          "action": "Get synonyms"
+        }
+      ],
+      "default": "getSynonyms"
+    },
+    {
+      "displayName": "Text",
+      "name": "text",
+      "type": "string",
+      "default": "",
+      "description": "The word to get synonyms for",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getSynonyms"
+          ]
+        }
       }
     },
-    "default": {},
-    "options": [
-      {
-        "displayName": "Baseform",
-        "name": "baseform",
-        "type": "boolean",
-        "default": false,
-        "description": "Specifies the basic form for the search term if it is not already a basic form"
+    {
+      "displayName": "Options",
+      "name": "options",
+      "type": "collection",
+      "placeholder": "Add option",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getSynonyms"
+          ]
+        }
       },
-      {
-        "displayName": "Similar",
-        "name": "similar",
-        "type": "boolean",
-        "default": false,
-        "description": "This also returns up to five similarly written words for each answer. This is useful to be able to make a suggestion to the user in the event of a possible typing error."
-      },
-      {
-        "displayName": "Starts With",
-        "name": "startswith",
-        "type": "boolean",
-        "default": false,
-        "description": "Like substring = true, but only finds words that begin with the specified search term"
-      },
-      {
-        "displayName": "Substring",
-        "name": "substring",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether up to ten words are returned for each answer that only contain the search term as a partial word"
-      },
-      {
-        "displayName": "Substring From Results",
-        "name": "substringFromResults",
-        "type": "number",
-        "default": 0,
-        "description": "Specifies from which entry the partial word hits are to be returned. Only works together with substring = true."
-      },
-      {
-        "displayName": "Substring Max Results",
-        "name": "substringMaxResults",
-        "type": "number",
-        "typeOptions": {
-          "maxValue": 250
+      "default": {},
+      "options": [
+        {
+          "displayName": "Baseform",
+          "name": "baseform",
+          "type": "boolean",
+          "default": false,
+          "description": "Specifies the basic form for the search term if it is not already a basic form"
         },
-        "default": 10,
-        "description": "Specifies how many partial word hits should be returned in total. Only works together with substring = true."
-      },
-      {
-        "displayName": "Subsynsets",
-        "name": "subsynsets",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether each synonym group has its (optional) sub-terms supplied"
-      },
-      {
-        "displayName": "Supersynsets",
-        "name": "supersynsets",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether each synonym group is supplied with its (optional) generic terms"
-      }
-    ]
-  }
-]
+        {
+          "displayName": "Similar",
+          "name": "similar",
+          "type": "boolean",
+          "default": false,
+          "description": "This also returns up to five similarly written words for each answer. This is useful to be able to make a suggestion to the user in the event of a possible typing error."
+        },
+        {
+          "displayName": "Starts With",
+          "name": "startswith",
+          "type": "boolean",
+          "default": false,
+          "description": "Like substring = true, but only finds words that begin with the specified search term"
+        },
+        {
+          "displayName": "Substring",
+          "name": "substring",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether up to ten words are returned for each answer that only contain the search term as a partial word"
+        },
+        {
+          "displayName": "Substring From Results",
+          "name": "substringFromResults",
+          "type": "number",
+          "default": 0,
+          "description": "Specifies from which entry the partial word hits are to be returned. Only works together with substring = true."
+        },
+        {
+          "displayName": "Substring Max Results",
+          "name": "substringMaxResults",
+          "type": "number",
+          "typeOptions": {
+            "maxValue": 250
+          },
+          "default": 10,
+          "description": "Specifies how many partial word hits should be returned in total. Only works together with substring = true."
+        },
+        {
+          "displayName": "Subsynsets",
+          "name": "subsynsets",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether each synonym group has its (optional) sub-terms supplied"
+        },
+        {
+          "displayName": "Supersynsets",
+          "name": "supersynsets",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether each synonym group is supplied with its (optional) generic terms"
+        }
+      ]
+    }
+  ]
+}
 ```

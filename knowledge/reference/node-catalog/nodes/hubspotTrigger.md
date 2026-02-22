@@ -1,230 +1,251 @@
+---
+title: "HubSpot Trigger"
+description: "Starts the workflow when HubSpot events occur"
+---
+
 # HubSpot Trigger
+**Node Type:** nodes-base.hubspotTrigger
 
-- Node name: `hubspotTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Hubspot/HubspotTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Starts the workflow when HubSpot events occur
+## Description
+Starts the workflow when HubSpot events occur
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `hubspotDeveloperApi` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Events | `eventsUi` | `fixedCollection` | no | `{}` |  |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Events",
-    "name": "eventsUi",
-    "type": "fixedCollection",
-    "typeOptions": {
-      "multipleValues": true
-    },
-    "placeholder": "Add Event",
-    "default": {},
-    "options": [
-      {
-        "displayName": "Event",
-        "name": "eventValues",
-        "values": [
-          {
-            "displayName": "Name",
-            "name": "name",
-            "type": "options",
-            "options": [
-              {
-                "name": "Company Created",
-                "value": "company.creation",
-                "description": "To get notified if any company is created in a customer's account"
-              },
-              {
-                "name": "Company Deleted",
-                "value": "company.deletion",
-                "description": "To get notified if any company is deleted in a customer's account"
-              },
-              {
-                "name": "Company Property Changed",
-                "value": "company.propertyChange",
-                "description": "To get notified if a specified property is changed for any company in a customer's account"
-              },
-              {
-                "name": "Contact Created",
-                "value": "contact.creation",
-                "description": "To get notified if any contact is created in a customer's account"
-              },
-              {
-                "name": "Contact Deleted",
-                "value": "contact.deletion",
-                "description": "To get notified if any contact is deleted in a customer's account"
-              },
-              {
-                "name": "Contact Privacy Deleted",
-                "value": "contact.privacyDeletion",
-                "description": "To get notified if a contact is deleted for privacy compliance reasons"
-              },
-              {
-                "name": "Contact Property Changed",
-                "value": "contact.propertyChange",
-                "description": "To get notified if a specified property is changed for any contact in a customer's account"
-              },
-              {
-                "name": "Conversation Creation",
-                "value": "conversation.creation",
-                "description": "To get notified if a new thread is created in an account"
-              },
-              {
-                "name": "Conversation Deletion",
-                "value": "conversation.deletion",
-                "description": "To get notified if a thread is archived or soft-deleted in an account"
-              },
-              {
-                "name": "Conversation New Message",
-                "value": "conversation.newMessage",
-                "description": "To get notified if a new message on a thread has been received"
-              },
-              {
-                "name": "Conversation Privacy Deletion",
-                "value": "conversation.privacyDeletion",
-                "description": "To get notified if a thread is permanently deleted in an account"
-              },
-              {
-                "name": "Conversation Property Change",
-                "value": "conversation.propertyChange",
-                "description": "To get notified if a property on a thread has been changed"
-              },
-              {
-                "name": "Deal Created",
-                "value": "deal.creation",
-                "description": "To get notified if any deal is created in a customer's account"
-              },
-              {
-                "name": "Deal Deleted",
-                "value": "deal.deletion",
-                "description": "To get notified if any deal is deleted in a customer's account"
-              },
-              {
-                "name": "Deal Property Changed",
-                "value": "deal.propertyChange",
-                "description": "To get notified if a specified property is changed for any deal in a customer's account"
-              },
-              {
-                "name": "Ticket Created",
-                "value": "ticket.creation",
-                "description": "To get notified if a ticket is created in a customer's account"
-              },
-              {
-                "name": "Ticket Deleted",
-                "value": "ticket.deletion",
-                "description": "To get notified if any ticket is deleted in a customer's account"
-              },
-              {
-                "name": "Ticket Property Changed",
-                "value": "ticket.propertyChange",
-                "description": "To get notified if a specified property is changed for any ticket in a customer's account"
-              }
-            ],
-            "default": "contact.creation",
-            "required": true
-          },
-          {
-            "displayName": "Property Name or ID",
-            "name": "property",
-            "type": "options",
-            "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-            "typeOptions": {
-              "loadOptionsDependsOn": [
-                "contact.propertyChange"
-              ],
-              "loadOptionsMethod": "getContactProperties"
-            },
-            "displayOptions": {
-              "show": {
-                "name": [
-                  "contact.propertyChange"
-                ]
-              }
-            },
-            "default": "",
-            "required": true
-          },
-          {
-            "displayName": "Property Name or ID",
-            "name": "property",
-            "type": "options",
-            "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-            "typeOptions": {
-              "loadOptionsDependsOn": [
-                "company.propertyChange"
-              ],
-              "loadOptionsMethod": "getCompanyProperties"
-            },
-            "displayOptions": {
-              "show": {
-                "name": [
-                  "company.propertyChange"
-                ]
-              }
-            },
-            "default": "",
-            "required": true
-          },
-          {
-            "displayName": "Property Name or ID",
-            "name": "property",
-            "type": "options",
-            "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-            "typeOptions": {
-              "loadOptionsDependsOn": [
-                "deal.propertyChange"
-              ],
-              "loadOptionsMethod": "getDealProperties"
-            },
-            "displayOptions": {
-              "show": {
-                "name": [
-                  "deal.propertyChange"
-                ]
-              }
-            },
-            "default": "",
-            "required": true
-          }
-        ]
-      }
-    ]
+{
+  "displayName": "HubSpot Trigger",
+  "name": "hubspotTrigger",
+  "icon": "file:hubspot.svg",
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "description": "Starts the workflow when HubSpot events occur",
+  "defaults": {
+    "name": "HubSpot Trigger"
   },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "default": {},
-    "options": [
-      {
-        "displayName": "Max Concurrent Requests",
-        "name": "maxConcurrentRequests",
-        "type": "number",
-        "typeOptions": {
-          "minValue": 5
-        },
-        "default": 5
-      }
-    ]
-  }
-]
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "hubspotDeveloperApi",
+      "required": true
+    }
+  ],
+  "webhooks": [
+    {
+      "name": "default",
+      "httpMethod": "POST",
+      "responseMode": "onReceived",
+      "path": "webhook"
+    },
+    {
+      "name": "setup",
+      "httpMethod": "GET",
+      "responseMode": "onReceived",
+      "path": "webhook"
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Events",
+      "name": "eventsUi",
+      "type": "fixedCollection",
+      "typeOptions": {
+        "multipleValues": true
+      },
+      "placeholder": "Add Event",
+      "default": {},
+      "options": [
+        {
+          "displayName": "Event",
+          "name": "eventValues",
+          "values": [
+            {
+              "displayName": "Name",
+              "name": "name",
+              "type": "options",
+              "options": [
+                {
+                  "name": "Company Created",
+                  "value": "company.creation",
+                  "description": "To get notified if any company is created in a customer's account"
+                },
+                {
+                  "name": "Company Deleted",
+                  "value": "company.deletion",
+                  "description": "To get notified if any company is deleted in a customer's account"
+                },
+                {
+                  "name": "Company Property Changed",
+                  "value": "company.propertyChange",
+                  "description": "To get notified if a specified property is changed for any company in a customer's account"
+                },
+                {
+                  "name": "Contact Created",
+                  "value": "contact.creation",
+                  "description": "To get notified if any contact is created in a customer's account"
+                },
+                {
+                  "name": "Contact Deleted",
+                  "value": "contact.deletion",
+                  "description": "To get notified if any contact is deleted in a customer's account"
+                },
+                {
+                  "name": "Contact Privacy Deleted",
+                  "value": "contact.privacyDeletion",
+                  "description": "To get notified if a contact is deleted for privacy compliance reasons"
+                },
+                {
+                  "name": "Contact Property Changed",
+                  "value": "contact.propertyChange",
+                  "description": "To get notified if a specified property is changed for any contact in a customer's account"
+                },
+                {
+                  "name": "Conversation Creation",
+                  "value": "conversation.creation",
+                  "description": "To get notified if a new thread is created in an account"
+                },
+                {
+                  "name": "Conversation Deletion",
+                  "value": "conversation.deletion",
+                  "description": "To get notified if a thread is archived or soft-deleted in an account"
+                },
+                {
+                  "name": "Conversation New Message",
+                  "value": "conversation.newMessage",
+                  "description": "To get notified if a new message on a thread has been received"
+                },
+                {
+                  "name": "Conversation Privacy Deletion",
+                  "value": "conversation.privacyDeletion",
+                  "description": "To get notified if a thread is permanently deleted in an account"
+                },
+                {
+                  "name": "Conversation Property Change",
+                  "value": "conversation.propertyChange",
+                  "description": "To get notified if a property on a thread has been changed"
+                },
+                {
+                  "name": "Deal Created",
+                  "value": "deal.creation",
+                  "description": "To get notified if any deal is created in a customer's account"
+                },
+                {
+                  "name": "Deal Deleted",
+                  "value": "deal.deletion",
+                  "description": "To get notified if any deal is deleted in a customer's account"
+                },
+                {
+                  "name": "Deal Property Changed",
+                  "value": "deal.propertyChange",
+                  "description": "To get notified if a specified property is changed for any deal in a customer's account"
+                },
+                {
+                  "name": "Ticket Created",
+                  "value": "ticket.creation",
+                  "description": "To get notified if a ticket is created in a customer's account"
+                },
+                {
+                  "name": "Ticket Deleted",
+                  "value": "ticket.deletion",
+                  "description": "To get notified if any ticket is deleted in a customer's account"
+                },
+                {
+                  "name": "Ticket Property Changed",
+                  "value": "ticket.propertyChange",
+                  "description": "To get notified if a specified property is changed for any ticket in a customer's account"
+                }
+              ],
+              "default": "contact.creation",
+              "required": true
+            },
+            {
+              "displayName": "Property Name or ID",
+              "name": "property",
+              "type": "options",
+              "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+              "typeOptions": {
+                "loadOptionsDependsOn": [
+                  "contact.propertyChange"
+                ],
+                "loadOptionsMethod": "getContactProperties"
+              },
+              "displayOptions": {
+                "show": {
+                  "name": [
+                    "contact.propertyChange"
+                  ]
+                }
+              },
+              "default": "",
+              "required": true
+            },
+            {
+              "displayName": "Property Name or ID",
+              "name": "property",
+              "type": "options",
+              "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+              "typeOptions": {
+                "loadOptionsDependsOn": [
+                  "company.propertyChange"
+                ],
+                "loadOptionsMethod": "getCompanyProperties"
+              },
+              "displayOptions": {
+                "show": {
+                  "name": [
+                    "company.propertyChange"
+                  ]
+                }
+              },
+              "default": "",
+              "required": true
+            },
+            {
+              "displayName": "Property Name or ID",
+              "name": "property",
+              "type": "options",
+              "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+              "typeOptions": {
+                "loadOptionsDependsOn": [
+                  "deal.propertyChange"
+                ],
+                "loadOptionsMethod": "getDealProperties"
+              },
+              "displayOptions": {
+                "show": {
+                  "name": [
+                    "deal.propertyChange"
+                  ]
+                }
+              },
+              "default": "",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "default": {},
+      "options": [
+        {
+          "displayName": "Max Concurrent Requests",
+          "name": "maxConcurrentRequests",
+          "type": "number",
+          "typeOptions": {
+            "minValue": 5
+          },
+          "default": 5
+        }
+      ]
+    }
+  ]
+}
 ```

@@ -1,1395 +1,1380 @@
+---
+title: "AWS IAM"
+description: "Interacts with Amazon IAM"
+---
+
 # AWS IAM
+**Node Type:** nodes-base.awsIam
 
-- Node name: `awsIam`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Aws/IAM/AwsIam.node.js`
-- Node version: `1`
-- Groups: `output`
-- Description: Interacts with Amazon IAM
+## Description
+Interacts with Amazon IAM
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `aws` (required)
-
-## Resource and Operation Coverage
-### Resources
-- User (`user`)
-- Group (`group`)
-
-### Operations
-- resource `group`: `create`, `delete`, `get`, `getAll`, `update`
-- resource `user`: `addToGroup`, `create`, `delete`, `get`, `getAll`, `removeFromGroup`, `update`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Resource | `resource` | `options` | no | `user` |  |
-| Operation | `operation` | `options` | no | `getAll` |  |
-| User | `user` | `resourceLocator` | yes | `{"mode":"list","value":""}` | Select the user you want to add to the group |
-| Group | `group` | `resourceLocator` | yes | `{"mode":"list","value":""}` | Select the group you want to add the user to |
-| User Name | `userName` | `string` | yes |  | The username of the new user to create |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-| User | `user` | `resourceLocator` | yes | `{"mode":"list","value":""}` | Select the user you want to delete |
-| User | `user` | `resourceLocator` | yes | `{"mode":"list","value":""}` | Select the user you want to retrieve |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `100` | Max number of results to return |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-| User | `user` | `resourceLocator` | yes | `{"mode":"list","value":""}` | Select the user you want to update |
-| User Name | `userName` | `string` | yes |  | The new name of the user |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-| User | `user` | `resourceLocator` | yes | `{"mode":"list","value":""}` | Select the user you want to remove from the group |
-| Group | `group` | `resourceLocator` | yes | `{"mode":"list","value":""}` | Select the group you want to remove the user from |
-| Operation | `operation` | `options` | no | `getAll` |  |
-| Group Name | `groupName` | `string` | yes |  | The name of the new group to create |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-| Group | `group` | `resourceLocator` | yes | `{"mode":"list","value":""}` | Select the group you want to delete |
-| Group | `group` | `resourceLocator` | yes | `{"mode":"list","value":""}` | Select the group you want to retrieve |
-| Include Users | `includeUsers` | `boolean` | no | `false` | Whether to include a list of users in the group |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `100` | Max number of results to return |
-| Include Users | `includeUsers` | `boolean` | no | `false` | Whether to include a list of users in the group |
-| Group | `group` | `resourceLocator` | yes | `{"mode":"list","value":""}` | Select the group you want to update |
-| Group Name | `groupName` | `string` | yes |  | The new name of the group |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Resource",
-    "name": "resource",
-    "type": "options",
-    "noDataExpression": true,
-    "default": "user",
-    "options": [
-      {
-        "name": "User",
-        "value": "user"
-      },
-      {
-        "name": "Group",
-        "value": "group"
-      }
-    ],
-    "routing": {
-      "send": {
-        "preSend": [
-          null
-        ]
-      }
+{
+  "displayName": "AWS IAM",
+  "name": "awsIam",
+  "icon": "file:AwsIam.svg",
+  "group": [
+    "output"
+  ],
+  "version": 1,
+  "subtitle": "={{$parameter[\"operation\"] + \": \" + $parameter[\"resource\"]}}",
+  "description": "Interacts with Amazon IAM",
+  "defaults": {
+    "name": "AWS IAM"
+  },
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "aws",
+      "required": true
+    }
+  ],
+  "requestDefaults": {
+    "baseURL": "https://iam.amazonaws.com",
+    "json": true,
+    "headers": {
+      "Content-Type": "application/x-www-form-urlencoded"
     }
   },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "default": "getAll",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Add to Group",
-        "value": "addToGroup",
-        "description": "Add an existing user to a group",
-        "action": "Add user to group",
-        "routing": {
-          "request": {
-            "method": "POST",
-            "url": "",
-            "body": {
-              "Action": "AddUserToGroup",
-              "Version": "2010-05-08",
-              "UserName": "={{ $parameter[\"user\"] }}",
-              "GroupName": "={{ $parameter[\"group\"] }}"
-            },
-            "ignoreHttpStatusErrors": true
-          },
-          "output": {
-            "postReceive": [
-              null
-            ]
-          }
-        }
-      },
-      {
-        "name": "Create",
-        "value": "create",
-        "description": "Create a new user",
-        "action": "Create user",
-        "routing": {
-          "request": {
-            "method": "POST",
-            "url": "",
-            "body": {
-              "Action": "CreateUser",
-              "Version": "2010-05-08",
-              "UserName": "={{ $parameter[\"userName\"] }}"
-            },
-            "ignoreHttpStatusErrors": true
-          },
-          "output": {
-            "postReceive": [
-              null
-            ]
-          }
-        }
-      },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "description": "Delete a user",
-        "action": "Delete user",
-        "routing": {
-          "send": {
-            "preSend": [
-              null
-            ]
-          },
-          "request": {
-            "method": "POST",
-            "url": "",
-            "body": {
-              "Action": "DeleteUser",
-              "Version": "2010-05-08",
-              "UserName": "={{ $parameter[\"user\"] }}"
-            },
-            "ignoreHttpStatusErrors": true
-          },
-          "output": {
-            "postReceive": [
-              null
-            ]
-          }
-        }
-      },
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Retrieve a user",
-        "action": "Get user",
-        "routing": {
-          "request": {
-            "method": "POST",
-            "url": "",
-            "body": {
-              "Action": "GetUser",
-              "Version": "2010-05-08",
-              "UserName": "={{ $parameter[\"user\"] }}"
-            },
-            "ignoreHttpStatusErrors": true
-          },
-          "output": {
-            "postReceive": [
-              {
-                "type": "rootProperty",
-                "properties": {
-                  "property": "GetUserResponse.GetUserResult.User"
-                }
-              },
-              null
-            ]
-          }
-        }
-      },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Retrieve a list of users",
-        "routing": {
-          "request": {
-            "method": "POST",
-            "url": "",
-            "body": {
-              "Action": "ListUsers",
-              "Version": "2010-05-08"
-            },
-            "ignoreHttpStatusErrors": true
-          },
-          "output": {
-            "postReceive": [
-              null,
-              null
-            ]
-          }
+  "properties": [
+    {
+      "displayName": "Resource",
+      "name": "resource",
+      "type": "options",
+      "noDataExpression": true,
+      "default": "user",
+      "options": [
+        {
+          "name": "User",
+          "value": "user"
         },
-        "action": "Get many users"
-      },
-      {
-        "name": "Remove From Group",
-        "value": "removeFromGroup",
-        "description": "Remove a user from a group",
-        "action": "Remove user from group",
-        "routing": {
-          "request": {
-            "method": "POST",
-            "url": "",
-            "body": {
-              "Action": "RemoveUserFromGroup",
-              "Version": "2010-05-08",
-              "UserName": "={{ $parameter[\"user\"] }}",
-              "GroupName": "={{ $parameter[\"group\"] }}"
-            },
-            "ignoreHttpStatusErrors": true
-          },
-          "output": {
-            "postReceive": [
-              null
-            ]
-          }
+        {
+          "name": "Group",
+          "value": "group"
         }
-      },
-      {
-        "name": "Update",
-        "value": "update",
-        "description": "Update a user",
-        "action": "Update user",
-        "routing": {
-          "request": {
-            "method": "POST",
-            "url": "",
-            "body": {
-              "Action": "UpdateUser",
-              "Version": "2010-05-08",
-              "NewUserName": "={{ $parameter[\"userName\"] }}",
-              "UserName": "={{ $parameter[\"user\"] }}"
-            },
-            "ignoreHttpStatusErrors": true
-          },
-          "output": {
-            "postReceive": [
-              null
-            ]
-          }
+      ],
+      "routing": {
+        "send": {
+          "preSend": [
+            null
+          ]
         }
       }
-    ]
-  },
-  {
-    "displayName": "User",
-    "name": "user",
-    "required": true,
-    "type": "resourceLocator",
-    "default": {
-      "mode": "list",
-      "value": ""
     },
-    "modes": [
-      {
-        "displayName": "From list",
-        "name": "list",
-        "type": "list",
-        "typeOptions": {
-          "searchListMethod": "searchUsers",
-          "searchable": true
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "default": "getAll",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ]
         }
       },
-      {
-        "displayName": "By Name",
-        "name": "userName",
-        "type": "string",
-        "placeholder": "e.g. Admins",
-        "hint": "Enter the user name",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "^[\\w+=,.@-]+$",
-              "errorMessage": "The user name must follow the allowed pattern"
+      "options": [
+        {
+          "name": "Add to Group",
+          "value": "addToGroup",
+          "description": "Add an existing user to a group",
+          "action": "Add user to group",
+          "routing": {
+            "request": {
+              "method": "POST",
+              "url": "",
+              "body": {
+                "Action": "AddUserToGroup",
+                "Version": "2010-05-08",
+                "UserName": "={{ $parameter[\"user\"] }}",
+                "GroupName": "={{ $parameter[\"group\"] }}"
+              },
+              "ignoreHttpStatusErrors": true
+            },
+            "output": {
+              "postReceive": [
+                null
+              ]
             }
           }
-        ]
-      }
-    ],
-    "description": "Select the user you want to add to the group",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "addToGroup"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Group",
-    "name": "group",
-    "required": true,
-    "type": "resourceLocator",
-    "default": {
-      "mode": "list",
-      "value": ""
-    },
-    "modes": [
-      {
-        "displayName": "From list",
-        "name": "list",
-        "type": "list",
-        "typeOptions": {
-          "searchListMethod": "searchGroups",
-          "searchable": true
-        }
-      },
-      {
-        "displayName": "By Name",
-        "name": "groupName",
-        "type": "string",
-        "placeholder": "e.g. Admins",
-        "hint": "Enter the group name",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "^[\\w+=,.@-]+$",
-              "errorMessage": "The group name must follow the allowed pattern."
+        },
+        {
+          "name": "Create",
+          "value": "create",
+          "description": "Create a new user",
+          "action": "Create user",
+          "routing": {
+            "request": {
+              "method": "POST",
+              "url": "",
+              "body": {
+                "Action": "CreateUser",
+                "Version": "2010-05-08",
+                "UserName": "={{ $parameter[\"userName\"] }}"
+              },
+              "ignoreHttpStatusErrors": true
+            },
+            "output": {
+              "postReceive": [
+                null
+              ]
             }
           }
-        ]
-      }
-    ],
-    "description": "Select the group you want to add the user to",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "addToGroup"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "User Name",
-    "name": "userName",
-    "required": true,
-    "type": "string",
-    "validateType": "string",
-    "default": "",
-    "placeholder": "e.g. UserName",
-    "typeOptions": {
-      "maxLength": 64,
-      "regex": "^[A-Za-z0-9+=,\\.@_-]+$"
-    },
-    "routing": {
-      "send": {
-        "preSend": [
-          null
-        ]
-      }
-    },
-    "description": "The username of the new user to create",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "create"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "type": "collection",
-    "placeholder": "Add Option",
-    "default": {},
-    "options": [
-      {
-        "displayName": "Path",
-        "name": "path",
-        "type": "string",
-        "validateType": "string",
-        "default": "/",
-        "description": "The path for the user name",
-        "placeholder": "e.g. /division_abc/subdivision_xyz/",
-        "routing": {
-          "send": {
-            "preSend": [
-              null
-            ],
-            "property": "Path",
-            "type": "query"
-          }
-        }
-      },
-      {
-        "displayName": "Permissions Boundary",
-        "name": "permissionsBoundary",
-        "default": "",
-        "description": "The ARN of the managed policy that is used to set the permissions boundary for the user",
-        "placeholder": "e.g. arn:aws:iam::123456789012:policy/ExampleBoundaryPolicy",
-        "type": "string",
-        "validateType": "string",
-        "routing": {
-          "send": {
-            "preSend": [
-              null
-            ]
-          }
-        }
-      },
-      {
-        "displayName": "Tags",
-        "name": "tags",
-        "type": "fixedCollection",
-        "description": "A list of tags that you want to attach to the new user",
-        "default": [],
-        "placeholder": "Add Tag",
-        "typeOptions": {
-          "multipleValues": true
         },
-        "options": [
-          {
-            "name": "tags",
-            "displayName": "Tag",
-            "values": [
-              {
-                "displayName": "Key",
-                "name": "key",
-                "type": "string",
-                "default": "",
-                "placeholder": "e.g., Department"
+        {
+          "name": "Delete",
+          "value": "delete",
+          "description": "Delete a user",
+          "action": "Delete user",
+          "routing": {
+            "send": {
+              "preSend": [
+                null
+              ]
+            },
+            "request": {
+              "method": "POST",
+              "url": "",
+              "body": {
+                "Action": "DeleteUser",
+                "Version": "2010-05-08",
+                "UserName": "={{ $parameter[\"user\"] }}"
               },
-              {
-                "displayName": "Value",
-                "name": "value",
-                "type": "string",
-                "default": "",
-                "placeholder": "e.g., Engineering"
+              "ignoreHttpStatusErrors": true
+            },
+            "output": {
+              "postReceive": [
+                null
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Retrieve a user",
+          "action": "Get user",
+          "routing": {
+            "request": {
+              "method": "POST",
+              "url": "",
+              "body": {
+                "Action": "GetUser",
+                "Version": "2010-05-08",
+                "UserName": "={{ $parameter[\"user\"] }}"
+              },
+              "ignoreHttpStatusErrors": true
+            },
+            "output": {
+              "postReceive": [
+                {
+                  "type": "rootProperty",
+                  "properties": {
+                    "property": "GetUserResponse.GetUserResult.User"
+                  }
+                },
+                null
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Retrieve a list of users",
+          "routing": {
+            "request": {
+              "method": "POST",
+              "url": "",
+              "body": {
+                "Action": "ListUsers",
+                "Version": "2010-05-08"
+              },
+              "ignoreHttpStatusErrors": true
+            },
+            "output": {
+              "postReceive": [
+                null,
+                null
+              ]
+            }
+          },
+          "action": "Get many users"
+        },
+        {
+          "name": "Remove From Group",
+          "value": "removeFromGroup",
+          "description": "Remove a user from a group",
+          "action": "Remove user from group",
+          "routing": {
+            "request": {
+              "method": "POST",
+              "url": "",
+              "body": {
+                "Action": "RemoveUserFromGroup",
+                "Version": "2010-05-08",
+                "UserName": "={{ $parameter[\"user\"] }}",
+                "GroupName": "={{ $parameter[\"group\"] }}"
+              },
+              "ignoreHttpStatusErrors": true
+            },
+            "output": {
+              "postReceive": [
+                null
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update",
+          "value": "update",
+          "description": "Update a user",
+          "action": "Update user",
+          "routing": {
+            "request": {
+              "method": "POST",
+              "url": "",
+              "body": {
+                "Action": "UpdateUser",
+                "Version": "2010-05-08",
+                "NewUserName": "={{ $parameter[\"userName\"] }}",
+                "UserName": "={{ $parameter[\"user\"] }}"
+              },
+              "ignoreHttpStatusErrors": true
+            },
+            "output": {
+              "postReceive": [
+                null
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "displayName": "User",
+      "name": "user",
+      "required": true,
+      "type": "resourceLocator",
+      "default": {
+        "mode": "list",
+        "value": ""
+      },
+      "modes": [
+        {
+          "displayName": "From list",
+          "name": "list",
+          "type": "list",
+          "typeOptions": {
+            "searchListMethod": "searchUsers",
+            "searchable": true
+          }
+        },
+        {
+          "displayName": "By Name",
+          "name": "userName",
+          "type": "string",
+          "placeholder": "e.g. Admins",
+          "hint": "Enter the user name",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "^[\\w+=,.@-]+$",
+                "errorMessage": "The user name must follow the allowed pattern"
               }
-            ]
-          }
-        ],
-        "routing": {
-          "send": {
-            "preSend": [
-              null
-            ]
-          }
+            }
+          ]
+        }
+      ],
+      "description": "Select the user you want to add to the group",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "addToGroup"
+          ]
         }
       }
-    ],
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "create"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "User",
-    "name": "user",
-    "required": true,
-    "type": "resourceLocator",
-    "default": {
-      "mode": "list",
-      "value": ""
     },
-    "modes": [
-      {
-        "displayName": "From list",
-        "name": "list",
-        "type": "list",
-        "typeOptions": {
-          "searchListMethod": "searchUsers",
-          "searchable": true
+    {
+      "displayName": "Group",
+      "name": "group",
+      "required": true,
+      "type": "resourceLocator",
+      "default": {
+        "mode": "list",
+        "value": ""
+      },
+      "modes": [
+        {
+          "displayName": "From list",
+          "name": "list",
+          "type": "list",
+          "typeOptions": {
+            "searchListMethod": "searchGroups",
+            "searchable": true
+          }
+        },
+        {
+          "displayName": "By Name",
+          "name": "groupName",
+          "type": "string",
+          "placeholder": "e.g. Admins",
+          "hint": "Enter the group name",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "^[\\w+=,.@-]+$",
+                "errorMessage": "The group name must follow the allowed pattern."
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Select the group you want to add the user to",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "addToGroup"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "User Name",
+      "name": "userName",
+      "required": true,
+      "type": "string",
+      "validateType": "string",
+      "default": "",
+      "placeholder": "e.g. UserName",
+      "typeOptions": {
+        "maxLength": 64,
+        "regex": "^[A-Za-z0-9+=,\\.@_-]+$"
+      },
+      "routing": {
+        "send": {
+          "preSend": [
+            null
+          ]
         }
       },
-      {
-        "displayName": "By Name",
-        "name": "userName",
-        "type": "string",
-        "placeholder": "e.g. Admins",
-        "hint": "Enter the user name",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "^[\\w+=,.@-]+$",
-              "errorMessage": "The user name must follow the allowed pattern"
+      "description": "The username of the new user to create",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "create"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "type": "collection",
+      "placeholder": "Add Option",
+      "default": {},
+      "options": [
+        {
+          "displayName": "Path",
+          "name": "path",
+          "type": "string",
+          "validateType": "string",
+          "default": "/",
+          "description": "The path for the user name",
+          "placeholder": "e.g. /division_abc/subdivision_xyz/",
+          "routing": {
+            "send": {
+              "preSend": [
+                null
+              ],
+              "property": "Path",
+              "type": "query"
             }
           }
-        ]
-      }
-    ],
-    "description": "Select the user you want to delete",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "delete"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "User",
-    "name": "user",
-    "required": true,
-    "type": "resourceLocator",
-    "default": {
-      "mode": "list",
-      "value": ""
-    },
-    "modes": [
-      {
-        "displayName": "From list",
-        "name": "list",
-        "type": "list",
-        "typeOptions": {
-          "searchListMethod": "searchUsers",
-          "searchable": true
-        }
-      },
-      {
-        "displayName": "By Name",
-        "name": "userName",
-        "type": "string",
-        "placeholder": "e.g. Admins",
-        "hint": "Enter the user name",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "^[\\w+=,.@-]+$",
-              "errorMessage": "The user name must follow the allowed pattern"
+        },
+        {
+          "displayName": "Permissions Boundary",
+          "name": "permissionsBoundary",
+          "default": "",
+          "description": "The ARN of the managed policy that is used to set the permissions boundary for the user",
+          "placeholder": "e.g. arn:aws:iam::123456789012:policy/ExampleBoundaryPolicy",
+          "type": "string",
+          "validateType": "string",
+          "routing": {
+            "send": {
+              "preSend": [
+                null
+              ]
             }
           }
-        ]
-      }
-    ],
-    "description": "Select the user you want to retrieve",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "get"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "default": 100,
-    "type": "number",
-    "validateType": "number",
-    "typeOptions": {
-      "minValue": 1
-    },
-    "description": "Max number of results to return",
-    "displayOptions": {
-      "hide": {
-        "returnAll": [
-          true
-        ]
-      },
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "routing": {
-      "send": {
-        "property": "MaxItems",
-        "type": "body",
-        "value": "={{ $value }}"
-      }
-    }
-  },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "default": {},
-    "options": [
-      {
-        "displayName": "Path Prefix",
-        "name": "pathPrefix",
-        "type": "string",
-        "validateType": "string",
-        "default": "/",
-        "description": "The path prefix for filtering the results",
-        "placeholder": "e.g. /division_abc/subdivision_xyz/",
-        "routing": {
-          "send": {
-            "preSend": [
-              null
-            ],
-            "property": "PathPrefix",
-            "value": "={{ $value }}"
-          }
-        }
-      }
-    ],
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "User",
-    "name": "user",
-    "required": true,
-    "type": "resourceLocator",
-    "default": {
-      "mode": "list",
-      "value": ""
-    },
-    "modes": [
-      {
-        "displayName": "From list",
-        "name": "list",
-        "type": "list",
-        "typeOptions": {
-          "searchListMethod": "searchUsers",
-          "searchable": true
-        }
-      },
-      {
-        "displayName": "By Name",
-        "name": "userName",
-        "type": "string",
-        "placeholder": "e.g. Admins",
-        "hint": "Enter the user name",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "^[\\w+=,.@-]+$",
-              "errorMessage": "The user name must follow the allowed pattern"
+        },
+        {
+          "displayName": "Tags",
+          "name": "tags",
+          "type": "fixedCollection",
+          "description": "A list of tags that you want to attach to the new user",
+          "default": [],
+          "placeholder": "Add Tag",
+          "typeOptions": {
+            "multipleValues": true
+          },
+          "options": [
+            {
+              "name": "tags",
+              "displayName": "Tag",
+              "values": [
+                {
+                  "displayName": "Key",
+                  "name": "key",
+                  "type": "string",
+                  "default": "",
+                  "placeholder": "e.g., Department"
+                },
+                {
+                  "displayName": "Value",
+                  "name": "value",
+                  "type": "string",
+                  "default": "",
+                  "placeholder": "e.g., Engineering"
+                }
+              ]
+            }
+          ],
+          "routing": {
+            "send": {
+              "preSend": [
+                null
+              ]
             }
           }
-        ]
-      }
-    ],
-    "description": "Select the user you want to update",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "User Name",
-    "name": "userName",
-    "required": true,
-    "type": "string",
-    "validateType": "string",
-    "default": "",
-    "placeholder": "e.g. JohnSmith",
-    "typeOptions": {
-      "maxLength": 64,
-      "regex": "^[A-Za-z0-9+=,\\.@_-]+$"
-    },
-    "routing": {
-      "send": {
-        "preSend": [
-          null
-        ]
-      }
-    },
-    "description": "The new name of the user",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "type": "collection",
-    "placeholder": "Add Option",
-    "default": {},
-    "options": [
-      {
-        "displayName": "Path",
-        "name": "path",
-        "type": "string",
-        "validateType": "string",
-        "default": "/",
-        "placeholder": "e.g. /division_abc/subdivision_xyz/",
-        "routing": {
-          "send": {
-            "preSend": [
-              null
-            ],
-            "property": "NewPath",
-            "type": "query"
-          }
+        }
+      ],
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "create"
+          ]
         }
       }
-    ],
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "User",
-    "name": "user",
-    "required": true,
-    "type": "resourceLocator",
-    "default": {
-      "mode": "list",
-      "value": ""
     },
-    "modes": [
-      {
-        "displayName": "From list",
-        "name": "list",
-        "type": "list",
-        "typeOptions": {
-          "searchListMethod": "searchUsers",
-          "searchable": true
+    {
+      "displayName": "User",
+      "name": "user",
+      "required": true,
+      "type": "resourceLocator",
+      "default": {
+        "mode": "list",
+        "value": ""
+      },
+      "modes": [
+        {
+          "displayName": "From list",
+          "name": "list",
+          "type": "list",
+          "typeOptions": {
+            "searchListMethod": "searchUsers",
+            "searchable": true
+          }
+        },
+        {
+          "displayName": "By Name",
+          "name": "userName",
+          "type": "string",
+          "placeholder": "e.g. Admins",
+          "hint": "Enter the user name",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "^[\\w+=,.@-]+$",
+                "errorMessage": "The user name must follow the allowed pattern"
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Select the user you want to delete",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "delete"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "User",
+      "name": "user",
+      "required": true,
+      "type": "resourceLocator",
+      "default": {
+        "mode": "list",
+        "value": ""
+      },
+      "modes": [
+        {
+          "displayName": "From list",
+          "name": "list",
+          "type": "list",
+          "typeOptions": {
+            "searchListMethod": "searchUsers",
+            "searchable": true
+          }
+        },
+        {
+          "displayName": "By Name",
+          "name": "userName",
+          "type": "string",
+          "placeholder": "e.g. Admins",
+          "hint": "Enter the user name",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "^[\\w+=,.@-]+$",
+                "errorMessage": "The user name must follow the allowed pattern"
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Select the user you want to retrieve",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "get"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "default": 100,
+      "type": "number",
+      "validateType": "number",
+      "typeOptions": {
+        "minValue": 1
+      },
+      "description": "Max number of results to return",
+      "displayOptions": {
+        "hide": {
+          "returnAll": [
+            true
+          ]
+        },
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "getAll"
+          ]
         }
       },
-      {
-        "displayName": "By Name",
-        "name": "userName",
-        "type": "string",
-        "placeholder": "e.g. Admins",
-        "hint": "Enter the user name",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "^[\\w+=,.@-]+$",
-              "errorMessage": "The user name must follow the allowed pattern"
+      "routing": {
+        "send": {
+          "property": "MaxItems",
+          "type": "body",
+          "value": "={{ $value }}"
+        }
+      }
+    },
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "default": {},
+      "options": [
+        {
+          "displayName": "Path Prefix",
+          "name": "pathPrefix",
+          "type": "string",
+          "validateType": "string",
+          "default": "/",
+          "description": "The path prefix for filtering the results",
+          "placeholder": "e.g. /division_abc/subdivision_xyz/",
+          "routing": {
+            "send": {
+              "preSend": [
+                null
+              ],
+              "property": "PathPrefix",
+              "value": "={{ $value }}"
             }
           }
-        ]
+        }
+      ],
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
       }
-    ],
-    "description": "Select the user you want to remove from the group",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "removeFromGroup"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Group",
-    "name": "group",
-    "required": true,
-    "type": "resourceLocator",
-    "default": {
-      "mode": "list",
-      "value": ""
     },
-    "modes": [
-      {
-        "displayName": "From list",
-        "name": "list",
-        "type": "list",
-        "typeOptions": {
-          "searchListMethod": "searchGroupsForUser",
-          "searchable": true
+    {
+      "displayName": "User",
+      "name": "user",
+      "required": true,
+      "type": "resourceLocator",
+      "default": {
+        "mode": "list",
+        "value": ""
+      },
+      "modes": [
+        {
+          "displayName": "From list",
+          "name": "list",
+          "type": "list",
+          "typeOptions": {
+            "searchListMethod": "searchUsers",
+            "searchable": true
+          }
+        },
+        {
+          "displayName": "By Name",
+          "name": "userName",
+          "type": "string",
+          "placeholder": "e.g. Admins",
+          "hint": "Enter the user name",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "^[\\w+=,.@-]+$",
+                "errorMessage": "The user name must follow the allowed pattern"
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Select the user you want to update",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "User Name",
+      "name": "userName",
+      "required": true,
+      "type": "string",
+      "validateType": "string",
+      "default": "",
+      "placeholder": "e.g. JohnSmith",
+      "typeOptions": {
+        "maxLength": 64,
+        "regex": "^[A-Za-z0-9+=,\\.@_-]+$"
+      },
+      "routing": {
+        "send": {
+          "preSend": [
+            null
+          ]
         }
       },
-      {
-        "displayName": "By Name",
-        "name": "groupName",
-        "type": "string",
-        "hint": "Enter the group name",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "^[\\w+=,.@-]+$",
-              "errorMessage": "The group name must follow the allowed pattern"
-            }
-          }
-        ],
-        "placeholder": "e.g. Admins"
-      }
-    ],
-    "description": "Select the group you want to remove the user from",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "user"
-        ],
-        "operation": [
-          "removeFromGroup"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "default": "getAll",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "group"
-        ]
+      "description": "The new name of the user",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
       }
     },
-    "options": [
-      {
-        "name": "Create",
-        "value": "create",
-        "action": "Create group",
-        "description": "Create a new group",
-        "routing": {
-          "request": {
-            "method": "POST",
-            "url": "",
-            "body": {
-              "Action": "CreateGroup",
-              "Version": "2010-05-08",
-              "GroupName": "={{ $parameter[\"groupName\"] }}"
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "type": "collection",
+      "placeholder": "Add Option",
+      "default": {},
+      "options": [
+        {
+          "displayName": "Path",
+          "name": "path",
+          "type": "string",
+          "validateType": "string",
+          "default": "/",
+          "placeholder": "e.g. /division_abc/subdivision_xyz/",
+          "routing": {
+            "send": {
+              "preSend": [
+                null
+              ],
+              "property": "NewPath",
+              "type": "query"
+            }
+          }
+        }
+      ],
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "User",
+      "name": "user",
+      "required": true,
+      "type": "resourceLocator",
+      "default": {
+        "mode": "list",
+        "value": ""
+      },
+      "modes": [
+        {
+          "displayName": "From list",
+          "name": "list",
+          "type": "list",
+          "typeOptions": {
+            "searchListMethod": "searchUsers",
+            "searchable": true
+          }
+        },
+        {
+          "displayName": "By Name",
+          "name": "userName",
+          "type": "string",
+          "placeholder": "e.g. Admins",
+          "hint": "Enter the user name",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "^[\\w+=,.@-]+$",
+                "errorMessage": "The user name must follow the allowed pattern"
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Select the user you want to remove from the group",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "removeFromGroup"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Group",
+      "name": "group",
+      "required": true,
+      "type": "resourceLocator",
+      "default": {
+        "mode": "list",
+        "value": ""
+      },
+      "modes": [
+        {
+          "displayName": "From list",
+          "name": "list",
+          "type": "list",
+          "typeOptions": {
+            "searchListMethod": "searchGroupsForUser",
+            "searchable": true
+          }
+        },
+        {
+          "displayName": "By Name",
+          "name": "groupName",
+          "type": "string",
+          "hint": "Enter the group name",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "^[\\w+=,.@-]+$",
+                "errorMessage": "The group name must follow the allowed pattern"
+              }
+            }
+          ],
+          "placeholder": "e.g. Admins"
+        }
+      ],
+      "description": "Select the group you want to remove the user from",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "user"
+          ],
+          "operation": [
+            "removeFromGroup"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "default": "getAll",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "group"
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "Create",
+          "value": "create",
+          "action": "Create group",
+          "description": "Create a new group",
+          "routing": {
+            "request": {
+              "method": "POST",
+              "url": "",
+              "body": {
+                "Action": "CreateGroup",
+                "Version": "2010-05-08",
+                "GroupName": "={{ $parameter[\"groupName\"] }}"
+              },
+              "ignoreHttpStatusErrors": true
             },
-            "ignoreHttpStatusErrors": true
-          },
-          "output": {
-            "postReceive": [
-              null
-            ]
-          }
-        }
-      },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "action": "Delete group",
-        "description": "Delete an existing group",
-        "routing": {
-          "send": {
-            "preSend": [
-              null
-            ]
-          },
-          "request": {
-            "method": "POST",
-            "url": "",
-            "body": {
-              "Action": "DeleteGroup",
-              "Version": "2010-05-08",
-              "GroupName": "={{ $parameter[\"group\"] }}"
-            },
-            "ignoreHttpStatusErrors": true
-          },
-          "output": {
-            "postReceive": [
-              null
-            ]
-          }
-        }
-      },
-      {
-        "name": "Get",
-        "value": "get",
-        "action": "Get group",
-        "description": "Retrieve details of an existing group",
-        "routing": {
-          "request": {
-            "method": "POST",
-            "url": "",
-            "body": {
-              "Action": "GetGroup",
-              "Version": "2010-05-08",
-              "GroupName": "={{ $parameter[\"group\"] }}"
-            },
-            "ignoreHttpStatusErrors": true
-          },
-          "output": {
-            "postReceive": [
-              null,
-              null
-            ]
-          }
-        }
-      },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "action": "Get many groups",
-        "description": "Retrieve a list of groups",
-        "routing": {
-          "request": {
-            "method": "POST",
-            "url": "",
-            "body": {
-              "Action": "ListGroups",
-              "Version": "2010-05-08"
-            },
-            "ignoreHttpStatusErrors": true
-          },
-          "output": {
-            "postReceive": [
-              null,
-              null
-            ]
-          }
-        }
-      },
-      {
-        "name": "Update",
-        "value": "update",
-        "action": "Update group",
-        "description": "Update an existing group",
-        "routing": {
-          "request": {
-            "method": "POST",
-            "url": "",
-            "body": {
-              "Action": "UpdateGroup",
-              "Version": "2010-05-08",
-              "GroupName": "={{ $parameter[\"group\"] }}",
-              "NewGroupName": "={{ $parameter[\"groupName\"] }}"
-            },
-            "ignoreHttpStatusErrors": true
-          },
-          "output": {
-            "postReceive": [
-              null
-            ]
-          }
-        }
-      }
-    ]
-  },
-  {
-    "displayName": "Group Name",
-    "name": "groupName",
-    "required": true,
-    "type": "string",
-    "validateType": "string",
-    "typeOptions": {
-      "maxLength": 128,
-      "regex": "^[+=,.@\\-_A-Za-z0-9]+$"
-    },
-    "default": "",
-    "placeholder": "e.g. GroupName",
-    "routing": {
-      "send": {
-        "preSend": [
-          null
-        ]
-      }
-    },
-    "description": "The name of the new group to create",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "group"
-        ],
-        "operation": [
-          "create"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "default": {},
-    "options": [
-      {
-        "displayName": "Path",
-        "name": "path",
-        "type": "string",
-        "validateType": "string",
-        "default": "/",
-        "placeholder": "e.g. /division_abc/engineering/",
-        "description": "The path to the group, if it is not included, it defaults to a slash (/)",
-        "routing": {
-          "send": {
-            "preSend": [
-              null
-            ],
-            "property": "Path",
-            "type": "query"
-          }
-        }
-      }
-    ],
-    "placeholder": "Add Option",
-    "type": "collection",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "group"
-        ],
-        "operation": [
-          "create"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Group",
-    "name": "group",
-    "required": true,
-    "type": "resourceLocator",
-    "default": {
-      "mode": "list",
-      "value": ""
-    },
-    "modes": [
-      {
-        "displayName": "From list",
-        "name": "list",
-        "type": "list",
-        "typeOptions": {
-          "searchListMethod": "searchGroups",
-          "searchable": true
-        }
-      },
-      {
-        "displayName": "By Name",
-        "name": "groupName",
-        "type": "string",
-        "placeholder": "e.g. Admins",
-        "hint": "Enter the group name",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "^[\\w+=,.@-]+$",
-              "errorMessage": "The group name must follow the allowed pattern."
+            "output": {
+              "postReceive": [
+                null
+              ]
             }
           }
-        ]
-      }
-    ],
-    "description": "Select the group you want to delete",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "group"
-        ],
-        "operation": [
-          "delete"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Group",
-    "name": "group",
-    "required": true,
-    "type": "resourceLocator",
-    "default": {
-      "mode": "list",
-      "value": ""
-    },
-    "modes": [
-      {
-        "displayName": "From list",
-        "name": "list",
-        "type": "list",
-        "typeOptions": {
-          "searchListMethod": "searchGroups",
-          "searchable": true
-        }
-      },
-      {
-        "displayName": "By Name",
-        "name": "groupName",
-        "type": "string",
-        "placeholder": "e.g. Admins",
-        "hint": "Enter the group name",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "^[\\w+=,.@-]+$",
-              "errorMessage": "The group name must follow the allowed pattern."
+        },
+        {
+          "name": "Delete",
+          "value": "delete",
+          "action": "Delete group",
+          "description": "Delete an existing group",
+          "routing": {
+            "send": {
+              "preSend": [
+                null
+              ]
+            },
+            "request": {
+              "method": "POST",
+              "url": "",
+              "body": {
+                "Action": "DeleteGroup",
+                "Version": "2010-05-08",
+                "GroupName": "={{ $parameter[\"group\"] }}"
+              },
+              "ignoreHttpStatusErrors": true
+            },
+            "output": {
+              "postReceive": [
+                null
+              ]
             }
           }
-        ]
-      }
-    ],
-    "description": "Select the group you want to retrieve",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "group"
-        ],
-        "operation": [
-          "get"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Include Users",
-    "name": "includeUsers",
-    "type": "boolean",
-    "default": false,
-    "description": "Whether to include a list of users in the group",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "group"
-        ],
-        "operation": [
-          "get"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "group"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "default": 100,
-    "type": "number",
-    "validateType": "number",
-    "typeOptions": {
-      "minValue": 1
-    },
-    "description": "Max number of results to return",
-    "displayOptions": {
-      "hide": {
-        "returnAll": [
-          true
-        ]
-      },
-      "show": {
-        "resource": [
-          "group"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "routing": {
-      "send": {
-        "property": "MaxItems",
-        "type": "body",
-        "value": "={{ $value }}"
-      }
-    }
-  },
-  {
-    "displayName": "Include Users",
-    "name": "includeUsers",
-    "type": "boolean",
-    "default": false,
-    "description": "Whether to include a list of users in the group",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "group"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Group",
-    "name": "group",
-    "required": true,
-    "type": "resourceLocator",
-    "default": {
-      "mode": "list",
-      "value": ""
-    },
-    "modes": [
-      {
-        "displayName": "From list",
-        "name": "list",
-        "type": "list",
-        "typeOptions": {
-          "searchListMethod": "searchGroups",
-          "searchable": true
-        }
-      },
-      {
-        "displayName": "By Name",
-        "name": "groupName",
-        "type": "string",
-        "placeholder": "e.g. Admins",
-        "hint": "Enter the group name",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "^[\\w+=,.@-]+$",
-              "errorMessage": "The group name must follow the allowed pattern."
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "action": "Get group",
+          "description": "Retrieve details of an existing group",
+          "routing": {
+            "request": {
+              "method": "POST",
+              "url": "",
+              "body": {
+                "Action": "GetGroup",
+                "Version": "2010-05-08",
+                "GroupName": "={{ $parameter[\"group\"] }}"
+              },
+              "ignoreHttpStatusErrors": true
+            },
+            "output": {
+              "postReceive": [
+                null,
+                null
+              ]
             }
           }
-        ]
-      }
-    ],
-    "description": "Select the group you want to update",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "group"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Group Name",
-    "name": "groupName",
-    "required": true,
-    "type": "string",
-    "validateType": "string",
-    "typeOptions": {
-      "maxLength": 128,
-      "regex": "^[+=,.@\\-_A-Za-z0-9]+$"
-    },
-    "default": "",
-    "placeholder": "e.g. GroupName",
-    "routing": {
-      "send": {
-        "preSend": [
-          null
-        ]
-      }
-    },
-    "description": "The new name of the group",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "group"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "type": "collection",
-    "placeholder": "Add Option",
-    "default": {},
-    "options": [
-      {
-        "displayName": "Path",
-        "name": "path",
-        "type": "string",
-        "validateType": "string",
-        "default": "/",
-        "placeholder": "e.g. /division_abc/engineering/",
-        "description": "The new path to the group, if it is not included, it defaults to a slash (/)",
-        "routing": {
-          "send": {
-            "preSend": [
-              null
-            ],
-            "property": "NewPath",
-            "type": "query"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "action": "Get many groups",
+          "description": "Retrieve a list of groups",
+          "routing": {
+            "request": {
+              "method": "POST",
+              "url": "",
+              "body": {
+                "Action": "ListGroups",
+                "Version": "2010-05-08"
+              },
+              "ignoreHttpStatusErrors": true
+            },
+            "output": {
+              "postReceive": [
+                null,
+                null
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update",
+          "value": "update",
+          "action": "Update group",
+          "description": "Update an existing group",
+          "routing": {
+            "request": {
+              "method": "POST",
+              "url": "",
+              "body": {
+                "Action": "UpdateGroup",
+                "Version": "2010-05-08",
+                "GroupName": "={{ $parameter[\"group\"] }}",
+                "NewGroupName": "={{ $parameter[\"groupName\"] }}"
+              },
+              "ignoreHttpStatusErrors": true
+            },
+            "output": {
+              "postReceive": [
+                null
+              ]
+            }
           }
         }
+      ]
+    },
+    {
+      "displayName": "Group Name",
+      "name": "groupName",
+      "required": true,
+      "type": "string",
+      "validateType": "string",
+      "typeOptions": {
+        "maxLength": 128,
+        "regex": "^[+=,.@\\-_A-Za-z0-9]+$"
+      },
+      "default": "",
+      "placeholder": "e.g. GroupName",
+      "routing": {
+        "send": {
+          "preSend": [
+            null
+          ]
+        }
+      },
+      "description": "The name of the new group to create",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "group"
+          ],
+          "operation": [
+            "create"
+          ]
+        }
       }
-    ],
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "group"
-        ],
-        "operation": [
-          "update"
-        ]
+    },
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "default": {},
+      "options": [
+        {
+          "displayName": "Path",
+          "name": "path",
+          "type": "string",
+          "validateType": "string",
+          "default": "/",
+          "placeholder": "e.g. /division_abc/engineering/",
+          "description": "The path to the group, if it is not included, it defaults to a slash (/)",
+          "routing": {
+            "send": {
+              "preSend": [
+                null
+              ],
+              "property": "Path",
+              "type": "query"
+            }
+          }
+        }
+      ],
+      "placeholder": "Add Option",
+      "type": "collection",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "group"
+          ],
+          "operation": [
+            "create"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Group",
+      "name": "group",
+      "required": true,
+      "type": "resourceLocator",
+      "default": {
+        "mode": "list",
+        "value": ""
+      },
+      "modes": [
+        {
+          "displayName": "From list",
+          "name": "list",
+          "type": "list",
+          "typeOptions": {
+            "searchListMethod": "searchGroups",
+            "searchable": true
+          }
+        },
+        {
+          "displayName": "By Name",
+          "name": "groupName",
+          "type": "string",
+          "placeholder": "e.g. Admins",
+          "hint": "Enter the group name",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "^[\\w+=,.@-]+$",
+                "errorMessage": "The group name must follow the allowed pattern."
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Select the group you want to delete",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "group"
+          ],
+          "operation": [
+            "delete"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Group",
+      "name": "group",
+      "required": true,
+      "type": "resourceLocator",
+      "default": {
+        "mode": "list",
+        "value": ""
+      },
+      "modes": [
+        {
+          "displayName": "From list",
+          "name": "list",
+          "type": "list",
+          "typeOptions": {
+            "searchListMethod": "searchGroups",
+            "searchable": true
+          }
+        },
+        {
+          "displayName": "By Name",
+          "name": "groupName",
+          "type": "string",
+          "placeholder": "e.g. Admins",
+          "hint": "Enter the group name",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "^[\\w+=,.@-]+$",
+                "errorMessage": "The group name must follow the allowed pattern."
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Select the group you want to retrieve",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "group"
+          ],
+          "operation": [
+            "get"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Include Users",
+      "name": "includeUsers",
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to include a list of users in the group",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "group"
+          ],
+          "operation": [
+            "get"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "group"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "default": 100,
+      "type": "number",
+      "validateType": "number",
+      "typeOptions": {
+        "minValue": 1
+      },
+      "description": "Max number of results to return",
+      "displayOptions": {
+        "hide": {
+          "returnAll": [
+            true
+          ]
+        },
+        "show": {
+          "resource": [
+            "group"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "routing": {
+        "send": {
+          "property": "MaxItems",
+          "type": "body",
+          "value": "={{ $value }}"
+        }
+      }
+    },
+    {
+      "displayName": "Include Users",
+      "name": "includeUsers",
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to include a list of users in the group",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "group"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Group",
+      "name": "group",
+      "required": true,
+      "type": "resourceLocator",
+      "default": {
+        "mode": "list",
+        "value": ""
+      },
+      "modes": [
+        {
+          "displayName": "From list",
+          "name": "list",
+          "type": "list",
+          "typeOptions": {
+            "searchListMethod": "searchGroups",
+            "searchable": true
+          }
+        },
+        {
+          "displayName": "By Name",
+          "name": "groupName",
+          "type": "string",
+          "placeholder": "e.g. Admins",
+          "hint": "Enter the group name",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "^[\\w+=,.@-]+$",
+                "errorMessage": "The group name must follow the allowed pattern."
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Select the group you want to update",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "group"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Group Name",
+      "name": "groupName",
+      "required": true,
+      "type": "string",
+      "validateType": "string",
+      "typeOptions": {
+        "maxLength": 128,
+        "regex": "^[+=,.@\\-_A-Za-z0-9]+$"
+      },
+      "default": "",
+      "placeholder": "e.g. GroupName",
+      "routing": {
+        "send": {
+          "preSend": [
+            null
+          ]
+        }
+      },
+      "description": "The new name of the group",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "group"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "type": "collection",
+      "placeholder": "Add Option",
+      "default": {},
+      "options": [
+        {
+          "displayName": "Path",
+          "name": "path",
+          "type": "string",
+          "validateType": "string",
+          "default": "/",
+          "placeholder": "e.g. /division_abc/engineering/",
+          "description": "The new path to the group, if it is not included, it defaults to a slash (/)",
+          "routing": {
+            "send": {
+              "preSend": [
+                null
+              ],
+              "property": "NewPath",
+              "type": "query"
+            }
+          }
+        }
+      ],
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "group"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}
 ```

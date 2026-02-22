@@ -1,64 +1,57 @@
+---
+title: "Function"
+description: "Run custom function code which gets executed once and allows you to add, remove, change and replace items"
+---
+
 # Function
+**Node Type:** nodes-base.function
 
-- Node name: `function`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Function/Function.node.js`
-- Node version: `1`
-- Groups: `transform`
-- Description: Run custom function code which gets executed once and allows you to add, remove, change and replace items
+## Description
+Run custom function code which gets executed once and allows you to add, remove, change and replace items
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- None
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| A newer version of this node type is available, called the ‘Code’ node | `notice` | `notice` | no |  |  |
-| JavaScript Code | `functionCode` | `string` | no | `// Code here will run only once, no matter how many input items there are.
-// More info and help:https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.function/
-// Tip: You can use luxon for dates and $jmespath for querying JSON structures
-
-// Loop over inputs and add a new field called 'myNewField' to the JSON of each one
-for (item of items) {
-  item.json.myNewField = 1;
-}
-
-// You can write logs to the browser console
-console.log('Done!');
-
-return items;` | The JavaScript code to execute |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "A newer version of this node type is available, called the ‘Code’ node",
-    "name": "notice",
-    "type": "notice",
-    "default": ""
+{
+  "displayName": "Function",
+  "name": "function",
+  "hidden": true,
+  "icon": "fa:code",
+  "group": [
+    "transform"
+  ],
+  "version": 1,
+  "description": "Run custom function code which gets executed once and allows you to add, remove, change and replace items",
+  "defaults": {
+    "name": "Function",
+    "color": "#FF9922"
   },
-  {
-    "displayName": "JavaScript Code",
-    "name": "functionCode",
-    "typeOptions": {
-      "alwaysOpenEditWindow": true,
-      "codeAutocomplete": "function",
-      "editor": "jsEditor",
-      "rows": 10
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "properties": [
+    {
+      "displayName": "A newer version of this node type is available, called the ‘Code’ node",
+      "name": "notice",
+      "type": "notice",
+      "default": ""
     },
-    "type": "string",
-    "default": "// Code here will run only once, no matter how many input items there are.\n// More info and help:https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.function/\n// Tip: You can use luxon for dates and $jmespath for querying JSON structures\n\n// Loop over inputs and add a new field called 'myNewField' to the JSON of each one\nfor (item of items) {\n  item.json.myNewField = 1;\n}\n\n// You can write logs to the browser console\nconsole.log('Done!');\n\nreturn items;",
-    "description": "The JavaScript code to execute",
-    "noDataExpression": true
-  }
-]
+    {
+      "displayName": "JavaScript Code",
+      "name": "functionCode",
+      "typeOptions": {
+        "alwaysOpenEditWindow": true,
+        "codeAutocomplete": "function",
+        "editor": "jsEditor",
+        "rows": 10
+      },
+      "type": "string",
+      "default": "// Code here will run only once, no matter how many input items there are.\n// More info and help:https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.function/\n// Tip: You can use luxon for dates and $jmespath for querying JSON structures\n\n// Loop over inputs and add a new field called 'myNewField' to the JSON of each one\nfor (item of items) {\n  item.json.myNewField = 1;\n}\n\n// You can write logs to the browser console\nconsole.log('Done!');\n\nreturn items;",
+      "description": "The JavaScript code to execute",
+      "noDataExpression": true
+    }
+  ]
+}
 ```

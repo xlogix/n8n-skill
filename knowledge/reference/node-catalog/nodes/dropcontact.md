@@ -1,265 +1,267 @@
+---
+title: "Dropcontact"
+description: "Find B2B emails and enrich contacts"
+---
+
 # Dropcontact
+**Node Type:** nodes-base.dropcontact
 
-- Node name: `dropcontact`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Dropcontact/Dropcontact.node.js`
-- Node version: `1`
-- Groups: `transform`
-- Description: Find B2B emails and enrich contacts
+## Description
+Find B2B emails and enrich contacts
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `dropcontactApi` (required)
-
-## Resource and Operation Coverage
-### Resources
-- Contact (`contact`)
-
-### Operations
-- default/all resources: `enrich`, `fetchRequest`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Resource | `resource` | `options` | yes | `contact` |  |
-| Operation | `operation` | `options` | yes | `enrich` |  |
-| Request ID | `requestId` | `string` | yes |  |  |
-| Email | `email` | `string` | no |  |  |
-| Simplify Output (Faster) | `simplify` | `boolean` | no | `false` | When off, waits for the contact data before completing. Waiting time can be adjusted with Extend Wait Time option. When on, returns a request_id that can be used later in the Fetch Request operation. |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-| Options | `options` | `collection` | no | `{}` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Resource",
-    "noDataExpression": true,
-    "name": "resource",
-    "type": "options",
-    "options": [
-      {
-        "name": "Contact",
-        "value": "contact"
-      }
-    ],
-    "default": "contact",
-    "required": true
+{
+  "displayName": "Dropcontact",
+  "name": "dropcontact",
+  "icon": "file:dropcontact.svg",
+  "group": [
+    "transform"
+  ],
+  "version": 1,
+  "description": "Find B2B emails and enrich contacts",
+  "subtitle": "={{$parameter[\"operation\"] + \": \" + $parameter[\"resource\"]}}",
+  "defaults": {
+    "name": "Dropcontact"
   },
-  {
-    "displayName": "Operation",
-    "noDataExpression": true,
-    "name": "operation",
-    "type": "options",
-    "options": [
-      {
-        "name": "Enrich",
-        "value": "enrich",
-        "description": "Find B2B emails and enrich your contact from his name and his website",
-        "action": "Find B2B emails"
-      },
-      {
-        "name": "Fetch Request",
-        "value": "fetchRequest"
-      }
-    ],
-    "default": "enrich",
-    "required": true
-  },
-  {
-    "displayName": "Request ID",
-    "name": "requestId",
-    "type": "string",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "contact"
-        ],
-        "operation": [
-          "fetchRequest"
-        ]
-      }
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "dropcontactApi",
+      "required": true
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Resource",
+      "noDataExpression": true,
+      "name": "resource",
+      "type": "options",
+      "options": [
+        {
+          "name": "Contact",
+          "value": "contact"
+        }
+      ],
+      "default": "contact",
+      "required": true
     },
-    "default": ""
-  },
-  {
-    "displayName": "Email",
-    "name": "email",
-    "type": "string",
-    "placeholder": "name@email.com",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "contact"
-        ],
-        "operation": [
-          "enrich"
-        ]
-      }
-    },
-    "default": ""
-  },
-  {
-    "displayName": "Simplify Output (Faster)",
-    "name": "simplify",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "contact"
-        ],
-        "operation": [
-          "enrich"
-        ]
-      }
-    },
-    "default": false,
-    "description": "When off, waits for the contact data before completing. Waiting time can be adjusted with Extend Wait Time option. When on, returns a request_id that can be used later in the Fetch Request operation."
-  },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "default": {},
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "contact"
-        ],
-        "operation": [
-          "enrich"
-        ]
-      }
-    },
-    "options": [
-      {
-        "displayName": "Company SIREN Number",
-        "name": "num_siren",
-        "type": "string",
-        "default": ""
-      },
-      {
-        "displayName": "Company SIRET Code",
-        "name": "siret",
-        "type": "string",
-        "default": ""
-      },
-      {
-        "displayName": "Company Name",
-        "name": "company",
-        "type": "string",
-        "default": ""
-      },
-      {
-        "displayName": "Country",
-        "name": "country",
-        "type": "string",
-        "default": ""
-      },
-      {
-        "displayName": "First Name",
-        "name": "first_name",
-        "type": "string",
-        "default": ""
-      },
-      {
-        "displayName": "Full Name",
-        "name": "full_name",
-        "type": "string",
-        "default": ""
-      },
-      {
-        "displayName": "Last Name",
-        "name": "last_name",
-        "type": "string",
-        "default": ""
-      },
-      {
-        "displayName": "LinkedIn Profile",
-        "name": "linkedin",
-        "type": "string",
-        "default": ""
-      },
-      {
-        "displayName": "Phone Number",
-        "name": "phone",
-        "type": "string",
-        "default": ""
-      },
-      {
-        "displayName": "Website",
-        "name": "website",
-        "type": "string",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "displayName": "Options",
-    "name": "options",
-    "type": "collection",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "contact"
-        ],
-        "operation": [
-          "enrich"
-        ]
-      }
-    },
-    "placeholder": "Add option",
-    "default": {},
-    "options": [
-      {
-        "displayName": "Data Fetch Wait Time",
-        "name": "waitTime",
-        "type": "number",
-        "typeOptions": {
-          "minValue": 1
+    {
+      "displayName": "Operation",
+      "noDataExpression": true,
+      "name": "operation",
+      "type": "options",
+      "options": [
+        {
+          "name": "Enrich",
+          "value": "enrich",
+          "description": "Find B2B emails and enrich your contact from his name and his website",
+          "action": "Find B2B emails"
         },
-        "displayOptions": {
-          "show": {
-            "/simplify": [
-              false
-            ]
-          }
+        {
+          "name": "Fetch Request",
+          "value": "fetchRequest"
+        }
+      ],
+      "default": "enrich",
+      "required": true
+    },
+    {
+      "displayName": "Request ID",
+      "name": "requestId",
+      "type": "string",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "contact"
+          ],
+          "operation": [
+            "fetchRequest"
+          ]
+        }
+      },
+      "default": ""
+    },
+    {
+      "displayName": "Email",
+      "name": "email",
+      "type": "string",
+      "placeholder": "name@email.com",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "contact"
+          ],
+          "operation": [
+            "enrich"
+          ]
+        }
+      },
+      "default": ""
+    },
+    {
+      "displayName": "Simplify Output (Faster)",
+      "name": "simplify",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "contact"
+          ],
+          "operation": [
+            "enrich"
+          ]
+        }
+      },
+      "default": false,
+      "description": "When off, waits for the contact data before completing. Waiting time can be adjusted with Extend Wait Time option. When on, returns a request_id that can be used later in the Fetch Request operation."
+    },
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "default": {},
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "contact"
+          ],
+          "operation": [
+            "enrich"
+          ]
+        }
+      },
+      "options": [
+        {
+          "displayName": "Company SIREN Number",
+          "name": "num_siren",
+          "type": "string",
+          "default": ""
         },
-        "default": 45,
-        "description": "When not simplifying the response, data will be fetched in two steps. This parameter controls how long to wait (in seconds) before trying the second step."
+        {
+          "displayName": "Company SIRET Code",
+          "name": "siret",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "displayName": "Company Name",
+          "name": "company",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "displayName": "Country",
+          "name": "country",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "displayName": "First Name",
+          "name": "first_name",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "displayName": "Full Name",
+          "name": "full_name",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "displayName": "Last Name",
+          "name": "last_name",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "displayName": "LinkedIn Profile",
+          "name": "linkedin",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "displayName": "Phone Number",
+          "name": "phone",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "displayName": "Website",
+          "name": "website",
+          "type": "string",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "displayName": "Options",
+      "name": "options",
+      "type": "collection",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "contact"
+          ],
+          "operation": [
+            "enrich"
+          ]
+        }
       },
-      {
-        "displayName": "French Company Enrich",
-        "name": "siren",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether you want the <a href=\"https://en.wikipedia.org/wiki/SIREN_code\" target=\"_blank\">SIREN number</a>, NAF code, TVA number, company address and informations about the company leader. Only applies to french companies."
-      },
-      {
-        "displayName": "Language",
-        "name": "language",
-        "type": "options",
-        "options": [
-          {
-            "name": "English",
-            "value": "en"
+      "placeholder": "Add option",
+      "default": {},
+      "options": [
+        {
+          "displayName": "Data Fetch Wait Time",
+          "name": "waitTime",
+          "type": "number",
+          "typeOptions": {
+            "minValue": 1
           },
-          {
-            "name": "French",
-            "value": "fr"
-          }
-        ],
-        "default": "en",
-        "description": "Whether the response is in English or French"
-      }
-    ]
-  }
-]
+          "displayOptions": {
+            "show": {
+              "/simplify": [
+                false
+              ]
+            }
+          },
+          "default": 45,
+          "description": "When not simplifying the response, data will be fetched in two steps. This parameter controls how long to wait (in seconds) before trying the second step."
+        },
+        {
+          "displayName": "French Company Enrich",
+          "name": "siren",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether you want the <a href=\"https://en.wikipedia.org/wiki/SIREN_code\" target=\"_blank\">SIREN number</a>, NAF code, TVA number, company address and informations about the company leader. Only applies to french companies."
+        },
+        {
+          "displayName": "Language",
+          "name": "language",
+          "type": "options",
+          "options": [
+            {
+              "name": "English",
+              "value": "en"
+            },
+            {
+              "name": "French",
+              "value": "fr"
+            }
+          ],
+          "default": "en",
+          "description": "Whether the response is in English or French"
+        }
+      ]
+    }
+  ]
+}
 ```

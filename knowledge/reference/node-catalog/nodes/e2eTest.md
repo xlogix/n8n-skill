@@ -1,186 +1,186 @@
+---
+title: "E2E Test"
+description: "Dummy node used for e2e testing"
+---
+
 # E2E Test
+**Node Type:** nodes-base.e2eTest
 
-- Node name: `e2eTest`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/E2eTest/E2eTest.node.js`
-- Node version: `1`
-- Groups: `output`
-- Description: Dummy node used for e2e testing
+## Description
+Dummy node used for e2e testing
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- None
-
-## Resource and Operation Coverage
-### Operations
-- default/all resources: `remoteOptions`, `resourceLocator`, `resourceMapper`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Operation | `operation` | `options` | no | `remoteOptions` |  |
-| Field ID | `fieldId` | `string` | no |  |  |
-| Remote Options Name or ID | `remoteOptions` | `options` | yes | `[]` | Remote options to load. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Resource Locator | `rlc` | `resourceLocator` | yes | `{"mode":"list","value":""}` |  |
-| Resource Mapping Component | `resourceMapper` | `resourceMapper` | yes | `{"mappingMode":"defineBelow","value":null}` |  |
-| Other Non Important Field | `otherField` | `string` | no |  |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "Remote Options",
-        "value": "remoteOptions"
-      },
-      {
-        "name": "Resource Locator",
-        "value": "resourceLocator"
-      },
-      {
-        "name": "Resource Mapping Component",
-        "value": "resourceMapper"
-      }
-    ],
-    "default": "remoteOptions"
+{
+  "displayName": "E2E Test",
+  "name": "e2eTest",
+  "icon": "fa:play",
+  "group": [
+    "output"
+  ],
+  "version": 1,
+  "subtitle": "={{$parameter[\"operation\"]}}",
+  "description": "Dummy node used for e2e testing",
+  "defaults": {
+    "name": "E2E Test"
   },
-  {
-    "displayName": "Field ID",
-    "name": "fieldId",
-    "type": "string",
-    "default": ""
-  },
-  {
-    "displayName": "Remote Options Name or ID",
-    "name": "remoteOptions",
-    "description": "Remote options to load. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsDependsOn": [
-        "fieldId"
-      ],
-      "loadOptionsMethod": "getOptions"
-    },
-    "required": true,
-    "default": [],
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "remoteOptions"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Resource Locator",
-    "name": "rlc",
-    "type": "resourceLocator",
-    "default": {
-      "mode": "list",
-      "value": ""
-    },
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "resourceLocator"
-        ]
-      }
-    },
-    "modes": [
-      {
-        "displayName": "From List",
-        "name": "list",
-        "type": "list",
-        "typeOptions": {
-          "searchListMethod": "optionsSearch",
-          "searchable": true
-        }
-      },
-      {
-        "displayName": "By URL",
-        "name": "url",
-        "type": "string",
-        "placeholder": "https://example.com/user/a4071e98-7d40-41fb-8911-ce3e7bf94fb2",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "https://example.com/user/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
-              "errorMessage": "Not a valid example URL"
-            }
-          }
-        ],
-        "extractValue": {
-          "type": "regex",
-          "regex": "https://example.com/user/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})"
-        }
-      },
-      {
-        "displayName": "ID",
-        "name": "id",
-        "type": "string",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
-              "errorMessage": "Not a valid UUI"
-            }
-          }
-        ],
-        "placeholder": "a4071e98-7d40-41fb-8911-ce3e7bf94fb2"
-      }
-    ]
-  },
-  {
-    "displayName": "Resource Mapping Component",
-    "name": "resourceMapper",
-    "type": "resourceMapper",
-    "noDataExpression": true,
-    "default": {
-      "mappingMode": "defineBelow",
-      "value": null
-    },
-    "required": true,
-    "typeOptions": {
-      "loadOptionsDependsOn": [
-        "fieldId"
-      ],
-      "resourceMapper": {
-        "resourceMapperMethod": "getMappingColumns",
-        "mode": "upsert",
-        "fieldWords": {
-          "singular": "column",
-          "plural": "columns"
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "properties": [
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "Remote Options",
+          "value": "remoteOptions"
         },
-        "addAllFields": true,
-        "multiKeyMatch": false
+        {
+          "name": "Resource Locator",
+          "value": "resourceLocator"
+        },
+        {
+          "name": "Resource Mapping Component",
+          "value": "resourceMapper"
+        }
+      ],
+      "default": "remoteOptions"
+    },
+    {
+      "displayName": "Field ID",
+      "name": "fieldId",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "displayName": "Remote Options Name or ID",
+      "name": "remoteOptions",
+      "description": "Remote options to load. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsDependsOn": [
+          "fieldId"
+        ],
+        "loadOptionsMethod": "getOptions"
+      },
+      "required": true,
+      "default": [],
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "remoteOptions"
+          ]
+        }
       }
     },
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "resourceMapper"
-        ]
+    {
+      "displayName": "Resource Locator",
+      "name": "rlc",
+      "type": "resourceLocator",
+      "default": {
+        "mode": "list",
+        "value": ""
+      },
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "resourceLocator"
+          ]
+        }
+      },
+      "modes": [
+        {
+          "displayName": "From List",
+          "name": "list",
+          "type": "list",
+          "typeOptions": {
+            "searchListMethod": "optionsSearch",
+            "searchable": true
+          }
+        },
+        {
+          "displayName": "By URL",
+          "name": "url",
+          "type": "string",
+          "placeholder": "https://example.com/user/a4071e98-7d40-41fb-8911-ce3e7bf94fb2",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "https://example.com/user/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                "errorMessage": "Not a valid example URL"
+              }
+            }
+          ],
+          "extractValue": {
+            "type": "regex",
+            "regex": "https://example.com/user/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})"
+          }
+        },
+        {
+          "displayName": "ID",
+          "name": "id",
+          "type": "string",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                "errorMessage": "Not a valid UUI"
+              }
+            }
+          ],
+          "placeholder": "a4071e98-7d40-41fb-8911-ce3e7bf94fb2"
+        }
+      ]
+    },
+    {
+      "displayName": "Resource Mapping Component",
+      "name": "resourceMapper",
+      "type": "resourceMapper",
+      "noDataExpression": true,
+      "default": {
+        "mappingMode": "defineBelow",
+        "value": null
+      },
+      "required": true,
+      "typeOptions": {
+        "loadOptionsDependsOn": [
+          "fieldId"
+        ],
+        "resourceMapper": {
+          "resourceMapperMethod": "getMappingColumns",
+          "mode": "upsert",
+          "fieldWords": {
+            "singular": "column",
+            "plural": "columns"
+          },
+          "addAllFields": true,
+          "multiKeyMatch": false
+        }
+      },
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "resourceMapper"
+          ]
+        }
       }
+    },
+    {
+      "displayName": "Other Non Important Field",
+      "name": "otherField",
+      "type": "string",
+      "default": ""
     }
-  },
-  {
-    "displayName": "Other Non Important Field",
-    "name": "otherField",
-    "type": "string",
-    "default": ""
-  }
-]
+  ]
+}
 ```

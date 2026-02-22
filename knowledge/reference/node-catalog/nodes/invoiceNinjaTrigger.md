@@ -1,110 +1,127 @@
+---
+title: "Invoice Ninja Trigger"
+description: "Starts the workflow when Invoice Ninja events occur"
+---
+
 # Invoice Ninja Trigger
+**Node Type:** nodes-base.invoiceNinjaTrigger
 
-- Node name: `invoiceNinjaTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/InvoiceNinja/InvoiceNinjaTrigger.node.js`
-- Node version: `[1,2]`
-- Groups: `trigger`
-- Description: Starts the workflow when Invoice Ninja events occur
+## Description
+Starts the workflow when Invoice Ninja events occur
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `invoiceNinjaApi` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| API Version | `apiVersion` | `options` | no | `v4` |  |
-| API Version | `apiVersion` | `options` | no | `v5` |  |
-| Event | `event` | `options` | yes |  |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "API Version",
-    "name": "apiVersion",
-    "type": "options",
-    "isNodeSetting": true,
-    "displayOptions": {
-      "show": {
-        "@version": [
-          1
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Version 4",
-        "value": "v4"
-      },
-      {
-        "name": "Version 5",
-        "value": "v5"
-      }
-    ],
-    "default": "v4"
+{
+  "displayName": "Invoice Ninja Trigger",
+  "name": "invoiceNinjaTrigger",
+  "icon": "file:invoiceNinja.svg",
+  "group": [
+    "trigger"
+  ],
+  "version": [
+    1,
+    2
+  ],
+  "description": "Starts the workflow when Invoice Ninja events occur",
+  "defaults": {
+    "name": "Invoice Ninja Trigger"
   },
-  {
-    "displayName": "API Version",
-    "name": "apiVersion",
-    "type": "options",
-    "isNodeSetting": true,
-    "displayOptions": {
-      "show": {
-        "@version": [
-          2
-        ]
-      }
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "invoiceNinjaApi",
+      "required": true
+    }
+  ],
+  "webhooks": [
+    {
+      "name": "default",
+      "httpMethod": "POST",
+      "responseMode": "onReceived",
+      "path": "webhook"
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "API Version",
+      "name": "apiVersion",
+      "type": "options",
+      "isNodeSetting": true,
+      "displayOptions": {
+        "show": {
+          "@version": [
+            1
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "Version 4",
+          "value": "v4"
+        },
+        {
+          "name": "Version 5",
+          "value": "v5"
+        }
+      ],
+      "default": "v4"
     },
-    "options": [
-      {
-        "name": "Version 4",
-        "value": "v4"
+    {
+      "displayName": "API Version",
+      "name": "apiVersion",
+      "type": "options",
+      "isNodeSetting": true,
+      "displayOptions": {
+        "show": {
+          "@version": [
+            2
+          ]
+        }
       },
-      {
-        "name": "Version 5",
-        "value": "v5"
-      }
-    ],
-    "default": "v5"
-  },
-  {
-    "displayName": "Event",
-    "name": "event",
-    "type": "options",
-    "options": [
-      {
-        "name": "Client Created",
-        "value": "create_client"
-      },
-      {
-        "name": "Invoice Created",
-        "value": "create_invoice"
-      },
-      {
-        "name": "Payment Created",
-        "value": "create_payment"
-      },
-      {
-        "name": "Quote Created",
-        "value": "create_quote"
-      },
-      {
-        "name": "Vendor Created",
-        "value": "create_vendor"
-      }
-    ],
-    "default": "",
-    "required": true
-  }
-]
+      "options": [
+        {
+          "name": "Version 4",
+          "value": "v4"
+        },
+        {
+          "name": "Version 5",
+          "value": "v5"
+        }
+      ],
+      "default": "v5"
+    },
+    {
+      "displayName": "Event",
+      "name": "event",
+      "type": "options",
+      "options": [
+        {
+          "name": "Client Created",
+          "value": "create_client"
+        },
+        {
+          "name": "Invoice Created",
+          "value": "create_invoice"
+        },
+        {
+          "name": "Payment Created",
+          "value": "create_payment"
+        },
+        {
+          "name": "Quote Created",
+          "value": "create_quote"
+        },
+        {
+          "name": "Vendor Created",
+          "value": "create_vendor"
+        }
+      ],
+      "default": "",
+      "required": true
+    }
+  ]
+}
 ```

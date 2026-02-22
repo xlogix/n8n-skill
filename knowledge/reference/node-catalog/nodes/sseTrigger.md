@@ -1,40 +1,54 @@
+---
+title: "SSE Trigger"
+description: "Triggers the workflow when Server-Sent Events occur"
+---
+
 # SSE Trigger
+**Node Type:** nodes-base.sseTrigger
 
-- Node name: `sseTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/SseTrigger/SseTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Triggers the workflow when Server-Sent Events occur
+## Description
+Triggers the workflow when Server-Sent Events occur
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- None
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| URL | `url` | `string` | yes |  | The URL to receive the SSE from |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "URL",
-    "name": "url",
-    "type": "string",
-    "default": "",
-    "placeholder": "http://example.com",
-    "description": "The URL to receive the SSE from",
-    "required": true
-  }
-]
+{
+  "displayName": "SSE Trigger",
+  "name": "sseTrigger",
+  "icon": "fa:cloud-download-alt",
+  "iconColor": "dark-blue",
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "description": "Triggers the workflow when Server-Sent Events occur",
+  "eventTriggerDescription": "",
+  "activationMessage": "You can now make calls to your SSE URL to trigger executions.",
+  "defaults": {
+    "name": "SSE Trigger",
+    "color": "#225577"
+  },
+  "triggerPanel": {
+    "header": "",
+    "executionsHelp": {
+      "inactive": "<b>While building your workflow</b>, click the 'execute step' button, then trigger an SSE event. This will trigger an execution, which will show up in this editor.<br /> <br /><b>Once you're happy with your workflow</b>, <a data-key='activate'>activate</a> it. Then every time a change is detected, the workflow will execute. These executions will show up in the <a data-key='executions'>executions list</a>, but not in the editor.",
+      "active": "<b>While building your workflow</b>, click the 'execute step' button, then trigger an SSE event. This will trigger an execution, which will show up in this editor.<br /> <br /><b>Your workflow will also execute automatically</b>, since it's activated. Every time a change is detected, this node will trigger an execution. These executions will show up in the <a data-key='executions'>executions list</a>, but not in the editor."
+    },
+    "activationHint": "Once you’ve finished building your workflow, <a data-key='activate'>activate</a> it to have it also listen continuously (you just won’t see those executions here)."
+  },
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "properties": [
+    {
+      "displayName": "URL",
+      "name": "url",
+      "type": "string",
+      "default": "",
+      "placeholder": "http://example.com",
+      "description": "The URL to receive the SSE from",
+      "required": true
+    }
+  ]
+}
 ```

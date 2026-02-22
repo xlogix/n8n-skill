@@ -1,207 +1,211 @@
+---
+title: "Mocean"
+description: "Send SMS and voice messages via Mocean"
+---
+
 # Mocean
+**Node Type:** nodes-base.mocean
 
-- Node name: `mocean`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Mocean/Mocean.node.js`
-- Node version: `1`
-- Groups: `transform`
-- Description: Send SMS and voice messages via Mocean
+## Description
+Send SMS and voice messages via Mocean
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `moceanApi` (required)
-
-## Resource and Operation Coverage
-### Resources
-- SMS (`sms`)
-- Voice (`voice`)
-
-### Operations
-- resource `sms`: `send`
-- resource `voice`: `send`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Resource | `resource` | `options` | no | `sms` |  |
-| Operation | `operation` | `options` | no | `send` |  |
-| From | `from` | `string` | yes |  | Number to which to send the message |
-| To | `to` | `string` | yes |  | Number from which to send the message |
-| Language | `language` | `options` | no | `en-US` |  |
-| Message | `message` | `string` | yes |  | Message to send |
-| Options | `options` | `collection` | no | `{}` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Resource",
-    "name": "resource",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "SMS",
-        "value": "sms"
+{
+  "displayName": "Mocean",
+  "name": "mocean",
+  "subtitle": "={{$parameter[\"operation\"] + \": \" + $parameter[\"resource\"]}}",
+  "icon": {
+    "light": "file:mocean.svg",
+    "dark": "file:mocean.dark.svg"
+  },
+  "group": [
+    "transform"
+  ],
+  "version": 1,
+  "description": "Send SMS and voice messages via Mocean",
+  "defaults": {
+    "name": "Mocean"
+  },
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "moceanApi",
+      "required": true,
+      "testedBy": "moceanApiTest"
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Resource",
+      "name": "resource",
+      "type": "options",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "SMS",
+          "value": "sms"
+        },
+        {
+          "name": "Voice",
+          "value": "voice"
+        }
+      ],
+      "default": "sms"
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "sms",
+            "voice"
+          ]
+        }
       },
-      {
-        "name": "Voice",
-        "value": "voice"
-      }
-    ],
-    "default": "sms"
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "sms",
-          "voice"
-        ]
-      }
+      "options": [
+        {
+          "name": "Send",
+          "value": "send",
+          "description": "Send SMS/Voice message",
+          "action": "Send an SMS"
+        }
+      ],
+      "default": "send"
     },
-    "options": [
-      {
-        "name": "Send",
-        "value": "send",
-        "description": "Send SMS/Voice message",
-        "action": "Send an SMS"
-      }
-    ],
-    "default": "send"
-  },
-  {
-    "displayName": "From",
-    "name": "from",
-    "type": "string",
-    "default": "",
-    "placeholder": "Sender Number",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "send"
-        ],
-        "resource": [
-          "sms",
-          "voice"
-        ]
-      }
-    },
-    "description": "Number to which to send the message"
-  },
-  {
-    "displayName": "To",
-    "name": "to",
-    "type": "string",
-    "default": "",
-    "placeholder": "Receipient number",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "send"
-        ],
-        "resource": [
-          "sms",
-          "voice"
-        ]
-      }
-    },
-    "description": "Number from which to send the message"
-  },
-  {
-    "displayName": "Language",
-    "name": "language",
-    "type": "options",
-    "options": [
-      {
-        "name": "Chinese Mandarin (China)",
-        "value": "cmn-CN"
+    {
+      "displayName": "From",
+      "name": "from",
+      "type": "string",
+      "default": "",
+      "placeholder": "Sender Number",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "send"
+          ],
+          "resource": [
+            "sms",
+            "voice"
+          ]
+        }
       },
-      {
-        "name": "English (United Kingdom)",
-        "value": "en-GB"
-      },
-      {
-        "name": "English (United States)",
-        "value": "en-US"
-      },
-      {
-        "name": "Japanese (Japan)",
-        "value": "ja-JP"
-      },
-      {
-        "name": "Korean (Korea)",
-        "value": "ko-KR"
-      }
-    ],
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "send"
-        ],
-        "resource": [
-          "voice"
-        ]
-      }
+      "description": "Number to which to send the message"
     },
-    "default": "en-US"
-  },
-  {
-    "displayName": "Message",
-    "name": "message",
-    "type": "string",
-    "default": "",
-    "placeholder": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "send"
-        ],
-        "resource": [
-          "sms",
-          "voice"
-        ]
-      }
+    {
+      "displayName": "To",
+      "name": "to",
+      "type": "string",
+      "default": "",
+      "placeholder": "Receipient number",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "send"
+          ],
+          "resource": [
+            "sms",
+            "voice"
+          ]
+        }
+      },
+      "description": "Number from which to send the message"
     },
-    "description": "Message to send"
-  },
-  {
-    "displayName": "Options",
-    "name": "options",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "send"
-        ],
-        "resource": [
-          "sms"
-        ]
-      }
+    {
+      "displayName": "Language",
+      "name": "language",
+      "type": "options",
+      "options": [
+        {
+          "name": "Chinese Mandarin (China)",
+          "value": "cmn-CN"
+        },
+        {
+          "name": "English (United Kingdom)",
+          "value": "en-GB"
+        },
+        {
+          "name": "English (United States)",
+          "value": "en-US"
+        },
+        {
+          "name": "Japanese (Japan)",
+          "value": "ja-JP"
+        },
+        {
+          "name": "Korean (Korea)",
+          "value": "ko-KR"
+        }
+      ],
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "send"
+          ],
+          "resource": [
+            "voice"
+          ]
+        }
+      },
+      "default": "en-US"
     },
-    "default": {},
-    "options": [
-      {
-        "displayName": "Delivery Report URL",
-        "name": "dlrUrl",
-        "type": "string",
-        "default": "",
-        "placeholder": ""
-      }
-    ]
-  }
-]
+    {
+      "displayName": "Message",
+      "name": "message",
+      "type": "string",
+      "default": "",
+      "placeholder": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "send"
+          ],
+          "resource": [
+            "sms",
+            "voice"
+          ]
+        }
+      },
+      "description": "Message to send"
+    },
+    {
+      "displayName": "Options",
+      "name": "options",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "send"
+          ],
+          "resource": [
+            "sms"
+          ]
+        }
+      },
+      "default": {},
+      "options": [
+        {
+          "displayName": "Delivery Report URL",
+          "name": "dlrUrl",
+          "type": "string",
+          "default": "",
+          "placeholder": ""
+        }
+      ]
+    }
+  ]
+}
 ```

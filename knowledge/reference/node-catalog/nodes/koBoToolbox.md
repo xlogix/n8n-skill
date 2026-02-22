@@ -1,1061 +1,1030 @@
+---
+title: "KoBoToolbox"
+description: "Work with KoBoToolbox forms and submissions"
+---
+
 # KoBoToolbox
+**Node Type:** nodes-base.koBoToolbox
 
-- Node name: `koBoToolbox`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/KoBoToolbox/KoBoToolbox.node.js`
-- Node version: `1`
-- Groups: `transform`
-- Description: Work with KoBoToolbox forms and submissions
+## Description
+Work with KoBoToolbox forms and submissions
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `koBoToolboxApi` (required)
-
-## Resource and Operation Coverage
-### Resources
-- File (`file`)
-- Form (`form`)
-- Hook (`hook`)
-- Submission (`submission`)
-
-### Operations
-- resource `file`: `create`, `delete`, `get`, `getAll`
-- resource `form`: `get`, `getAll`, `redeploy`
-- resource `hook`: `get`, `getAll`, `getLogs`, `retryAll`, `retryOne`
-- resource `submission`: `delete`, `get`, `getAll`, `getValidation`, `setValidation`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Resource | `resource` | `options` | yes | `submission` |  |
-| Operation | `operation` | `options` | no | `get` |  |
-| Form Name or ID | `formId` | `options` | yes |  | Form ID (e.g. aSAvYreNzVEkrWg5Gdcvg). Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Return All | `returnAll` | `boolean` | yes | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `1000` | Max number of results to return |
-| Options | `options` | `collection` | no | `{}` |  |
-| Filters | `filters` | `collection` | no | `{}` |  |
-| Operation | `operation` | `options` | no | `getAll` |  |
-| Form Name or ID | `formId` | `options` | yes |  | Form ID (e.g. aSAvYreNzVEkrWg5Gdcvg). Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Hook ID | `hookId` | `string` | yes |  | Hook ID (starts with h, e.g. hVehywQ2oXPYGHJHKtqth4) |
-| Hook Log ID | `logId` | `string` | yes |  | Hook log ID (starts with hl, e.g. hlSbGKaUKzTVNoWEVMYbLHe) |
-| Return All | `returnAll` | `boolean` | yes | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `1000` | Max number of results to return |
-| Log Status | `status` | `options` | no |  | Only retrieve logs with a specific status |
-| Start Date | `startDate` | `dateTime` | no |  | Minimum date for the hook log to retrieve |
-| End Date | `endDate` | `dateTime` | no |  | Maximum date for the hook log to retrieve |
-| Operation | `operation` | `options` | no | `getAll` |  |
-| Form Name or ID | `formId` | `options` | yes |  | Form ID (e.g. aSAvYreNzVEkrWg5Gdcvg). Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Submission ID | `submissionId` | `string` | yes |  | Submission ID (number, e.g. 245128) |
-| Validation Status | `validationStatus` | `options` | yes |  | Desired Validation Status |
-| Return All | `returnAll` | `boolean` | yes | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `100` | Max number of results to return |
-| Filter | `filterType` | `options` | no | `none` |  |
-| See <a href="https://github.com/SEL-Columbia/formhub/wiki/Formhub-Access-Points-(API)#api-parameters" target="_blank">Formhub API docs</a> to creating filters, using the MongoDB JSON format - e.g. {"_submission_time":{"$lt":"2021-10-01T01:02:03"}} | `jsonNotice` | `notice` | no |  |  |
-| Filters (JSON) | `filterJson` | `string` | no |  |  |
-| Options | `options` | `collection` | no | `{}` |  |
-| Operation | `operation` | `options` | no | `get` |  |
-| Form Name or ID | `formId` | `options` | yes |  | Form ID (e.g. aSAvYreNzVEkrWg5Gdcvg). Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| File ID | `fileId` | `string` | yes |  | Uid of the file (should start with "af" e.g. "afQoJxA4kmKEXVpkH6SYbhb" |
-| Property Name | `binaryPropertyName` | `string` | yes | `data` | Name of the binary property to write the file into |
-| Download File Content | `download` | `boolean` | yes | `false` | Whether to download the file content into a binary property |
-| File Upload Mode | `fileMode` | `options` | yes | `binary` |  |
-| Property Name | `binaryPropertyName` | `string` | yes | `data` | Name of the binary property containing the file to upload. Supported types: image, audio, video, csv, xml, zip. |
-| File URL | `fileUrl` | `string` | yes |  | HTTP(s) link to the file to upload |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Resource",
-    "name": "resource",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "File",
-        "value": "file"
-      },
-      {
-        "name": "Form",
-        "value": "form"
-      },
-      {
-        "name": "Hook",
-        "value": "hook"
-      },
-      {
-        "name": "Submission",
-        "value": "submission"
-      }
-    ],
-    "default": "submission",
-    "required": true
+{
+  "displayName": "KoBoToolbox",
+  "name": "koBoToolbox",
+  "icon": "file:koBoToolbox.svg",
+  "group": [
+    "transform"
+  ],
+  "version": 1,
+  "description": "Work with KoBoToolbox forms and submissions",
+  "subtitle": "={{$parameter[\"operation\"] + \": \" + $parameter[\"resource\"]}}",
+  "defaults": {
+    "name": "KoBoToolbox"
   },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "form"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Get a form",
-        "action": "Get a form"
-      },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Get many forms",
-        "action": "Get many forms"
-      },
-      {
-        "name": "Redeploy",
-        "value": "redeploy",
-        "description": "Redeploy Current Form Version",
-        "action": "Redeploy Current Form Version"
-      }
-    ],
-    "default": "get"
-  },
-  {
-    "displayName": "Form Name or ID",
-    "name": "formId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "loadForms"
-    },
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "form"
-        ],
-        "operation": [
-          "get",
-          "redeploy"
-        ]
-      }
-    },
-    "description": "Form ID (e.g. aSAvYreNzVEkrWg5Gdcvg). Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "required": true,
-    "default": false,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "form"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "typeOptions": {
-      "maxValue": 3000
-    },
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "form"
-        ],
-        "operation": [
-          "getAll"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
-    },
-    "default": 1000,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Options",
-    "name": "options",
-    "placeholder": "Add option",
-    "type": "collection",
-    "default": {},
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "form"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "options": [
-      {
-        "displayName": "Sort",
-        "name": "sort",
-        "type": "fixedCollection",
-        "typeOptions": {
-          "multipleValues": false
-        },
-        "default": {},
-        "placeholder": "Add Sort",
-        "options": [
-          {
-            "displayName": "Sort",
-            "name": "value",
-            "values": [
-              {
-                "displayName": "Descending",
-                "name": "descending",
-                "type": "boolean",
-                "default": true,
-                "description": "Whether to sort by descending order"
-              },
-              {
-                "displayName": "Order By",
-                "name": "ordering",
-                "type": "options",
-                "default": "date_modified",
-                "options": [
-                  {
-                    "name": "Asset Type",
-                    "value": "asset_type"
-                  },
-                  {
-                    "name": "Date Modified",
-                    "value": "date_modified"
-                  },
-                  {
-                    "name": "Name",
-                    "value": "name"
-                  },
-                  {
-                    "name": "Owner Username",
-                    "value": "owner__username"
-                  },
-                  {
-                    "name": "Subscribers Count",
-                    "value": "subscribers_count"
-                  }
-                ],
-                "description": "Field to order by"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "displayName": "Filters",
-    "name": "filters",
-    "type": "collection",
-    "placeholder": "Add Filter",
-    "default": {},
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "form"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "options": [
-      {
-        "displayName": "Filter",
-        "name": "filter",
-        "type": "string",
-        "default": "asset_type:survey",
-        "description": "A text search query based on form data - e.g. \"owner__username:meg AND name__icontains:quixotic\" - see <a href=\"https://github.com/kobotoolbox/kpi#searching\" target=\"_blank\">docs</a> for more details"
-      }
-    ]
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "hook"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Get a single hook definition",
-        "action": "Get a hook"
-      },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "List many hooks on a form",
-        "action": "Get Many hooks"
-      },
-      {
-        "name": "Logs",
-        "value": "getLogs",
-        "description": "Get hook logs",
-        "action": "Get Logs for a hook"
-      },
-      {
-        "name": "Retry All",
-        "value": "retryAll",
-        "description": "Retry all failed attempts for a given hook",
-        "action": "Retry All hooks"
-      },
-      {
-        "name": "Retry One",
-        "value": "retryOne",
-        "description": "Retry a specific hook",
-        "action": "Retry One hook"
-      }
-    ],
-    "default": "getAll"
-  },
-  {
-    "displayName": "Form Name or ID",
-    "name": "formId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "loadForms"
-    },
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "hook"
-        ],
-        "operation": [
-          "get",
-          "retryOne",
-          "retryAll",
-          "getLogs",
-          "getAll"
-        ]
-      }
-    },
-    "description": "Form ID (e.g. aSAvYreNzVEkrWg5Gdcvg). Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Hook ID",
-    "name": "hookId",
-    "type": "string",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "hook"
-        ],
-        "operation": [
-          "get",
-          "retryOne",
-          "retryAll",
-          "getLogs"
-        ]
-      }
-    },
-    "default": "",
-    "description": "Hook ID (starts with h, e.g. hVehywQ2oXPYGHJHKtqth4)"
-  },
-  {
-    "displayName": "Hook Log ID",
-    "name": "logId",
-    "type": "string",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "hook"
-        ],
-        "operation": [
-          "retryOne"
-        ]
-      }
-    },
-    "default": "",
-    "description": "Hook log ID (starts with hl, e.g. hlSbGKaUKzTVNoWEVMYbLHe)"
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "required": true,
-    "default": false,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "hook"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "typeOptions": {
-      "maxValue": 3000
-    },
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "hook"
-        ],
-        "operation": [
-          "getAll"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
-    },
-    "default": 1000,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Log Status",
-    "name": "status",
-    "type": "options",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "hook"
-        ],
-        "operation": [
-          "getLogs"
-        ]
-      }
-    },
-    "default": "",
-    "description": "Only retrieve logs with a specific status",
-    "options": [
-      {
-        "name": "All",
-        "value": ""
-      },
-      {
-        "name": "Failed",
-        "value": "0"
-      },
-      {
-        "name": "Pending",
-        "value": "1"
-      },
-      {
-        "name": "Success",
-        "value": "2"
-      }
-    ]
-  },
-  {
-    "displayName": "Start Date",
-    "name": "startDate",
-    "type": "dateTime",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "hook"
-        ],
-        "operation": [
-          "getLogs"
-        ]
-      }
-    },
-    "default": "",
-    "description": "Minimum date for the hook log to retrieve"
-  },
-  {
-    "displayName": "End Date",
-    "name": "endDate",
-    "type": "dateTime",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "hook"
-        ],
-        "operation": [
-          "getLogs"
-        ]
-      }
-    },
-    "default": "",
-    "description": "Maximum date for the hook log to retrieve"
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "submission"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Delete",
-        "value": "delete",
-        "description": "Delete a single submission",
-        "action": "Delete a submission"
-      },
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Get a single submission",
-        "action": "Get a submission"
-      },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Get many submissions",
-        "action": "Get many submissions"
-      },
-      {
-        "name": "Get Validation Status",
-        "value": "getValidation",
-        "description": "Get the validation status for the submission",
-        "action": "Get the validation status for a submission"
-      },
-      {
-        "name": "Update Validation Status",
-        "value": "setValidation",
-        "description": "Set the validation status of the submission",
-        "action": "Update the validation status for a submission"
-      }
-    ],
-    "default": "getAll"
-  },
-  {
-    "displayName": "Form Name or ID",
-    "name": "formId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "loadForms"
-    },
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "submission"
-        ],
-        "operation": [
-          "get",
-          "delete",
-          "getValidation",
-          "setValidation",
-          "getAll"
-        ]
-      }
-    },
-    "description": "Form ID (e.g. aSAvYreNzVEkrWg5Gdcvg). Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Submission ID",
-    "name": "submissionId",
-    "type": "string",
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "submission"
-        ],
-        "operation": [
-          "get",
-          "delete",
-          "getValidation",
-          "setValidation"
-        ]
-      }
-    },
-    "description": "Submission ID (number, e.g. 245128)"
-  },
-  {
-    "displayName": "Validation Status",
-    "name": "validationStatus",
-    "type": "options",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "submission"
-        ],
-        "operation": [
-          "setValidation"
-        ]
-      }
-    },
-    "default": "",
-    "options": [
-      {
-        "name": "Approved",
-        "value": "validation_status_approved"
-      },
-      {
-        "name": "Not Approved",
-        "value": "validation_status_not_approved"
-      },
-      {
-        "name": "On Hold",
-        "value": "validation_status_on_hold"
-      }
-    ],
-    "description": "Desired Validation Status"
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "required": true,
-    "default": false,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "submission"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "typeOptions": {
-      "maxValue": 3000
-    },
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "submission"
-        ],
-        "operation": [
-          "getAll"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
-    },
-    "default": 100,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Filter",
-    "name": "filterType",
-    "type": "options",
-    "default": "none",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "submission"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "None",
-        "value": "none"
-      },
-      {
-        "name": "JSON",
-        "value": "json"
-      }
-    ]
-  },
-  {
-    "displayName": "See <a href=\"https://github.com/SEL-Columbia/formhub/wiki/Formhub-Access-Points-(API)#api-parameters\" target=\"_blank\">Formhub API docs</a> to creating filters, using the MongoDB JSON format - e.g. {\"_submission_time\":{\"$lt\":\"2021-10-01T01:02:03\"}}",
-    "name": "jsonNotice",
-    "type": "notice",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "submission"
-        ],
-        "operation": [
-          "getAll"
-        ],
-        "filterType": [
-          "json"
-        ]
-      }
-    },
-    "default": ""
-  },
-  {
-    "displayName": "Filters (JSON)",
-    "name": "filterJson",
-    "type": "string",
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "submission"
-        ],
-        "operation": [
-          "getAll"
-        ],
-        "filterType": [
-          "json"
-        ]
-      }
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "koBoToolboxApi",
+      "required": true
     }
-  },
-  {
-    "displayName": "Options",
-    "name": "options",
-    "type": "collection",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "submission"
-        ],
-        "operation": [
-          "get",
-          "getAll"
-        ]
-      }
-    },
-    "default": {},
-    "placeholder": "Add option",
-    "options": [
-      {
-        "displayName": "Download Attachments",
-        "name": "download",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether to download submitted attachments"
-      },
-      {
-        "displayName": "Attachments Naming Scheme",
-        "name": "binaryNamingScheme",
-        "type": "options",
-        "default": "sequence",
-        "displayOptions": {
-          "show": {
-            "download": [
-              true
-            ]
-          }
+  ],
+  "properties": [
+    {
+      "displayName": "Resource",
+      "name": "resource",
+      "type": "options",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "File",
+          "value": "file"
         },
-        "options": [
-          {
-            "name": "Sequence (e.g. attachment_N)",
-            "value": "sequence"
-          },
-          {
-            "name": "Use Original Form Question ID",
-            "value": "question"
-          }
-        ]
-      },
-      {
-        "displayName": "Attachments Prefix",
-        "name": "dataPropertyAttachmentsPrefixName",
-        "type": "string",
-        "displayOptions": {
-          "show": {
-            "download": [
-              true
-            ],
-            "binaryNamingScheme": [
-              "sequence"
-            ]
-          }
+        {
+          "name": "Form",
+          "value": "form"
         },
-        "default": "attachment_",
-        "description": "Prefix for name of the binary property to which to write the attachments. An index starting with 0 will be added. So if name is \"attachment_\" the first attachment is saved to \"attachment_0\""
-      },
-      {
-        "displayName": "Fields to Retrieve",
-        "name": "fields",
-        "type": "string",
-        "default": "",
-        "description": "Comma-separated list of fields to retrieve (e.g. _submission_time,_submitted_by). If left blank, all fields are retrieved."
-      },
-      {
-        "displayName": "File Size",
-        "name": "version",
-        "type": "options",
-        "displayOptions": {
-          "show": {
-            "download": [
-              true
-            ]
-          }
+        {
+          "name": "Hook",
+          "value": "hook"
         },
-        "default": "download_url",
-        "description": "Attachment size to retrieve, if multiple versions are available",
-        "options": [
-          {
-            "name": "Original",
-            "value": "download_url"
+        {
+          "name": "Submission",
+          "value": "submission"
+        }
+      ],
+      "default": "submission",
+      "required": true
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "form"
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Get a form",
+          "action": "Get a form"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Get many forms",
+          "action": "Get many forms"
+        },
+        {
+          "name": "Redeploy",
+          "value": "redeploy",
+          "description": "Redeploy Current Form Version",
+          "action": "Redeploy Current Form Version"
+        }
+      ],
+      "default": "get"
+    },
+    {
+      "displayName": "Form Name or ID",
+      "name": "formId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "loadForms"
+      },
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "form"
+          ],
+          "operation": [
+            "get",
+            "redeploy"
+          ]
+        }
+      },
+      "description": "Form ID (e.g. aSAvYreNzVEkrWg5Gdcvg). Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "form"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "description": "Whether to return all results or only up to a given limit"
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "typeOptions": {
+        "maxValue": 3000
+      },
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "form"
+          ],
+          "operation": [
+            "getAll"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "default": 1000,
+      "description": "Max number of results to return"
+    },
+    {
+      "displayName": "Options",
+      "name": "options",
+      "placeholder": "Add option",
+      "type": "collection",
+      "default": {},
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "form"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "options": [
+        {
+          "displayName": "Sort",
+          "name": "sort",
+          "type": "fixedCollection",
+          "typeOptions": {
+            "multipleValues": false
           },
-          {
-            "name": "Small",
-            "value": "download_small_url"
+          "default": {},
+          "placeholder": "Add Sort",
+          "options": [
+            {
+              "displayName": "Sort",
+              "name": "value",
+              "values": [
+                {
+                  "displayName": "Descending",
+                  "name": "descending",
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Whether to sort by descending order"
+                },
+                {
+                  "displayName": "Order By",
+                  "name": "ordering",
+                  "type": "options",
+                  "default": "date_modified",
+                  "options": [
+                    {
+                      "name": "Asset Type",
+                      "value": "asset_type"
+                    },
+                    {
+                      "name": "Date Modified",
+                      "value": "date_modified"
+                    },
+                    {
+                      "name": "Name",
+                      "value": "name"
+                    },
+                    {
+                      "name": "Owner Username",
+                      "value": "owner__username"
+                    },
+                    {
+                      "name": "Subscribers Count",
+                      "value": "subscribers_count"
+                    }
+                  ],
+                  "description": "Field to order by"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Filters",
+      "name": "filters",
+      "type": "collection",
+      "placeholder": "Add Filter",
+      "default": {},
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "form"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "options": [
+        {
+          "displayName": "Filter",
+          "name": "filter",
+          "type": "string",
+          "default": "asset_type:survey",
+          "description": "A text search query based on form data - e.g. \"owner__username:meg AND name__icontains:quixotic\" - see <a href=\"https://github.com/kobotoolbox/kpi#searching\" target=\"_blank\">docs</a> for more details"
+        }
+      ]
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "hook"
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Get a single hook definition",
+          "action": "Get a hook"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "List many hooks on a form",
+          "action": "Get Many hooks"
+        },
+        {
+          "name": "Logs",
+          "value": "getLogs",
+          "description": "Get hook logs",
+          "action": "Get Logs for a hook"
+        },
+        {
+          "name": "Retry All",
+          "value": "retryAll",
+          "description": "Retry all failed attempts for a given hook",
+          "action": "Retry All hooks"
+        },
+        {
+          "name": "Retry One",
+          "value": "retryOne",
+          "description": "Retry a specific hook",
+          "action": "Retry One hook"
+        }
+      ],
+      "default": "getAll"
+    },
+    {
+      "displayName": "Form Name or ID",
+      "name": "formId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "loadForms"
+      },
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "hook"
+          ],
+          "operation": [
+            "get",
+            "retryOne",
+            "retryAll",
+            "getLogs",
+            "getAll"
+          ]
+        }
+      },
+      "description": "Form ID (e.g. aSAvYreNzVEkrWg5Gdcvg). Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Hook ID",
+      "name": "hookId",
+      "type": "string",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "hook"
+          ],
+          "operation": [
+            "get",
+            "retryOne",
+            "retryAll",
+            "getLogs"
+          ]
+        }
+      },
+      "default": "",
+      "description": "Hook ID (starts with h, e.g. hVehywQ2oXPYGHJHKtqth4)"
+    },
+    {
+      "displayName": "Hook Log ID",
+      "name": "logId",
+      "type": "string",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "hook"
+          ],
+          "operation": [
+            "retryOne"
+          ]
+        }
+      },
+      "default": "",
+      "description": "Hook log ID (starts with hl, e.g. hlSbGKaUKzTVNoWEVMYbLHe)"
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "hook"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "description": "Whether to return all results or only up to a given limit"
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "typeOptions": {
+        "maxValue": 3000
+      },
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "hook"
+          ],
+          "operation": [
+            "getAll"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "default": 1000,
+      "description": "Max number of results to return"
+    },
+    {
+      "displayName": "Log Status",
+      "name": "status",
+      "type": "options",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "hook"
+          ],
+          "operation": [
+            "getLogs"
+          ]
+        }
+      },
+      "default": "",
+      "description": "Only retrieve logs with a specific status",
+      "options": [
+        {
+          "name": "All",
+          "value": ""
+        },
+        {
+          "name": "Failed",
+          "value": "0"
+        },
+        {
+          "name": "Pending",
+          "value": "1"
+        },
+        {
+          "name": "Success",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "displayName": "Start Date",
+      "name": "startDate",
+      "type": "dateTime",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "hook"
+          ],
+          "operation": [
+            "getLogs"
+          ]
+        }
+      },
+      "default": "",
+      "description": "Minimum date for the hook log to retrieve"
+    },
+    {
+      "displayName": "End Date",
+      "name": "endDate",
+      "type": "dateTime",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "hook"
+          ],
+          "operation": [
+            "getLogs"
+          ]
+        }
+      },
+      "default": "",
+      "description": "Maximum date for the hook log to retrieve"
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "submission"
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "Delete",
+          "value": "delete",
+          "description": "Delete a single submission",
+          "action": "Delete a submission"
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Get a single submission",
+          "action": "Get a submission"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Get many submissions",
+          "action": "Get many submissions"
+        },
+        {
+          "name": "Get Validation Status",
+          "value": "getValidation",
+          "description": "Get the validation status for the submission",
+          "action": "Get the validation status for a submission"
+        },
+        {
+          "name": "Update Validation Status",
+          "value": "setValidation",
+          "description": "Set the validation status of the submission",
+          "action": "Update the validation status for a submission"
+        }
+      ],
+      "default": "getAll"
+    },
+    {
+      "displayName": "Form Name or ID",
+      "name": "formId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "loadForms"
+      },
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "submission"
+          ],
+          "operation": [
+            "get",
+            "delete",
+            "getValidation",
+            "setValidation",
+            "getAll"
+          ]
+        }
+      },
+      "description": "Form ID (e.g. aSAvYreNzVEkrWg5Gdcvg). Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Submission ID",
+      "name": "submissionId",
+      "type": "string",
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "submission"
+          ],
+          "operation": [
+            "get",
+            "delete",
+            "getValidation",
+            "setValidation"
+          ]
+        }
+      },
+      "description": "Submission ID (number, e.g. 245128)"
+    },
+    {
+      "displayName": "Validation Status",
+      "name": "validationStatus",
+      "type": "options",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "submission"
+          ],
+          "operation": [
+            "setValidation"
+          ]
+        }
+      },
+      "default": "",
+      "options": [
+        {
+          "name": "Approved",
+          "value": "validation_status_approved"
+        },
+        {
+          "name": "Not Approved",
+          "value": "validation_status_not_approved"
+        },
+        {
+          "name": "On Hold",
+          "value": "validation_status_on_hold"
+        }
+      ],
+      "description": "Desired Validation Status"
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "submission"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "description": "Whether to return all results or only up to a given limit"
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "typeOptions": {
+        "maxValue": 3000
+      },
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "submission"
+          ],
+          "operation": [
+            "getAll"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "default": 100,
+      "description": "Max number of results to return"
+    },
+    {
+      "displayName": "Filter",
+      "name": "filterType",
+      "type": "options",
+      "default": "none",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "submission"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "None",
+          "value": "none"
+        },
+        {
+          "name": "JSON",
+          "value": "json"
+        }
+      ]
+    },
+    {
+      "displayName": "See <a href=\"https://github.com/SEL-Columbia/formhub/wiki/Formhub-Access-Points-(API)#api-parameters\" target=\"_blank\">Formhub API docs</a> to creating filters, using the MongoDB JSON format - e.g. {\"_submission_time\":{\"$lt\":\"2021-10-01T01:02:03\"}}",
+      "name": "jsonNotice",
+      "type": "notice",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "submission"
+          ],
+          "operation": [
+            "getAll"
+          ],
+          "filterType": [
+            "json"
+          ]
+        }
+      },
+      "default": ""
+    },
+    {
+      "displayName": "Filters (JSON)",
+      "name": "filterJson",
+      "type": "string",
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "submission"
+          ],
+          "operation": [
+            "getAll"
+          ],
+          "filterType": [
+            "json"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Options",
+      "name": "options",
+      "type": "collection",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "submission"
+          ],
+          "operation": [
+            "get",
+            "getAll"
+          ]
+        }
+      },
+      "default": {},
+      "placeholder": "Add option",
+      "options": [
+        {
+          "displayName": "Download Attachments",
+          "name": "download",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to download submitted attachments"
+        },
+        {
+          "displayName": "Attachments Naming Scheme",
+          "name": "binaryNamingScheme",
+          "type": "options",
+          "default": "sequence",
+          "displayOptions": {
+            "show": {
+              "download": [
+                true
+              ]
+            }
           },
-          {
-            "name": "Medium",
-            "value": "download_medium_url"
+          "options": [
+            {
+              "name": "Sequence (e.g. attachment_N)",
+              "value": "sequence"
+            },
+            {
+              "name": "Use Original Form Question ID",
+              "value": "question"
+            }
+          ]
+        },
+        {
+          "displayName": "Attachments Prefix",
+          "name": "dataPropertyAttachmentsPrefixName",
+          "type": "string",
+          "displayOptions": {
+            "show": {
+              "download": [
+                true
+              ],
+              "binaryNamingScheme": [
+                "sequence"
+              ]
+            }
           },
-          {
-            "name": "Large",
-            "value": "download_large_url"
-          }
-        ]
+          "default": "attachment_",
+          "description": "Prefix for name of the binary property to which to write the attachments. An index starting with 0 will be added. So if name is \"attachment_\" the first attachment is saved to \"attachment_0\""
+        },
+        {
+          "displayName": "Fields to Retrieve",
+          "name": "fields",
+          "type": "string",
+          "default": "",
+          "description": "Comma-separated list of fields to retrieve (e.g. _submission_time,_submitted_by). If left blank, all fields are retrieved."
+        },
+        {
+          "displayName": "File Size",
+          "name": "version",
+          "type": "options",
+          "displayOptions": {
+            "show": {
+              "download": [
+                true
+              ]
+            }
+          },
+          "default": "download_url",
+          "description": "Attachment size to retrieve, if multiple versions are available",
+          "options": [
+            {
+              "name": "Original",
+              "value": "download_url"
+            },
+            {
+              "name": "Small",
+              "value": "download_small_url"
+            },
+            {
+              "name": "Medium",
+              "value": "download_medium_url"
+            },
+            {
+              "name": "Large",
+              "value": "download_large_url"
+            }
+          ]
+        },
+        {
+          "displayName": "Multiselect Mask",
+          "name": "selectMask",
+          "type": "string",
+          "default": "select_*",
+          "description": "Comma-separated list of wildcard-style selectors for fields that should be treated as multiselect fields, i.e. parsed as arrays."
+        },
+        {
+          "displayName": "Number Mask",
+          "name": "numberMask",
+          "type": "string",
+          "default": "n_*, f_*",
+          "description": "Comma-separated list of wildcard-style selectors for fields that should be treated as numbers"
+        },
+        {
+          "displayName": "Reformat",
+          "name": "reformat",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to apply some reformatting to the submission data, such as parsing GeoJSON coordinates"
+        },
+        {
+          "displayName": "Sort",
+          "name": "sort",
+          "type": "json",
+          "default": "",
+          "description": "Sort predicates, in MongoDB JSON format (e.g. {\"_submission_time\":1})"
+        }
+      ]
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "file"
+          ]
+        }
       },
-      {
-        "displayName": "Multiselect Mask",
-        "name": "selectMask",
-        "type": "string",
-        "default": "select_*",
-        "description": "Comma-separated list of wildcard-style selectors for fields that should be treated as multiselect fields, i.e. parsed as arrays."
+      "options": [
+        {
+          "name": "Create",
+          "value": "create",
+          "description": "Create a file",
+          "action": "Create a file"
+        },
+        {
+          "name": "Delete",
+          "value": "delete",
+          "description": "Delete file",
+          "action": "Delete a file"
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Get a file content",
+          "action": "Get a file content"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Get many files",
+          "action": "Get many files"
+        }
+      ],
+      "default": "get"
+    },
+    {
+      "displayName": "Form Name or ID",
+      "name": "formId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "loadForms"
       },
-      {
-        "displayName": "Number Mask",
-        "name": "numberMask",
-        "type": "string",
-        "default": "n_*, f_*",
-        "description": "Comma-separated list of wildcard-style selectors for fields that should be treated as numbers"
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "file"
+          ]
+        }
       },
-      {
-        "displayName": "Reformat",
-        "name": "reformat",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether to apply some reformatting to the submission data, such as parsing GeoJSON coordinates"
+      "description": "Form ID (e.g. aSAvYreNzVEkrWg5Gdcvg). Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "File ID",
+      "name": "fileId",
+      "type": "string",
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "file"
+          ],
+          "operation": [
+            "delete",
+            "get"
+          ]
+        }
       },
-      {
-        "displayName": "Sort",
-        "name": "sort",
-        "type": "json",
-        "default": "",
-        "description": "Sort predicates, in MongoDB JSON format (e.g. {\"_submission_time\":1})"
-      }
-    ]
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "file"
-        ]
-      }
+      "description": "Uid of the file (should start with \"af\" e.g. \"afQoJxA4kmKEXVpkH6SYbhb\""
     },
-    "options": [
-      {
-        "name": "Create",
-        "value": "create",
-        "description": "Create a file",
-        "action": "Create a file"
+    {
+      "displayName": "Property Name",
+      "name": "binaryPropertyName",
+      "type": "string",
+      "required": true,
+      "default": "data",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "file"
+          ],
+          "operation": [
+            "get"
+          ]
+        }
       },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "description": "Delete file",
-        "action": "Delete a file"
+      "description": "Name of the binary property to write the file into"
+    },
+    {
+      "displayName": "Download File Content",
+      "name": "download",
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "file"
+          ],
+          "operation": [
+            "get"
+          ]
+        }
       },
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Get a file content",
-        "action": "Get a file content"
+      "description": "Whether to download the file content into a binary property"
+    },
+    {
+      "displayName": "File Upload Mode",
+      "name": "fileMode",
+      "type": "options",
+      "required": true,
+      "default": "binary",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "file"
+          ],
+          "operation": [
+            "create"
+          ]
+        }
       },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Get many files",
-        "action": "Get many files"
-      }
-    ],
-    "default": "get"
-  },
-  {
-    "displayName": "Form Name or ID",
-    "name": "formId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "loadForms"
+      "options": [
+        {
+          "name": "Binary File",
+          "value": "binary"
+        },
+        {
+          "name": "URL",
+          "value": "url"
+        }
+      ]
     },
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "file"
-        ]
-      }
-    },
-    "description": "Form ID (e.g. aSAvYreNzVEkrWg5Gdcvg). Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "File ID",
-    "name": "fileId",
-    "type": "string",
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "file"
-        ],
-        "operation": [
-          "delete",
-          "get"
-        ]
-      }
-    },
-    "description": "Uid of the file (should start with \"af\" e.g. \"afQoJxA4kmKEXVpkH6SYbhb\""
-  },
-  {
-    "displayName": "Property Name",
-    "name": "binaryPropertyName",
-    "type": "string",
-    "required": true,
-    "default": "data",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "file"
-        ],
-        "operation": [
-          "get"
-        ]
-      }
-    },
-    "description": "Name of the binary property to write the file into"
-  },
-  {
-    "displayName": "Download File Content",
-    "name": "download",
-    "type": "boolean",
-    "required": true,
-    "default": false,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "file"
-        ],
-        "operation": [
-          "get"
-        ]
-      }
-    },
-    "description": "Whether to download the file content into a binary property"
-  },
-  {
-    "displayName": "File Upload Mode",
-    "name": "fileMode",
-    "type": "options",
-    "required": true,
-    "default": "binary",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "file"
-        ],
-        "operation": [
-          "create"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Binary File",
-        "value": "binary"
+    {
+      "displayName": "Property Name",
+      "name": "binaryPropertyName",
+      "type": "string",
+      "required": true,
+      "default": "data",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "file"
+          ],
+          "operation": [
+            "create"
+          ],
+          "fileMode": [
+            "binary"
+          ]
+        }
       },
-      {
-        "name": "URL",
-        "value": "url"
-      }
-    ]
-  },
-  {
-    "displayName": "Property Name",
-    "name": "binaryPropertyName",
-    "type": "string",
-    "required": true,
-    "default": "data",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "file"
-        ],
-        "operation": [
-          "create"
-        ],
-        "fileMode": [
-          "binary"
-        ]
-      }
+      "description": "Name of the binary property containing the file to upload. Supported types: image, audio, video, csv, xml, zip."
     },
-    "description": "Name of the binary property containing the file to upload. Supported types: image, audio, video, csv, xml, zip."
-  },
-  {
-    "displayName": "File URL",
-    "name": "fileUrl",
-    "type": "string",
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "file"
-        ],
-        "operation": [
-          "create"
-        ],
-        "fileMode": [
-          "url"
-        ]
-      }
-    },
-    "description": "HTTP(s) link to the file to upload"
-  }
-]
+    {
+      "displayName": "File URL",
+      "name": "fileUrl",
+      "type": "string",
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "file"
+          ],
+          "operation": [
+            "create"
+          ],
+          "fileMode": [
+            "url"
+          ]
+        }
+      },
+      "description": "HTTP(s) link to the file to upload"
+    }
+  ]
+}
 ```

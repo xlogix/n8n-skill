@@ -1,2813 +1,2714 @@
+---
+title: "Wekan"
+description: "Consume Wekan API"
+---
+
 # Wekan
+**Node Type:** nodes-base.wekan
 
-- Node name: `wekan`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Wekan/Wekan.node.js`
-- Node version: `1`
-- Groups: `transform`
-- Description: Consume Wekan API
+## Description
+Consume Wekan API
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `wekanApi` (required)
-
-## Resource and Operation Coverage
-### Resources
-- Board (`board`)
-- Card (`card`)
-- Card Comment (`cardComment`)
-- Checklist (`checklist`)
-- Checklist Item (`checklistItem`)
-- List (`list`)
-
-### Operations
-- resource `board`: `create`, `delete`, `get`, `getAll`
-- resource `card`: `create`, `delete`, `get`, `getAll`, `update`
-- resource `cardComment`: `create`, `delete`, `get`, `getAll`
-- resource `checklist`: `create`, `delete`, `get`, `getAll`
-- resource `checklistItem`: `delete`, `get`, `update`
-- resource `list`: `create`, `delete`, `get`, `getAll`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Resource | `resource` | `options` | no | `card` |  |
-| Operation | `operation` | `options` | no | `create` |  |
-| Operation | `operation` | `options` | no | `create` |  |
-| Operation | `operation` | `options` | no | `create` |  |
-| Operation | `operation` | `options` | no | `getAll` |  |
-| Operation | `operation` | `options` | no | `getAll` |  |
-| Operation | `operation` | `options` | no | `create` |  |
-| Title | `title` | `string` | yes |  | The title of the board |
-| Owner Name or ID | `owner` | `options` | yes |  | The user ID in Wekan. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-| Board ID | `boardId` | `string` | yes |  | The ID of the board to delete |
-| Board ID | `boardId` | `string` | yes |  | The ID of the board to get |
-| User Name or ID | `IdUser` | `options` | yes |  | The ID of the user that boards are attached. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `100` | Max number of results to return |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list to create card in. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Title | `title` | `string` | yes |  | The title of the card |
-| Swimlane Name or ID | `swimlaneId` | `options` | yes |  | The swimlane ID of the new card. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Author Name or ID | `authorId` | `options` | yes |  | Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a> |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card to delete. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card ID | `cardId` | `string` | yes |  | The ID of the card to get |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| From Object | `fromObject` | `options` | yes |  |  |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Swimlane Name or ID | `swimlaneId` | `options` | no |  | The ID of the swimlane that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `100` | Max number of results to return |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card to update. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Update Fields | `updateFields` | `collection` | no | `{}` |  |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Author Name or ID | `authorId` | `options` | yes |  | The user who posted the comment. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Comment | `comment` | `string` | yes |  | The comment text |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Comment Name or ID | `commentId` | `options` | yes |  | The ID of the comment to delete. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Board ID | `boardId` | `string` | yes |  | The ID of the board that card belongs to |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Comment ID | `commentId` | `string` | yes |  | The ID of the comment to get |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `100` | Max number of results to return |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board where the card is in. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card to add checklist to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Title | `title` | `string` | yes |  | The title of the checklist to add |
-| Items | `items` | `string` | no | `[]` | Items to be added to the checklist |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card that checklist belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Checklist Name or ID | `checklistId` | `options` | yes |  | The ID of the checklist to delete. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card that checklist belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Checklist Name or ID | `checklistId` | `options` | yes |  | The ID of the checklist to get. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card to get checklists. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `100` | Max number of results to return |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card that checklistItem belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Checklist Name or ID | `checklistId` | `options` | yes |  | The ID of the checklistItem that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Checklist Item Name or ID | `checklistItemId` | `options` | yes |  | The ID of the checklistItem item to get. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card that checklistItem belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Checklist ID | `checklistId` | `string` | yes |  | The ID of the checklistItem that card belongs to |
-| Checklist Item Name or ID | `checklistItemId` | `options` | yes |  | The ID of the checklistItem item to get. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Card Name or ID | `cardId` | `options` | yes |  | The ID of the card that checklistItem belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| CheckList Name or ID | `checklistId` | `options` | yes |  | The ID of the checklistItem that card belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Checklist Item Name or ID | `checklistItemId` | `options` | yes |  | The ID of the checklistItem item to update. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Update Fields | `updateFields` | `collection` | no | `{}` |  |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board the list should be created in. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Title | `title` | `string` | yes |  | The title of the list |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List Name or ID | `listId` | `options` | yes |  | The ID of the list to delete. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Board Name or ID | `boardId` | `options` | yes |  | The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| List ID | `listId` | `string` | yes |  | The ID of the list to get |
-| Board Name or ID | `boardId` | `options` | yes |  | ID of the board where the lists are in. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `100` | Max number of results to return |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Resource",
-    "name": "resource",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "Board",
-        "value": "board"
-      },
-      {
-        "name": "Card",
-        "value": "card"
-      },
-      {
-        "name": "Card Comment",
-        "value": "cardComment"
-      },
-      {
-        "name": "Checklist",
-        "value": "checklist"
-      },
-      {
-        "name": "Checklist Item",
-        "value": "checklistItem"
-      },
-      {
-        "name": "List",
-        "value": "list"
-      }
-    ],
-    "default": "card"
+{
+  "displayName": "Wekan",
+  "name": "wekan",
+  "icon": "file:wekan.svg",
+  "group": [
+    "transform"
+  ],
+  "version": 1,
+  "subtitle": "={{$parameter[\"operation\"] + \": \" + $parameter[\"resource\"]}}",
+  "description": "Consume Wekan API",
+  "defaults": {
+    "name": "Wekan"
   },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "board"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Create",
-        "value": "create",
-        "description": "Create a new board",
-        "action": "Create a board"
-      },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "description": "Delete a board",
-        "action": "Delete a board"
-      },
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Get the data of a board",
-        "action": "Get a board"
-      },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Get many user boards",
-        "action": "Get many boards"
-      }
-    ],
-    "default": "create"
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Create",
-        "value": "create",
-        "description": "Create a new card",
-        "action": "Create a card"
-      },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "description": "Delete a card",
-        "action": "Delete a card"
-      },
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Get a card",
-        "action": "Get a card"
-      },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Get many cards",
-        "action": "Get many cards"
-      },
-      {
-        "name": "Update",
-        "value": "update",
-        "description": "Update a card",
-        "action": "Update a card"
-      }
-    ],
-    "default": "create"
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Create",
-        "value": "create",
-        "description": "Create a comment on a card",
-        "action": "Create a comment on a card"
-      },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "description": "Delete a comment from a card",
-        "action": "Delete a comment from a card"
-      },
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Get a card comment",
-        "action": "Get a card comment"
-      },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Get many card comments",
-        "action": "Get many card comments"
-      }
-    ],
-    "default": "create"
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Create",
-        "value": "create",
-        "description": "Create a new checklist",
-        "action": "Create a checklist"
-      },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "description": "Delete a checklist",
-        "action": "Delete a checklist"
-      },
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Get the data of a checklist",
-        "action": "Get a checklist"
-      },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Returns many checklists for the card",
-        "action": "Get many checklists"
-      }
-    ],
-    "default": "getAll"
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Delete",
-        "value": "delete",
-        "description": "Delete a checklist item",
-        "action": "Delete a checklist item"
-      },
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Get a checklist item",
-        "action": "Get a checklist item"
-      },
-      {
-        "name": "Update",
-        "value": "update",
-        "description": "Update a checklist item",
-        "action": "Update a checklist item"
-      }
-    ],
-    "default": "getAll"
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "list"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Create",
-        "value": "create",
-        "description": "Create a new list",
-        "action": "Create a list"
-      },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "description": "Delete a list",
-        "action": "Delete a list"
-      },
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Get the data of a list",
-        "action": "Get a list"
-      },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Get many board lists",
-        "action": "Get many lists"
-      }
-    ],
-    "default": "create"
-  },
-  {
-    "displayName": "Title",
-    "name": "title",
-    "type": "string",
-    "default": "",
-    "placeholder": "My board",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "board"
-        ]
-      }
-    },
-    "description": "The title of the board"
-  },
-  {
-    "displayName": "Owner Name or ID",
-    "name": "owner",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getUsers"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "board"
-        ]
-      }
-    },
-    "description": "The user ID in Wekan. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "board"
-        ]
-      }
-    },
-    "default": {},
-    "options": [
-      {
-        "displayName": "Active",
-        "name": "isActive",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether to set the board active"
-      },
-      {
-        "displayName": "Admin",
-        "name": "isAdmin",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether to set the owner an admin of the board"
-      },
-      {
-        "displayName": "Color",
-        "name": "color",
-        "type": "options",
-        "options": [
-          {
-            "name": "Belize",
-            "value": "belize"
-          },
-          {
-            "name": "Midnight",
-            "value": "midnight"
-          },
-          {
-            "name": "Nephritis",
-            "value": "nephritis"
-          },
-          {
-            "name": "Pomegranate",
-            "value": "pomegranate"
-          },
-          {
-            "name": "Pumpkin",
-            "value": "pumpkin"
-          },
-          {
-            "name": "Wisteria",
-            "value": "wisteria"
-          }
-        ],
-        "default": "",
-        "description": "The color of the board"
-      },
-      {
-        "displayName": "Comment Only",
-        "name": "isCommentOnly",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether to enable comments"
-      },
-      {
-        "displayName": "No Comments",
-        "name": "isNoComments",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether to disable comments"
-      },
-      {
-        "displayName": "Permission",
-        "name": "permission",
-        "type": "options",
-        "options": [
-          {
-            "name": "Private",
-            "value": "private"
-          },
-          {
-            "name": "Public",
-            "value": "public"
-          }
-        ],
-        "default": "private",
-        "description": "Set the board permission"
-      },
-      {
-        "displayName": "Worker",
-        "name": "isWorker",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether to only move cards, assign himself to card and comment"
-      }
-    ]
-  },
-  {
-    "displayName": "Board ID",
-    "name": "boardId",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "board"
-        ]
-      }
-    },
-    "description": "The ID of the board to delete"
-  },
-  {
-    "displayName": "Board ID",
-    "name": "boardId",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "board"
-        ]
-      }
-    },
-    "description": "The ID of the board to get"
-  },
-  {
-    "displayName": "User Name or ID",
-    "name": "IdUser",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getUsers"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "board"
-        ]
-      }
-    },
-    "description": "The ID of the user that boards are attached. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "board"
-        ]
-      }
-    },
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "board"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
-    },
-    "typeOptions": {
-      "minValue": 1,
-      "maxValue": 200
-    },
-    "default": 100,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the list to create card in. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Title",
-    "name": "title",
-    "type": "string",
-    "default": "",
-    "placeholder": "My card",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The title of the card"
-  },
-  {
-    "displayName": "Swimlane Name or ID",
-    "name": "swimlaneId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getSwimlanes",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The swimlane ID of the new card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Author Name or ID",
-    "name": "authorId",
-    "type": "options",
-    "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-    "typeOptions": {
-      "loadOptionsMethod": "getUsers"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "wekanApi",
+      "required": true
     }
-  },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "default": {},
-    "options": [
-      {
-        "displayName": "Assignee Names or IDs",
-        "name": "assignees",
-        "type": "multiOptions",
-        "typeOptions": {
-          "loadOptionsMethod": "getUsers"
+  ],
+  "properties": [
+    {
+      "displayName": "Resource",
+      "name": "resource",
+      "type": "options",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "Board",
+          "value": "board"
         },
-        "default": [],
-        "description": "The new list of assignee IDs attached to the card. Choose from the list, or specify IDs using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-      },
-      {
-        "displayName": "Description",
-        "name": "description",
-        "type": "string",
-        "default": "",
-        "description": "The new description of the card"
-      },
-      {
-        "displayName": "Member Names or IDs",
-        "name": "members",
-        "type": "multiOptions",
-        "typeOptions": {
-          "loadOptionsMethod": "getUsers"
+        {
+          "name": "Card",
+          "value": "card"
         },
-        "default": [],
-        "description": "The new list of member IDs attached to the card. Choose from the list, or specify IDs using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-      }
-    ]
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the card to delete. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card ID",
-    "name": "cardId",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the card to get"
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "From Object",
-    "name": "fromObject",
-    "type": "options",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "List",
-        "value": "list"
-      },
-      {
-        "name": "Swimlane",
-        "value": "swimlane"
-      }
-    ],
-    "default": ""
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "fromObject": [
-          "list"
-        ],
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Swimlane Name or ID",
-    "name": "swimlaneId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getSwimlanes",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "fromObject": [
-          "swimlane"
-        ],
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the swimlane that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "card"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
-    },
-    "typeOptions": {
-      "minValue": 1,
-      "maxValue": 200
-    },
-    "default": 100,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "update"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "update"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "update"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "description": "The ID of the card to update. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Update Fields",
-    "name": "updateFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "update"
-        ],
-        "resource": [
-          "card"
-        ]
-      }
-    },
-    "default": {},
-    "options": [
-      {
-        "displayName": "Author Name or ID",
-        "name": "authorId",
-        "type": "options",
-        "typeOptions": {
-          "loadOptionsMethod": "getUsers"
+        {
+          "name": "Card Comment",
+          "value": "cardComment"
         },
-        "default": "",
-        "description": "Update the owner of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-      },
-      {
-        "displayName": "Assignee Names or IDs",
-        "name": "assignees",
-        "type": "multiOptions",
-        "typeOptions": {
-          "loadOptionsMethod": "getUsers"
+        {
+          "name": "Checklist",
+          "value": "checklist"
         },
-        "default": [],
-        "description": "The new list of assignee IDs attached to the card. Choose from the list, or specify IDs using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-      },
-      {
-        "displayName": "Color",
-        "name": "color",
-        "type": "options",
-        "options": [
-          {
-            "value": "black",
-            "name": "Black"
-          },
-          {
-            "value": "blue",
-            "name": "Blue"
-          },
-          {
-            "value": "crimson",
-            "name": "Crimson"
-          },
-          {
-            "value": "darkgreen",
-            "name": "Darkgreen"
-          },
-          {
-            "value": "gold",
-            "name": "Gold"
-          },
-          {
-            "value": "gray",
-            "name": "Gray"
-          },
-          {
-            "value": "green",
-            "name": "Green"
-          },
-          {
-            "value": "indigo",
-            "name": "Indigo"
-          },
-          {
-            "value": "lime",
-            "name": "Lime"
-          },
-          {
-            "value": "magenta",
-            "name": "Magenta"
-          },
-          {
-            "value": "mistyrose",
-            "name": "Mistyrose"
-          },
-          {
-            "value": "navy",
-            "name": "Navy"
-          },
-          {
-            "value": "orange",
-            "name": "Orange"
-          },
-          {
-            "value": "paleturquoise",
-            "name": "Paleturquoise"
-          },
-          {
-            "value": "peachpuff",
-            "name": "Peachpuff"
-          },
-          {
-            "value": "pink",
-            "name": "Pink"
-          },
-          {
-            "value": "plum",
-            "name": "Plum"
-          },
-          {
-            "value": "purple",
-            "name": "Purple"
-          },
-          {
-            "value": "red",
-            "name": "Red"
-          },
-          {
-            "value": "saddlebrown",
-            "name": "Saddlebrown"
-          },
-          {
-            "value": "silver",
-            "name": "Silver"
-          },
-          {
-            "value": "sky",
-            "name": "Sky"
-          },
-          {
-            "value": "slateblue",
-            "name": "Slateblue"
-          },
-          {
-            "value": "white",
-            "name": "White"
-          },
-          {
-            "value": "yellow",
-            "name": "Yellow"
-          }
-        ],
-        "default": "",
-        "description": "The new color of the card"
-      },
-      {
-        "displayName": "Description",
-        "name": "description",
-        "type": "string",
-        "default": "",
-        "description": "The new description of the card"
-      },
-      {
-        "displayName": "Due At",
-        "name": "dueAt",
-        "type": "dateTime",
-        "default": "",
-        "description": "The new due at field of the card"
-      },
-      {
-        "displayName": "End At",
-        "name": "endAt",
-        "type": "dateTime",
-        "default": "",
-        "description": "The new end at field of the card"
-      },
-      {
-        "displayName": "Label IDs",
-        "name": "labelIds",
-        "type": "string",
-        "default": "",
-        "description": "The label IDs attached to the card"
-      },
-      {
-        "displayName": "List Name or ID",
-        "name": "listId",
-        "type": "options",
-        "typeOptions": {
-          "loadOptionsMethod": "getLists",
-          "loadOptionsDependsOn": [
-            "boardId"
+        {
+          "name": "Checklist Item",
+          "value": "checklistItem"
+        },
+        {
+          "name": "List",
+          "value": "list"
+        }
+      ],
+      "default": "card"
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "board"
           ]
+        }
+      },
+      "options": [
+        {
+          "name": "Create",
+          "value": "create",
+          "description": "Create a new board",
+          "action": "Create a board"
         },
-        "default": "",
-        "description": "The new list ID of the card (move operation). Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-      },
-      {
-        "displayName": "Member Names or IDs",
-        "name": "members",
-        "type": "multiOptions",
-        "typeOptions": {
-          "loadOptionsMethod": "getUsers"
+        {
+          "name": "Delete",
+          "value": "delete",
+          "description": "Delete a board",
+          "action": "Delete a board"
         },
-        "default": [],
-        "description": "The new list of member IDs attached to the card. Choose from the list, or specify IDs using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-      },
-      {
-        "displayName": "Over Time",
-        "name": "isOverTime",
-        "type": "boolean",
-        "default": false,
-        "description": "The new over time field of the card"
-      },
-      {
-        "displayName": "Parent Name or ID",
-        "name": "parentId",
-        "type": "options",
-        "typeOptions": {
-          "loadOptionsMethod": "getCards",
-          "loadOptionsDependsOn": [
-            "boardId",
-            "listId"
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Get the data of a board",
+          "action": "Get a board"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Get many user boards",
+          "action": "Get many boards"
+        }
+      ],
+      "default": "create"
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "card"
           ]
+        }
+      },
+      "options": [
+        {
+          "name": "Create",
+          "value": "create",
+          "description": "Create a new card",
+          "action": "Create a card"
         },
-        "default": "",
-        "description": "The parent of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-      },
-      {
-        "displayName": "Received At",
-        "name": "receivedAt",
-        "type": "dateTime",
-        "default": "",
-        "description": "The new received at field of the card"
-      },
-      {
-        "displayName": "Sort",
-        "name": "sort",
-        "type": "number",
-        "default": 0,
-        "description": "The internally used sort value of a card"
-      },
-      {
-        "displayName": "Spent Time",
-        "name": "spentTime",
-        "type": "number",
-        "typeOptions": {
-          "minValue": 0
+        {
+          "name": "Delete",
+          "value": "delete",
+          "description": "Delete a card",
+          "action": "Delete a card"
         },
-        "default": "",
-        "description": "The new spent time field of the card"
-      },
-      {
-        "displayName": "Start At",
-        "name": "startAt",
-        "type": "dateTime",
-        "default": "",
-        "description": "The new start at field of the card"
-      },
-      {
-        "displayName": "Swimlane Name or ID",
-        "name": "swimlaneId",
-        "type": "options",
-        "typeOptions": {
-          "loadOptionsMethod": "getSwimlanes",
-          "loadOptionsDependsOn": [
-            "boardId"
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Get a card",
+          "action": "Get a card"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Get many cards",
+          "action": "Get many cards"
+        },
+        {
+          "name": "Update",
+          "value": "update",
+          "description": "Update a card",
+          "action": "Update a card"
+        }
+      ],
+      "default": "create"
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "cardComment"
           ]
+        }
+      },
+      "options": [
+        {
+          "name": "Create",
+          "value": "create",
+          "description": "Create a comment on a card",
+          "action": "Create a comment on a card"
         },
-        "default": "",
-        "description": "The new swimlane ID of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+        {
+          "name": "Delete",
+          "value": "delete",
+          "description": "Delete a comment from a card",
+          "action": "Delete a comment from a card"
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Get a card comment",
+          "action": "Get a card comment"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Get many card comments",
+          "action": "Get many card comments"
+        }
+      ],
+      "default": "create"
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "checklist"
+          ]
+        }
       },
-      {
-        "displayName": "Title",
-        "name": "title",
-        "type": "string",
-        "default": "",
-        "description": "The new title of the card"
-      }
-    ]
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Author Name or ID",
-    "name": "authorId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getUsers"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The user who posted the comment. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Comment",
-    "name": "comment",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The comment text"
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Comment Name or ID",
-    "name": "commentId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getComments",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "cardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the comment to delete. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Board ID",
-    "name": "boardId",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the board that card belongs to"
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Comment ID",
-    "name": "commentId",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the comment to get"
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "description": "The ID of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "cardComment"
-        ]
-      }
-    },
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "cardComment"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
-    },
-    "typeOptions": {
-      "minValue": 1,
-      "maxValue": 200
-    },
-    "default": 100,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the board where the card is in. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the card to add checklist to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Title",
-    "name": "title",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The title of the checklist to add"
-  },
-  {
-    "displayName": "Items",
-    "name": "items",
-    "type": "string",
-    "typeOptions": {
-      "multipleValues": true,
-      "multipleValueButtonText": "Add Item"
-    },
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "default": [],
-    "description": "Items to be added to the checklist"
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the card that checklist belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Checklist Name or ID",
-    "name": "checklistId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getChecklists",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "cardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the checklist to delete. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the card that checklist belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Checklist Name or ID",
-    "name": "checklistId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getChecklists",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "cardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the checklist to get. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "description": "The ID of the card to get checklists. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "checklist"
-        ]
-      }
-    },
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "checklist"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
-    },
-    "typeOptions": {
-      "minValue": 1,
-      "maxValue": 200
-    },
-    "default": 100,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the card that checklistItem belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Checklist Name or ID",
-    "name": "checklistId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getChecklists",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "cardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the checklistItem that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Checklist Item Name or ID",
-    "name": "checklistItemId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getChecklistItems",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "cardId",
-        "checklistId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the checklistItem item to get. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the card that checklistItem belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Checklist ID",
-    "name": "checklistId",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the checklistItem that card belongs to"
-  },
-  {
-    "displayName": "Checklist Item Name or ID",
-    "name": "checklistItemId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getChecklistItems",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "cardId",
-        "checklistId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the checklistItem item to get. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "update"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "update"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Card Name or ID",
-    "name": "cardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getCards",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "listId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "update"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the card that checklistItem belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "CheckList Name or ID",
-    "name": "checklistId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getChecklists",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "cardId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "update"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the checklistItem that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Checklist Item Name or ID",
-    "name": "checklistItemId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getChecklistItems",
-      "loadOptionsDependsOn": [
-        "boardId",
-        "cardId",
-        "checklistId"
-      ]
-    },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "update"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "description": "The ID of the checklistItem item to update. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Update Fields",
-    "name": "updateFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "update"
-        ],
-        "resource": [
-          "checklistItem"
-        ]
-      }
-    },
-    "default": {},
-    "options": [
-      {
-        "displayName": "Title",
-        "name": "title",
-        "type": "string",
-        "default": "",
-        "description": "The new title for the checklistItem item"
+      "options": [
+        {
+          "name": "Create",
+          "value": "create",
+          "description": "Create a new checklist",
+          "action": "Create a checklist"
+        },
+        {
+          "name": "Delete",
+          "value": "delete",
+          "description": "Delete a checklist",
+          "action": "Delete a checklist"
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Get the data of a checklist",
+          "action": "Get a checklist"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Returns many checklists for the card",
+          "action": "Get many checklists"
+        }
+      ],
+      "default": "getAll"
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "checklistItem"
+          ]
+        }
       },
-      {
-        "displayName": "Finished",
-        "name": "isFinished",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether the item is checked"
-      }
-    ]
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
+      "options": [
+        {
+          "name": "Delete",
+          "value": "delete",
+          "description": "Delete a checklist item",
+          "action": "Delete a checklist item"
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Get a checklist item",
+          "action": "Get a checklist item"
+        },
+        {
+          "name": "Update",
+          "value": "update",
+          "description": "Update a checklist item",
+          "action": "Update a checklist item"
+        }
+      ],
+      "default": "getAll"
     },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "list"
-        ]
-      }
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "Create",
+          "value": "create",
+          "description": "Create a new list",
+          "action": "Create a list"
+        },
+        {
+          "name": "Delete",
+          "value": "delete",
+          "description": "Delete a list",
+          "action": "Delete a list"
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Get the data of a list",
+          "action": "Get a list"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Get many board lists",
+          "action": "Get many lists"
+        }
+      ],
+      "default": "create"
     },
-    "description": "The ID of the board the list should be created in. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Title",
-    "name": "title",
-    "type": "string",
-    "default": "",
-    "placeholder": "My list",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "list"
-        ]
-      }
+    {
+      "displayName": "Title",
+      "name": "title",
+      "type": "string",
+      "default": "",
+      "placeholder": "My board",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "board"
+          ]
+        }
+      },
+      "description": "The title of the board"
     },
-    "description": "The title of the list"
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
+    {
+      "displayName": "Owner Name or ID",
+      "name": "owner",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getUsers"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "board"
+          ]
+        }
+      },
+      "description": "The user ID in Wekan. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
     },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "list"
-        ]
-      }
-    },
-    "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "listId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getLists",
-      "loadOptionsDependsOn": [
-        "boardId"
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "board"
+          ]
+        }
+      },
+      "default": {},
+      "options": [
+        {
+          "displayName": "Active",
+          "name": "isActive",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to set the board active"
+        },
+        {
+          "displayName": "Admin",
+          "name": "isAdmin",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to set the owner an admin of the board"
+        },
+        {
+          "displayName": "Color",
+          "name": "color",
+          "type": "options",
+          "options": [
+            {
+              "name": "Belize",
+              "value": "belize"
+            },
+            {
+              "name": "Midnight",
+              "value": "midnight"
+            },
+            {
+              "name": "Nephritis",
+              "value": "nephritis"
+            },
+            {
+              "name": "Pomegranate",
+              "value": "pomegranate"
+            },
+            {
+              "name": "Pumpkin",
+              "value": "pumpkin"
+            },
+            {
+              "name": "Wisteria",
+              "value": "wisteria"
+            }
+          ],
+          "default": "",
+          "description": "The color of the board"
+        },
+        {
+          "displayName": "Comment Only",
+          "name": "isCommentOnly",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to enable comments"
+        },
+        {
+          "displayName": "No Comments",
+          "name": "isNoComments",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to disable comments"
+        },
+        {
+          "displayName": "Permission",
+          "name": "permission",
+          "type": "options",
+          "options": [
+            {
+              "name": "Private",
+              "value": "private"
+            },
+            {
+              "name": "Public",
+              "value": "public"
+            }
+          ],
+          "default": "private",
+          "description": "Set the board permission"
+        },
+        {
+          "displayName": "Worker",
+          "name": "isWorker",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to only move cards, assign himself to card and comment"
+        }
       ]
     },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete"
-        ],
-        "resource": [
-          "list"
+    {
+      "displayName": "Board ID",
+      "name": "boardId",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "board"
+          ]
+        }
+      },
+      "description": "The ID of the board to delete"
+    },
+    {
+      "displayName": "Board ID",
+      "name": "boardId",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "board"
+          ]
+        }
+      },
+      "description": "The ID of the board to get"
+    },
+    {
+      "displayName": "User Name or ID",
+      "name": "IdUser",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getUsers"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "board"
+          ]
+        }
+      },
+      "description": "The ID of the user that boards are attached. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "board"
+          ]
+        }
+      },
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit"
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "board"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "typeOptions": {
+        "minValue": 1,
+        "maxValue": 200
+      },
+      "default": 100,
+      "description": "Max number of results to return"
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
         ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the list to create card in. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Title",
+      "name": "title",
+      "type": "string",
+      "default": "",
+      "placeholder": "My card",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The title of the card"
+    },
+    {
+      "displayName": "Swimlane Name or ID",
+      "name": "swimlaneId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getSwimlanes",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The swimlane ID of the new card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Author Name or ID",
+      "name": "authorId",
+      "type": "options",
+      "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+      "typeOptions": {
+        "loadOptionsMethod": "getUsers"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
       }
     },
-    "description": "The ID of the list to delete. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "default": {},
+      "options": [
+        {
+          "displayName": "Assignee Names or IDs",
+          "name": "assignees",
+          "type": "multiOptions",
+          "typeOptions": {
+            "loadOptionsMethod": "getUsers"
+          },
+          "default": [],
+          "description": "The new list of assignee IDs attached to the card. Choose from the list, or specify IDs using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+        },
+        {
+          "displayName": "Description",
+          "name": "description",
+          "type": "string",
+          "default": "",
+          "description": "The new description of the card"
+        },
+        {
+          "displayName": "Member Names or IDs",
+          "name": "members",
+          "type": "multiOptions",
+          "typeOptions": {
+            "loadOptionsMethod": "getUsers"
+          },
+          "default": [],
+          "description": "The new list of member IDs attached to the card. Choose from the list, or specify IDs using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+        }
+      ]
     },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "list"
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
         ]
-      }
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
     },
-    "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "List ID",
-    "name": "listId",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "list"
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
         ]
-      }
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the card to delete. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
     },
-    "description": "The ID of the list to get"
-  },
-  {
-    "displayName": "Board Name or ID",
-    "name": "boardId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getBoards"
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
     },
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "list"
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
         ]
-      }
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
     },
-    "description": "ID of the board where the lists are in. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "list"
+    {
+      "displayName": "Card ID",
+      "name": "cardId",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the card to get"
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "From Object",
+      "name": "fromObject",
+      "type": "options",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "List",
+          "value": "list"
+        },
+        {
+          "name": "Swimlane",
+          "value": "swimlane"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
         ]
-      }
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "fromObject": [
+            "list"
+          ],
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
     },
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "list"
-        ],
-        "returnAll": [
-          false
+    {
+      "displayName": "Swimlane Name or ID",
+      "name": "swimlaneId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getSwimlanes",
+        "loadOptionsDependsOn": [
+          "boardId"
         ]
-      }
+      },
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "fromObject": [
+            "swimlane"
+          ],
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the swimlane that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
     },
-    "typeOptions": {
-      "minValue": 1,
-      "maxValue": 200
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit"
     },
-    "default": 100,
-    "description": "Max number of results to return"
-  }
-]
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "card"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "typeOptions": {
+        "minValue": 1,
+        "maxValue": 200
+      },
+      "default": 100,
+      "description": "Max number of results to return"
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "update"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "update"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "update"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "description": "The ID of the card to update. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Update Fields",
+      "name": "updateFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "update"
+          ],
+          "resource": [
+            "card"
+          ]
+        }
+      },
+      "default": {},
+      "options": [
+        {
+          "displayName": "Author Name or ID",
+          "name": "authorId",
+          "type": "options",
+          "typeOptions": {
+            "loadOptionsMethod": "getUsers"
+          },
+          "default": "",
+          "description": "Update the owner of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+        },
+        {
+          "displayName": "Assignee Names or IDs",
+          "name": "assignees",
+          "type": "multiOptions",
+          "typeOptions": {
+            "loadOptionsMethod": "getUsers"
+          },
+          "default": [],
+          "description": "The new list of assignee IDs attached to the card. Choose from the list, or specify IDs using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+        },
+        {
+          "displayName": "Color",
+          "name": "color",
+          "type": "options",
+          "options": [
+            {
+              "value": "black",
+              "name": "Black"
+            },
+            {
+              "value": "blue",
+              "name": "Blue"
+            },
+            {
+              "value": "crimson",
+              "name": "Crimson"
+            },
+            {
+              "value": "darkgreen",
+              "name": "Darkgreen"
+            },
+            {
+              "value": "gold",
+              "name": "Gold"
+            },
+            {
+              "value": "gray",
+              "name": "Gray"
+            },
+            {
+              "value": "green",
+              "name": "Green"
+            },
+            {
+              "value": "indigo",
+              "name": "Indigo"
+            },
+            {
+              "value": "lime",
+              "name": "Lime"
+            },
+            {
+              "value": "magenta",
+              "name": "Magenta"
+            },
+            {
+              "value": "mistyrose",
+              "name": "Mistyrose"
+            },
+            {
+              "value": "navy",
+              "name": "Navy"
+            },
+            {
+              "value": "orange",
+              "name": "Orange"
+            },
+            {
+              "value": "paleturquoise",
+              "name": "Paleturquoise"
+            },
+            {
+              "value": "peachpuff",
+              "name": "Peachpuff"
+            },
+            {
+              "value": "pink",
+              "name": "Pink"
+            },
+            {
+              "value": "plum",
+              "name": "Plum"
+            },
+            {
+              "value": "purple",
+              "name": "Purple"
+            },
+            {
+              "value": "red",
+              "name": "Red"
+            },
+            {
+              "value": "saddlebrown",
+              "name": "Saddlebrown"
+            },
+            {
+              "value": "silver",
+              "name": "Silver"
+            },
+            {
+              "value": "sky",
+              "name": "Sky"
+            },
+            {
+              "value": "slateblue",
+              "name": "Slateblue"
+            },
+            {
+              "value": "white",
+              "name": "White"
+            },
+            {
+              "value": "yellow",
+              "name": "Yellow"
+            }
+          ],
+          "default": "",
+          "description": "The new color of the card"
+        },
+        {
+          "displayName": "Description",
+          "name": "description",
+          "type": "string",
+          "default": "",
+          "description": "The new description of the card"
+        },
+        {
+          "displayName": "Due At",
+          "name": "dueAt",
+          "type": "dateTime",
+          "default": "",
+          "description": "The new due at field of the card"
+        },
+        {
+          "displayName": "End At",
+          "name": "endAt",
+          "type": "dateTime",
+          "default": "",
+          "description": "The new end at field of the card"
+        },
+        {
+          "displayName": "Label IDs",
+          "name": "labelIds",
+          "type": "string",
+          "default": "",
+          "description": "The label IDs attached to the card"
+        },
+        {
+          "displayName": "List Name or ID",
+          "name": "listId",
+          "type": "options",
+          "typeOptions": {
+            "loadOptionsMethod": "getLists",
+            "loadOptionsDependsOn": [
+              "boardId"
+            ]
+          },
+          "default": "",
+          "description": "The new list ID of the card (move operation). Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+        },
+        {
+          "displayName": "Member Names or IDs",
+          "name": "members",
+          "type": "multiOptions",
+          "typeOptions": {
+            "loadOptionsMethod": "getUsers"
+          },
+          "default": [],
+          "description": "The new list of member IDs attached to the card. Choose from the list, or specify IDs using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+        },
+        {
+          "displayName": "Over Time",
+          "name": "isOverTime",
+          "type": "boolean",
+          "default": false,
+          "description": "The new over time field of the card"
+        },
+        {
+          "displayName": "Parent Name or ID",
+          "name": "parentId",
+          "type": "options",
+          "typeOptions": {
+            "loadOptionsMethod": "getCards",
+            "loadOptionsDependsOn": [
+              "boardId",
+              "listId"
+            ]
+          },
+          "default": "",
+          "description": "The parent of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+        },
+        {
+          "displayName": "Received At",
+          "name": "receivedAt",
+          "type": "dateTime",
+          "default": "",
+          "description": "The new received at field of the card"
+        },
+        {
+          "displayName": "Sort",
+          "name": "sort",
+          "type": "number",
+          "default": 0,
+          "description": "The internally used sort value of a card"
+        },
+        {
+          "displayName": "Spent Time",
+          "name": "spentTime",
+          "type": "number",
+          "typeOptions": {
+            "minValue": 0
+          },
+          "default": "",
+          "description": "The new spent time field of the card"
+        },
+        {
+          "displayName": "Start At",
+          "name": "startAt",
+          "type": "dateTime",
+          "default": "",
+          "description": "The new start at field of the card"
+        },
+        {
+          "displayName": "Swimlane Name or ID",
+          "name": "swimlaneId",
+          "type": "options",
+          "typeOptions": {
+            "loadOptionsMethod": "getSwimlanes",
+            "loadOptionsDependsOn": [
+              "boardId"
+            ]
+          },
+          "default": "",
+          "description": "The new swimlane ID of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+        },
+        {
+          "displayName": "Title",
+          "name": "title",
+          "type": "string",
+          "default": "",
+          "description": "The new title of the card"
+        }
+      ]
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Author Name or ID",
+      "name": "authorId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getUsers"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The user who posted the comment. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Comment",
+      "name": "comment",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The comment text"
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Comment Name or ID",
+      "name": "commentId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getComments",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "cardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the comment to delete. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Board ID",
+      "name": "boardId",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the board that card belongs to"
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Comment ID",
+      "name": "commentId",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the comment to get"
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "description": "The ID of the card. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "cardComment"
+          ]
+        }
+      },
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit"
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "cardComment"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "typeOptions": {
+        "minValue": 1,
+        "maxValue": 200
+      },
+      "default": 100,
+      "description": "Max number of results to return"
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the board where the card is in. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the card to add checklist to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Title",
+      "name": "title",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The title of the checklist to add"
+    },
+    {
+      "displayName": "Items",
+      "name": "items",
+      "type": "string",
+      "typeOptions": {
+        "multipleValues": true,
+        "multipleValueButtonText": "Add Item"
+      },
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "default": [],
+      "description": "Items to be added to the checklist"
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the card that checklist belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Checklist Name or ID",
+      "name": "checklistId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getChecklists",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "cardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the checklist to delete. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the card that checklist belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Checklist Name or ID",
+      "name": "checklistId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getChecklists",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "cardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the checklist to get. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "description": "The ID of the card to get checklists. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "checklist"
+          ]
+        }
+      },
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit"
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "checklist"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "typeOptions": {
+        "minValue": 1,
+        "maxValue": 200
+      },
+      "default": 100,
+      "description": "Max number of results to return"
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the card that checklistItem belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Checklist Name or ID",
+      "name": "checklistId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getChecklists",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "cardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the checklistItem that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Checklist Item Name or ID",
+      "name": "checklistItemId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getChecklistItems",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "cardId",
+          "checklistId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the checklistItem item to get. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the card that checklistItem belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Checklist ID",
+      "name": "checklistId",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the checklistItem that card belongs to"
+    },
+    {
+      "displayName": "Checklist Item Name or ID",
+      "name": "checklistItemId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getChecklistItems",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "cardId",
+          "checklistId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the checklistItem item to get. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "update"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the board that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "update"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the list that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Card Name or ID",
+      "name": "cardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getCards",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "listId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "update"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the card that checklistItem belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "CheckList Name or ID",
+      "name": "checklistId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getChecklists",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "cardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "update"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the checklistItem that card belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Checklist Item Name or ID",
+      "name": "checklistItemId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getChecklistItems",
+        "loadOptionsDependsOn": [
+          "boardId",
+          "cardId",
+          "checklistId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "update"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "description": "The ID of the checklistItem item to update. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Update Fields",
+      "name": "updateFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "update"
+          ],
+          "resource": [
+            "checklistItem"
+          ]
+        }
+      },
+      "default": {},
+      "options": [
+        {
+          "displayName": "Title",
+          "name": "title",
+          "type": "string",
+          "default": "",
+          "description": "The new title for the checklistItem item"
+        },
+        {
+          "displayName": "Finished",
+          "name": "isFinished",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the item is checked"
+        }
+      ]
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "description": "The ID of the board the list should be created in. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Title",
+      "name": "title",
+      "type": "string",
+      "default": "",
+      "placeholder": "My list",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "description": "The title of the list"
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "listId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getLists",
+        "loadOptionsDependsOn": [
+          "boardId"
+        ]
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete"
+          ],
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "description": "The ID of the list to delete. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "description": "The ID of the board that list belongs to. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "List ID",
+      "name": "listId",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "description": "The ID of the list to get"
+    },
+    {
+      "displayName": "Board Name or ID",
+      "name": "boardId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getBoards"
+      },
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "description": "ID of the board where the lists are in. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit"
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "list"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "typeOptions": {
+        "minValue": 1,
+        "maxValue": 200
+      },
+      "default": 100,
+      "description": "Max number of results to return"
+    }
+  ]
+}
 ```

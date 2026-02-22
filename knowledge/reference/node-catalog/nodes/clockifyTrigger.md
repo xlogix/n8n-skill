@@ -1,56 +1,67 @@
+---
+title: "Clockify Trigger"
+description: "Listens to Clockify events"
+---
+
 # Clockify Trigger
+**Node Type:** nodes-base.clockifyTrigger
 
-- Node name: `clockifyTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Clockify/ClockifyTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Listens to Clockify events
+## Description
+Listens to Clockify events
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `clockifyApi` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Workspace Name or ID | `workspaceId` | `options` | yes |  | Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a> |
-| Trigger | `watchField` | `options` | yes | `0` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Workspace Name or ID",
-    "name": "workspaceId",
-    "type": "options",
-    "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-    "typeOptions": {
-      "loadOptionsMethod": "listWorkspaces"
-    },
-    "required": true,
-    "default": ""
+{
+  "displayName": "Clockify Trigger",
+  "icon": {
+    "light": "file:clockify.svg",
+    "dark": "file:clockify.dark.svg"
   },
-  {
-    "displayName": "Trigger",
-    "name": "watchField",
-    "type": "options",
-    "options": [
-      {
-        "name": "New Time Entry",
-        "value": 0
-      }
-    ],
-    "required": true,
-    "default": 0
-  }
-]
+  "name": "clockifyTrigger",
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "description": "Listens to Clockify events",
+  "defaults": {
+    "name": "Clockify Trigger"
+  },
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "clockifyApi",
+      "required": true
+    }
+  ],
+  "polling": true,
+  "properties": [
+    {
+      "displayName": "Workspace Name or ID",
+      "name": "workspaceId",
+      "type": "options",
+      "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+      "typeOptions": {
+        "loadOptionsMethod": "listWorkspaces"
+      },
+      "required": true,
+      "default": ""
+    },
+    {
+      "displayName": "Trigger",
+      "name": "watchField",
+      "type": "options",
+      "options": [
+        {
+          "name": "New Time Entry",
+          "value": 0
+        }
+      ],
+      "required": true,
+      "default": 0
+    }
+  ]
+}
 ```

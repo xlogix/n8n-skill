@@ -1,144 +1,175 @@
+---
+title: "GitLab Trigger"
+description: "Starts the workflow when GitLab events occur"
+---
+
 # GitLab Trigger
+**Node Type:** nodes-base.gitlabTrigger
 
-- Node name: `gitlabTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Gitlab/GitlabTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Starts the workflow when GitLab events occur
+## Description
+Starts the workflow when GitLab events occur
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `gitlabApi` (required)
-- `gitlabOAuth2Api` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Authentication | `authentication` | `options` | no | `accessToken` |  |
-| Repository Owner | `owner` | `string` | yes |  | Owner of the repository |
-| Repository Name | `repository` | `string` | yes |  | The name of the repository |
-| Events | `events` | `multiOptions` | yes | `[]` | The events to listen to |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Authentication",
-    "name": "authentication",
-    "type": "options",
-    "options": [
-      {
-        "name": "Access Token",
-        "value": "accessToken"
-      },
-      {
-        "name": "OAuth2",
-        "value": "oAuth2"
+{
+  "displayName": "GitLab Trigger",
+  "name": "gitlabTrigger",
+  "icon": "file:gitlab.svg",
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "subtitle": "={{$parameter[\"owner\"] + \"/\" + $parameter[\"repository\"] + \": \" + $parameter[\"events\"].join(\", \")}}",
+  "description": "Starts the workflow when GitLab events occur",
+  "defaults": {
+    "name": "GitLab Trigger"
+  },
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "gitlabApi",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "accessToken"
+          ]
+        }
       }
-    ],
-    "default": "accessToken"
-  },
-  {
-    "displayName": "Repository Owner",
-    "name": "owner",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "placeholder": "n8n-io",
-    "description": "Owner of the repository"
-  },
-  {
-    "displayName": "Repository Name",
-    "name": "repository",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "placeholder": "n8n",
-    "description": "The name of the repository"
-  },
-  {
-    "displayName": "Events",
-    "name": "events",
-    "type": "multiOptions",
-    "options": [
-      {
-        "name": "Comment",
-        "value": "note",
-        "description": "Triggered when a new comment is made on commits, merge requests, issues, and code snippets"
-      },
-      {
-        "name": "Confidential Issues",
-        "value": "confidential_issues",
-        "description": "Triggered on confidential issues' events"
-      },
-      {
-        "name": "Confidential Comments",
-        "value": "confidential_note",
-        "description": "Triggered when a confidential comment is made"
-      },
-      {
-        "name": "Deployments",
-        "value": "deployment",
-        "description": "Triggered when a deployment starts/succeeds/fails/is cancelled"
-      },
-      {
-        "name": "Issue",
-        "value": "issues",
-        "description": "Triggered when a new issue is created or an existing issue was updated/closed/reopened"
-      },
-      {
-        "name": "Job",
-        "value": "job",
-        "description": "Triggered on status change of a job"
-      },
-      {
-        "name": "Merge Request",
-        "value": "merge_requests",
-        "description": "Triggered when a new merge request is created, an existing merge request was updated/merged/closed or a commit is added in the source branch"
-      },
-      {
-        "name": "Pipeline",
-        "value": "pipeline",
-        "description": "Triggered on status change of Pipeline"
-      },
-      {
-        "name": "Push",
-        "value": "push",
-        "description": "Triggered when you push to the repository except when pushing tags"
-      },
-      {
-        "name": "Release",
-        "value": "releases",
-        "description": "Release events are triggered when a release is created or updated"
-      },
-      {
-        "name": "Tag",
-        "value": "tag_push",
-        "description": "Triggered when you create (or delete) tags to the repository"
-      },
-      {
-        "name": "Wiki Page",
-        "value": "wiki_page",
-        "description": "Triggered when a wiki page is created, updated or deleted"
-      },
-      {
-        "name": "*",
-        "value": "*",
-        "description": "Any time any event is triggered (Wildcard Event)"
+    },
+    {
+      "name": "gitlabOAuth2Api",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "oAuth2"
+          ]
+        }
       }
-    ],
-    "required": true,
-    "default": [],
-    "description": "The events to listen to"
-  }
-]
+    }
+  ],
+  "webhooks": [
+    {
+      "name": "default",
+      "httpMethod": "POST",
+      "responseMode": "onReceived",
+      "path": "webhook"
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Authentication",
+      "name": "authentication",
+      "type": "options",
+      "options": [
+        {
+          "name": "Access Token",
+          "value": "accessToken"
+        },
+        {
+          "name": "OAuth2",
+          "value": "oAuth2"
+        }
+      ],
+      "default": "accessToken"
+    },
+    {
+      "displayName": "Repository Owner",
+      "name": "owner",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "placeholder": "n8n-io",
+      "description": "Owner of the repository"
+    },
+    {
+      "displayName": "Repository Name",
+      "name": "repository",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "placeholder": "n8n",
+      "description": "The name of the repository"
+    },
+    {
+      "displayName": "Events",
+      "name": "events",
+      "type": "multiOptions",
+      "options": [
+        {
+          "name": "Comment",
+          "value": "note",
+          "description": "Triggered when a new comment is made on commits, merge requests, issues, and code snippets"
+        },
+        {
+          "name": "Confidential Issues",
+          "value": "confidential_issues",
+          "description": "Triggered on confidential issues' events"
+        },
+        {
+          "name": "Confidential Comments",
+          "value": "confidential_note",
+          "description": "Triggered when a confidential comment is made"
+        },
+        {
+          "name": "Deployments",
+          "value": "deployment",
+          "description": "Triggered when a deployment starts/succeeds/fails/is cancelled"
+        },
+        {
+          "name": "Issue",
+          "value": "issues",
+          "description": "Triggered when a new issue is created or an existing issue was updated/closed/reopened"
+        },
+        {
+          "name": "Job",
+          "value": "job",
+          "description": "Triggered on status change of a job"
+        },
+        {
+          "name": "Merge Request",
+          "value": "merge_requests",
+          "description": "Triggered when a new merge request is created, an existing merge request was updated/merged/closed or a commit is added in the source branch"
+        },
+        {
+          "name": "Pipeline",
+          "value": "pipeline",
+          "description": "Triggered on status change of Pipeline"
+        },
+        {
+          "name": "Push",
+          "value": "push",
+          "description": "Triggered when you push to the repository except when pushing tags"
+        },
+        {
+          "name": "Release",
+          "value": "releases",
+          "description": "Release events are triggered when a release is created or updated"
+        },
+        {
+          "name": "Tag",
+          "value": "tag_push",
+          "description": "Triggered when you create (or delete) tags to the repository"
+        },
+        {
+          "name": "Wiki Page",
+          "value": "wiki_page",
+          "description": "Triggered when a wiki page is created, updated or deleted"
+        },
+        {
+          "name": "*",
+          "value": "*",
+          "description": "Any time any event is triggered (Wildcard Event)"
+        }
+      ],
+      "required": true,
+      "default": [],
+      "description": "The events to listen to"
+    }
+  ]
+}
 ```

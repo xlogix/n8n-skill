@@ -1,267 +1,271 @@
+---
+title: "Mistral AI"
+description: "Consume Mistral AI API"
+---
+
 # Mistral AI
+**Node Type:** nodes-base.mistralAi
 
-- Node name: `mistralAi`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/MistralAI/MistralAi.node.js`
-- Node version: `1`
-- Groups: `transform`
-- Description: Consume Mistral AI API
+## Description
+Consume Mistral AI API
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `mistralCloudApi` (required)
-
-## Resource and Operation Coverage
-### Resources
-- Document (`document`)
-
-### Operations
-- resource `document`: `extractText`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Resource | `resource` | `options` | no | `document` |  |
-| Operation | `operation` | `options` | no | `extractText` |  |
-| Model | `model` | `options` | yes | `mistral-ocr-latest` | The OCR model to use |
-| Document Type | `documentType` | `options` | yes | `document_url` | The type of document to process |
-| Input Type | `inputType` | `options` | yes | `binary` | How the document will be provided |
-| Input Binary Field | `binaryProperty` | `string` | yes | `data` | Name of the input binary field that contains the file to process |
-| URL | `url` | `string` | yes |  | URL of the document or image to process |
-| Options | `options` | `collection` | no | `{}` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Resource",
-    "name": "resource",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "Document",
-        "value": "document"
-      }
-    ],
-    "default": "document"
+{
+  "displayName": "Mistral AI",
+  "name": "mistralAi",
+  "icon": {
+    "light": "file:mistralAi.svg",
+    "dark": "file:mistralAi.svg"
   },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ]
+  "group": [
+    "transform"
+  ],
+  "version": 1,
+  "subtitle": "={{ $parameter[\"operation\"] + \": \" + $parameter[\"resource\"] }}",
+  "description": "Consume Mistral AI API",
+  "defaults": {
+    "name": "Mistral AI"
+  },
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "usableAsTool": true,
+  "credentials": [
+    {
+      "name": "mistralCloudApi",
+      "required": true
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Resource",
+      "name": "resource",
+      "type": "options",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "Document",
+          "value": "document"
+        }
+      ],
+      "default": "document"
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "Extract Text",
+          "value": "extractText",
+          "description": "Extract text from document using OCR",
+          "action": "Extract text"
+        }
+      ],
+      "default": "extractText"
+    },
+    {
+      "displayName": "Model",
+      "name": "model",
+      "type": "options",
+      "options": [
+        {
+          "name": "mistral-ocr-latest",
+          "value": "mistral-ocr-latest"
+        }
+      ],
+      "description": "The OCR model to use",
+      "required": true,
+      "default": "mistral-ocr-latest",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "extractText"
+          ]
+        }
       }
     },
-    "options": [
-      {
-        "name": "Extract Text",
-        "value": "extractText",
-        "description": "Extract text from document using OCR",
-        "action": "Extract text"
-      }
-    ],
-    "default": "extractText"
-  },
-  {
-    "displayName": "Model",
-    "name": "model",
-    "type": "options",
-    "options": [
-      {
-        "name": "mistral-ocr-latest",
-        "value": "mistral-ocr-latest"
-      }
-    ],
-    "description": "The OCR model to use",
-    "required": true,
-    "default": "mistral-ocr-latest",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "extractText"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Document Type",
-    "name": "documentType",
-    "type": "options",
-    "options": [
-      {
-        "name": "Document",
-        "value": "document_url"
-      },
-      {
-        "name": "Image",
-        "value": "image_url"
-      }
-    ],
-    "description": "The type of document to process",
-    "required": true,
-    "default": "document_url",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "extractText"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Input Type",
-    "name": "inputType",
-    "type": "options",
-    "options": [
-      {
-        "name": "Binary Data",
-        "value": "binary"
-      },
-      {
-        "name": "URL",
-        "value": "url"
-      }
-    ],
-    "description": "How the document will be provided",
-    "required": true,
-    "default": "binary",
-    "disabledOptions": {
-      "show": {
-        "options.batch": [
-          true
-        ]
-      }
-    },
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "extractText"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Input Binary Field",
-    "name": "binaryProperty",
-    "type": "string",
-    "description": "Name of the input binary field that contains the file to process",
-    "placeholder": "e.g. data",
-    "hint": "Uploaded document files must not exceed 50 MB in size and should be no longer than 1,000 pages.",
-    "required": true,
-    "default": "data",
-    "displayOptions": {
-      "show": {
-        "inputType": [
-          "binary"
-        ],
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "extractText"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "URL",
-    "name": "url",
-    "type": "string",
-    "description": "URL of the document or image to process",
-    "placeholder": "e.g. https://example.com/document.pdf",
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "inputType": [
-          "url"
-        ],
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "extractText"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Options",
-    "name": "options",
-    "type": "collection",
-    "placeholder": "Add Option",
-    "default": {},
-    "options": [
-      {
-        "displayName": "Enable Batch Processing",
-        "name": "batch",
-        "type": "boolean",
-        "description": "Whether to process multiple documents in a single API call (more cost-efficient)",
-        "default": false
-      },
-      {
-        "displayName": "Batch Size",
-        "name": "batchSize",
-        "type": "number",
-        "description": "Maximum number of documents to process in a single batch",
-        "default": 50,
-        "typeOptions": {
-          "maxValue": 2048
+    {
+      "displayName": "Document Type",
+      "name": "documentType",
+      "type": "options",
+      "options": [
+        {
+          "name": "Document",
+          "value": "document_url"
         },
-        "required": true,
-        "displayOptions": {
-          "show": {
-            "batch": [
-              true
-            ]
-          }
+        {
+          "name": "Image",
+          "value": "image_url"
+        }
+      ],
+      "description": "The type of document to process",
+      "required": true,
+      "default": "document_url",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "extractText"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Input Type",
+      "name": "inputType",
+      "type": "options",
+      "options": [
+        {
+          "name": "Binary Data",
+          "value": "binary"
+        },
+        {
+          "name": "URL",
+          "value": "url"
+        }
+      ],
+      "description": "How the document will be provided",
+      "required": true,
+      "default": "binary",
+      "disabledOptions": {
+        "show": {
+          "options.batch": [
+            true
+          ]
         }
       },
-      {
-        "displayName": "Delete Files After Processing",
-        "name": "deleteFiles",
-        "type": "boolean",
-        "default": true,
-        "description": "Whether to delete the files on Mistral Cloud after processing",
-        "displayOptions": {
-          "show": {
-            "batch": [
-              true
-            ]
-          }
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "extractText"
+          ]
         }
       }
-    ],
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "extractText"
-        ]
+    },
+    {
+      "displayName": "Input Binary Field",
+      "name": "binaryProperty",
+      "type": "string",
+      "description": "Name of the input binary field that contains the file to process",
+      "placeholder": "e.g. data",
+      "hint": "Uploaded document files must not exceed 50 MB in size and should be no longer than 1,000 pages.",
+      "required": true,
+      "default": "data",
+      "displayOptions": {
+        "show": {
+          "inputType": [
+            "binary"
+          ],
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "extractText"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "URL",
+      "name": "url",
+      "type": "string",
+      "description": "URL of the document or image to process",
+      "placeholder": "e.g. https://example.com/document.pdf",
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "inputType": [
+            "url"
+          ],
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "extractText"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Options",
+      "name": "options",
+      "type": "collection",
+      "placeholder": "Add Option",
+      "default": {},
+      "options": [
+        {
+          "displayName": "Enable Batch Processing",
+          "name": "batch",
+          "type": "boolean",
+          "description": "Whether to process multiple documents in a single API call (more cost-efficient)",
+          "default": false
+        },
+        {
+          "displayName": "Batch Size",
+          "name": "batchSize",
+          "type": "number",
+          "description": "Maximum number of documents to process in a single batch",
+          "default": 50,
+          "typeOptions": {
+            "maxValue": 2048
+          },
+          "required": true,
+          "displayOptions": {
+            "show": {
+              "batch": [
+                true
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "Delete Files After Processing",
+          "name": "deleteFiles",
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to delete the files on Mistral Cloud after processing",
+          "displayOptions": {
+            "show": {
+              "batch": [
+                true
+              ]
+            }
+          }
+        }
+      ],
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "extractText"
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}
 ```

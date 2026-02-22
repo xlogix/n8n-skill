@@ -1,100 +1,132 @@
+---
+title: "Linear Trigger"
+description: "Starts the workflow when Linear events occur"
+---
+
 # Linear Trigger
+**Node Type:** nodes-base.linearTrigger
 
-- Node name: `linearTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Linear/LinearTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Starts the workflow when Linear events occur
+## Description
+Starts the workflow when Linear events occur
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `linearApi` (required)
-- `linearOAuth2Api` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Authentication | `authentication` | `options` | no | `apiToken` |  |
-| Make sure your credential has the "Admin" scope to create webhooks. | `notice` | `notice` | no |  |  |
-| Team Name or ID | `teamId` | `options` | no |  | Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a> |
-| Listen to Resources | `resources` | `multiOptions` | yes | `[]` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Authentication",
-    "name": "authentication",
-    "type": "options",
-    "options": [
-      {
-        "name": "API Token",
-        "value": "apiToken"
-      },
-      {
-        "name": "OAuth2",
-        "value": "oAuth2"
+{
+  "displayName": "Linear Trigger",
+  "name": "linearTrigger",
+  "icon": "file:linear.svg",
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "subtitle": "={{$parameter[\"triggerOn\"]}}",
+  "description": "Starts the workflow when Linear events occur",
+  "defaults": {
+    "name": "Linear Trigger"
+  },
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "linearApi",
+      "required": true,
+      "testedBy": "linearApiTest",
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "apiToken"
+          ]
+        }
       }
-    ],
-    "default": "apiToken"
-  },
-  {
-    "displayName": "Make sure your credential has the \"Admin\" scope to create webhooks.",
-    "name": "notice",
-    "type": "notice",
-    "default": ""
-  },
-  {
-    "displayName": "Team Name or ID",
-    "name": "teamId",
-    "type": "options",
-    "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-    "typeOptions": {
-      "loadOptionsMethod": "getTeams"
     },
-    "default": ""
-  },
-  {
-    "displayName": "Listen to Resources",
-    "name": "resources",
-    "type": "multiOptions",
-    "options": [
-      {
-        "name": "Comment Reaction",
-        "value": "reaction"
-      },
-      {
-        "name": "Cycle",
-        "value": "cycle"
-      },
-      {
-        "name": "Issue",
-        "value": "issue"
-      },
-      {
-        "name": "Issue Comment",
-        "value": "comment"
-      },
-      {
-        "name": "Issue Label",
-        "value": "issueLabel"
-      },
-      {
-        "name": "Project",
-        "value": "project"
+    {
+      "name": "linearOAuth2Api",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "oAuth2"
+          ]
+        }
       }
-    ],
-    "default": [],
-    "required": true
-  }
-]
+    }
+  ],
+  "webhooks": [
+    {
+      "name": "default",
+      "httpMethod": "POST",
+      "responseMode": "onReceived",
+      "path": "webhook"
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Authentication",
+      "name": "authentication",
+      "type": "options",
+      "options": [
+        {
+          "name": "API Token",
+          "value": "apiToken"
+        },
+        {
+          "name": "OAuth2",
+          "value": "oAuth2"
+        }
+      ],
+      "default": "apiToken"
+    },
+    {
+      "displayName": "Make sure your credential has the \"Admin\" scope to create webhooks.",
+      "name": "notice",
+      "type": "notice",
+      "default": ""
+    },
+    {
+      "displayName": "Team Name or ID",
+      "name": "teamId",
+      "type": "options",
+      "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+      "typeOptions": {
+        "loadOptionsMethod": "getTeams"
+      },
+      "default": ""
+    },
+    {
+      "displayName": "Listen to Resources",
+      "name": "resources",
+      "type": "multiOptions",
+      "options": [
+        {
+          "name": "Comment Reaction",
+          "value": "reaction"
+        },
+        {
+          "name": "Cycle",
+          "value": "cycle"
+        },
+        {
+          "name": "Issue",
+          "value": "issue"
+        },
+        {
+          "name": "Issue Comment",
+          "value": "comment"
+        },
+        {
+          "name": "Issue Label",
+          "value": "issueLabel"
+        },
+        {
+          "name": "Project",
+          "value": "project"
+        }
+      ],
+      "default": [],
+      "required": true
+    }
+  ]
+}
 ```

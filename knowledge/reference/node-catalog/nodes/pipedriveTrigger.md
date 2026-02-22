@@ -1,293 +1,335 @@
+---
+title: "Pipedrive Trigger"
+description: "Starts the workflow when Pipedrive events occur"
+---
+
 # Pipedrive Trigger
+**Node Type:** nodes-base.pipedriveTrigger
 
-- Node name: `pipedriveTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Pipedrive/PipedriveTrigger.node.js`
-- Node version: `[1,1.1]`
-- Groups: `trigger`
-- Description: Starts the workflow when Pipedrive events occur
+## Description
+Starts the workflow when Pipedrive events occur
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `pipedriveApi` (required)
-- `pipedriveOAuth2Api` (required)
-- `httpBasicAuth` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Authentication | `authentication` | `options` | no | `apiToken` |  |
-| Incoming Authentication | `incomingAuthentication` | `options` | no | `none` | If authentication should be activated for the webhook (makes it more secure) |
-| Action | `action` | `options` | no | `*` | Type of action to receive notifications about |
-| Action | `action` | `options` | no | `*` | Type of action to receive notifications about |
-| Entity | `entity` | `options` | no | `*` | Type of object to receive notifications about |
-| Object | `object` | `options` | no | `*` | Type of object to receive notifications about |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Authentication",
-    "name": "authentication",
-    "type": "options",
-    "options": [
-      {
-        "name": "API Token",
-        "value": "apiToken"
-      },
-      {
-        "name": "OAuth2",
-        "value": "oAuth2"
-      }
-    ],
-    "default": "apiToken"
+{
+  "displayName": "Pipedrive Trigger",
+  "name": "pipedriveTrigger",
+  "icon": "file:pipedrive.svg",
+  "group": [
+    "trigger"
+  ],
+  "version": [
+    1,
+    1.1
+  ],
+  "defaultVersion": 1.1,
+  "description": "Starts the workflow when Pipedrive events occur",
+  "defaults": {
+    "name": "Pipedrive Trigger"
   },
-  {
-    "displayName": "Incoming Authentication",
-    "name": "incomingAuthentication",
-    "type": "options",
-    "options": [
-      {
-        "name": "Basic Auth",
-        "value": "basicAuth"
-      },
-      {
-        "name": "None",
-        "value": "none"
-      }
-    ],
-    "default": "none",
-    "description": "If authentication should be activated for the webhook (makes it more secure)"
-  },
-  {
-    "displayName": "Action",
-    "name": "action",
-    "type": "options",
-    "displayOptions": {
-      "hide": {
-        "@version": [
-          {
-            "_cnd": {
-              "gte": 1.1
-            }
-          }
-        ]
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "pipedriveApi",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "apiToken"
+          ]
+        }
       }
     },
-    "options": [
-      {
-        "name": "Added",
-        "value": "added",
-        "description": "Data got added",
-        "action": "Data was added"
-      },
-      {
-        "name": "All",
-        "value": "*",
-        "description": "Any change",
-        "action": "Any change"
-      },
-      {
-        "name": "Deleted",
-        "value": "deleted",
-        "description": "Data got deleted",
-        "action": "Data was deleted"
-      },
-      {
-        "name": "Merged",
-        "value": "merged",
-        "description": "Data got merged",
-        "action": "Data was merged"
-      },
-      {
-        "name": "Updated",
-        "value": "updated",
-        "description": "Data got updated",
-        "action": "Data was updated"
-      }
-    ],
-    "default": "*",
-    "description": "Type of action to receive notifications about"
-  },
-  {
-    "displayName": "Action",
-    "name": "action",
-    "type": "options",
-    "displayOptions": {
-      "hide": {
-        "@version": [
-          {
-            "_cnd": {
-              "lte": 1
-            }
-          }
-        ]
+    {
+      "name": "pipedriveOAuth2Api",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "oAuth2"
+          ]
+        }
       }
     },
-    "options": [
-      {
-        "name": "All",
-        "value": "*",
-        "description": "Any change",
-        "action": "Any change"
-      },
-      {
-        "name": "Create",
-        "value": "create",
-        "description": "Data got added",
-        "action": "Data was added"
-      },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "description": "Data got deleted",
-        "action": "Data was deleted"
-      },
-      {
-        "name": "Change",
-        "value": "change",
-        "description": "Data got changed",
-        "action": "Data was changed"
-      }
-    ],
-    "default": "*",
-    "description": "Type of action to receive notifications about"
-  },
-  {
-    "displayName": "Entity",
-    "name": "entity",
-    "type": "options",
-    "options": [
-      {
-        "name": "Activity",
-        "value": "activity"
-      },
-      {
-        "name": "Activity Type",
-        "value": "activityType"
-      },
-      {
-        "name": "All",
-        "value": "*"
-      },
-      {
-        "name": "Deal",
-        "value": "deal"
-      },
-      {
-        "name": "Note",
-        "value": "note"
-      },
-      {
-        "name": "Organization",
-        "value": "organization"
-      },
-      {
-        "name": "Person",
-        "value": "person"
-      },
-      {
-        "name": "Pipeline",
-        "value": "pipeline"
-      },
-      {
-        "name": "Product",
-        "value": "product"
-      },
-      {
-        "name": "Stage",
-        "value": "stage"
-      },
-      {
-        "name": "User",
-        "value": "user"
-      }
-    ],
-    "default": "*",
-    "description": "Type of object to receive notifications about",
-    "displayOptions": {
-      "hide": {
-        "@version": [
-          {
-            "_cnd": {
-              "lte": 1
-            }
-          }
-        ]
+    {
+      "name": "httpBasicAuth",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "incomingAuthentication": [
+            "basicAuth"
+          ]
+        }
       }
     }
-  },
-  {
-    "displayName": "Object",
-    "name": "object",
-    "type": "options",
-    "options": [
-      {
-        "name": "Activity",
-        "value": "activity"
-      },
-      {
-        "name": "Activity Type",
-        "value": "activityType"
-      },
-      {
-        "name": "All",
-        "value": "*"
-      },
-      {
-        "name": "Deal",
-        "value": "deal"
-      },
-      {
-        "name": "Note",
-        "value": "note"
-      },
-      {
-        "name": "Organization",
-        "value": "organization"
-      },
-      {
-        "name": "Person",
-        "value": "person"
-      },
-      {
-        "name": "Pipeline",
-        "value": "pipeline"
-      },
-      {
-        "name": "Product",
-        "value": "product"
-      },
-      {
-        "name": "Stage",
-        "value": "stage"
-      },
-      {
-        "name": "User",
-        "value": "user"
-      }
-    ],
-    "default": "*",
-    "description": "Type of object to receive notifications about",
-    "displayOptions": {
-      "hide": {
-        "@version": [
-          {
-            "_cnd": {
-              "gte": 1.1
+  ],
+  "webhooks": [
+    {
+      "name": "default",
+      "httpMethod": "POST",
+      "responseMode": "onReceived",
+      "path": "webhook"
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Authentication",
+      "name": "authentication",
+      "type": "options",
+      "options": [
+        {
+          "name": "API Token",
+          "value": "apiToken"
+        },
+        {
+          "name": "OAuth2",
+          "value": "oAuth2"
+        }
+      ],
+      "default": "apiToken"
+    },
+    {
+      "displayName": "Incoming Authentication",
+      "name": "incomingAuthentication",
+      "type": "options",
+      "options": [
+        {
+          "name": "Basic Auth",
+          "value": "basicAuth"
+        },
+        {
+          "name": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none",
+      "description": "If authentication should be activated for the webhook (makes it more secure)"
+    },
+    {
+      "displayName": "Action",
+      "name": "action",
+      "type": "options",
+      "displayOptions": {
+        "hide": {
+          "@version": [
+            {
+              "_cnd": {
+                "gte": 1.1
+              }
             }
-          }
-        ]
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "Added",
+          "value": "added",
+          "description": "Data got added",
+          "action": "Data was added"
+        },
+        {
+          "name": "All",
+          "value": "*",
+          "description": "Any change",
+          "action": "Any change"
+        },
+        {
+          "name": "Deleted",
+          "value": "deleted",
+          "description": "Data got deleted",
+          "action": "Data was deleted"
+        },
+        {
+          "name": "Merged",
+          "value": "merged",
+          "description": "Data got merged",
+          "action": "Data was merged"
+        },
+        {
+          "name": "Updated",
+          "value": "updated",
+          "description": "Data got updated",
+          "action": "Data was updated"
+        }
+      ],
+      "default": "*",
+      "description": "Type of action to receive notifications about"
+    },
+    {
+      "displayName": "Action",
+      "name": "action",
+      "type": "options",
+      "displayOptions": {
+        "hide": {
+          "@version": [
+            {
+              "_cnd": {
+                "lte": 1
+              }
+            }
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "All",
+          "value": "*",
+          "description": "Any change",
+          "action": "Any change"
+        },
+        {
+          "name": "Create",
+          "value": "create",
+          "description": "Data got added",
+          "action": "Data was added"
+        },
+        {
+          "name": "Delete",
+          "value": "delete",
+          "description": "Data got deleted",
+          "action": "Data was deleted"
+        },
+        {
+          "name": "Change",
+          "value": "change",
+          "description": "Data got changed",
+          "action": "Data was changed"
+        }
+      ],
+      "default": "*",
+      "description": "Type of action to receive notifications about"
+    },
+    {
+      "displayName": "Entity",
+      "name": "entity",
+      "type": "options",
+      "options": [
+        {
+          "name": "Activity",
+          "value": "activity"
+        },
+        {
+          "name": "Activity Type",
+          "value": "activityType"
+        },
+        {
+          "name": "All",
+          "value": "*"
+        },
+        {
+          "name": "Deal",
+          "value": "deal"
+        },
+        {
+          "name": "Note",
+          "value": "note"
+        },
+        {
+          "name": "Organization",
+          "value": "organization"
+        },
+        {
+          "name": "Person",
+          "value": "person"
+        },
+        {
+          "name": "Pipeline",
+          "value": "pipeline"
+        },
+        {
+          "name": "Product",
+          "value": "product"
+        },
+        {
+          "name": "Stage",
+          "value": "stage"
+        },
+        {
+          "name": "User",
+          "value": "user"
+        }
+      ],
+      "default": "*",
+      "description": "Type of object to receive notifications about",
+      "displayOptions": {
+        "hide": {
+          "@version": [
+            {
+              "_cnd": {
+                "lte": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Object",
+      "name": "object",
+      "type": "options",
+      "options": [
+        {
+          "name": "Activity",
+          "value": "activity"
+        },
+        {
+          "name": "Activity Type",
+          "value": "activityType"
+        },
+        {
+          "name": "All",
+          "value": "*"
+        },
+        {
+          "name": "Deal",
+          "value": "deal"
+        },
+        {
+          "name": "Note",
+          "value": "note"
+        },
+        {
+          "name": "Organization",
+          "value": "organization"
+        },
+        {
+          "name": "Person",
+          "value": "person"
+        },
+        {
+          "name": "Pipeline",
+          "value": "pipeline"
+        },
+        {
+          "name": "Product",
+          "value": "product"
+        },
+        {
+          "name": "Stage",
+          "value": "stage"
+        },
+        {
+          "name": "User",
+          "value": "user"
+        }
+      ],
+      "default": "*",
+      "description": "Type of object to receive notifications about",
+      "displayOptions": {
+        "hide": {
+          "@version": [
+            {
+              "_cnd": {
+                "gte": 1.1
+              }
+            }
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}
 ```

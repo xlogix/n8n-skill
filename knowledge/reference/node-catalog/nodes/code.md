@@ -1,266 +1,261 @@
-# Code
+---
+title: "LangChain Code"
+description: "LangChain Code Node"
+---
 
-- Node name: `code`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Code/Code.node.js`
-- Node version: `[1,2]`
-- Groups: `transform`
-- Description: Run custom JavaScript or Python code
+# LangChain Code
+**Node Type:** nodes-langchain.code
 
-## Inputs
-- `main`
+## Description
+LangChain Code Node
 
-## Outputs
-- `main`
-
-## Credentials
-- None
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Mode | `mode` | `options` | no | `runOnceForAllItems` |  |
-| Language | `language` | `options` | no | `javaScript` |  |
-| Language | `language` | `hidden` | no | `javaScript` |  |
-| JavaScript | `jsCode` | `string` | no |  | JavaScript code to execute.<br><br>Tip: You can use luxon vars like <code>$today</code> for dates and <code>$jmespath</code> for querying JSON structures. <a href="https://docs.n8n.io/nodes/n8n-nodes-base.function">Learn more</a>. |
-| JavaScript | `jsCode` | `string` | no |  | JavaScript code to execute.<br><br>Tip: You can use luxon vars like <code>$today</code> for dates and <code>$jmespath</code> for querying JSON structures. <a href="https://docs.n8n.io/nodes/n8n-nodes-base.function">Learn more</a>. |
-| JavaScript | `jsCode` | `string` | no |  | JavaScript code to execute.<br><br>Tip: You can use luxon vars like <code>$today</code> for dates and <code>$jmespath</code> for querying JSON structures. <a href="https://docs.n8n.io/nodes/n8n-nodes-base.function">Learn more</a>. |
-| JavaScript | `jsCode` | `string` | no |  | JavaScript code to execute.<br><br>Tip: You can use luxon vars like <code>$today</code> for dates and <code>$jmespath</code> for querying JSON structures. <a href="https://docs.n8n.io/nodes/n8n-nodes-base.function">Learn more</a>. |
-| Type <code>$</code> for a list of <a target="_blank" href="https://docs.n8n.io/code-examples/methods-variables-reference/">special vars/methods</a>. Debug by using <code>console.log()</code> statements and viewing their output in the browser console. | `notice` | `notice` | no |  |  |
-| Python | `pythonCode` | `string` | no |  | Python code to execute.<br><br>Tip: You can use built-in methods and variables like <code>_today</code> for dates and <code>_jmespath</code> for querying JSON structures. <a href="https://docs.n8n.io/code/builtin/">Learn more</a>. |
-| Python | `pythonCode` | `string` | no |  | Python code to execute.<br><br>Tip: You can use built-in methods and variables like <code>_today</code> for dates and <code>_jmespath</code> for querying JSON structures. <a href="https://docs.n8n.io/code/builtin/">Learn more</a>. |
-| Debug by using <code>print()</code> statements and viewing their output in the browser console.<br><br>The Python option does not support <code>_</code> syntax and helpers, except for <code>_items</code> in all-items mode and <code>_item</code> in per-item mode. | `notice` | `notice` | no |  |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Mode",
-    "name": "mode",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "Run Once for All Items",
-        "value": "runOnceForAllItems",
-        "description": "Run this code only once, no matter how many input items there are"
-      },
-      {
-        "name": "Run Once for Each Item",
-        "value": "runOnceForEachItem",
-        "description": "Run this code as many times as there are input items"
-      }
+{
+  "displayName": "LangChain Code",
+  "name": "code",
+  "icon": "fa:code",
+  "iconColor": "black",
+  "group": [
+    "transform"
+  ],
+  "version": 1,
+  "description": "LangChain Code Node",
+  "defaults": {
+    "name": "LangChain Code"
+  },
+  "codex": {
+    "categories": [
+      "AI"
     ],
-    "default": "runOnceForAllItems"
-  },
-  {
-    "displayName": "Language",
-    "name": "language",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "@version": [
-          2
-        ]
-      }
+    "subcategories": {
+      "AI": [
+        "Miscellaneous"
+      ]
     },
-    "options": [
-      {
-        "name": "JavaScript",
-        "value": "javaScript",
-        "action": "Code in JavaScript"
+    "resources": {
+      "primaryDocumentation": [
+        {
+          "url": "https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.code/"
+        }
+      ]
+    }
+  },
+  "inputs": "={{ ((values) => { const connectorTypes = {\"ai_chain\":\"Chain\",\"ai_document\":\"Document\",\"ai_embedding\":\"Embedding\",\"ai_languageModel\":\"Language Model\",\"ai_memory\":\"Memory\",\"ai_outputParser\":\"Output Parser\",\"ai_textSplitter\":\"Text Splitter\",\"ai_tool\":\"Tool\",\"ai_vectorStore\":\"Vector Store\",\"main\":\"Main\"}; return values.map(value => { return { type: value.type, required: value.required, maxConnections: value.maxConnections === -1 ? undefined : value.maxConnections, displayName: connectorTypes[value.type] !== 'Main' ? connectorTypes[value.type] : undefined } } ) })($parameter.inputs.input) }}",
+  "outputs": "={{ ((values) => { const connectorTypes = {\"ai_chain\":\"Chain\",\"ai_document\":\"Document\",\"ai_embedding\":\"Embedding\",\"ai_languageModel\":\"Language Model\",\"ai_memory\":\"Memory\",\"ai_outputParser\":\"Output Parser\",\"ai_textSplitter\":\"Text Splitter\",\"ai_tool\":\"Tool\",\"ai_vectorStore\":\"Vector Store\",\"main\":\"Main\"}; return values.map(value => { return { type: value.type, displayName: connectorTypes[value.type] !== 'Main' ? connectorTypes[value.type] : undefined } } ) })($parameter.outputs.output) }}",
+  "properties": [
+    {
+      "displayName": "Code",
+      "name": "code",
+      "placeholder": "Add Code",
+      "type": "fixedCollection",
+      "noDataExpression": true,
+      "default": {},
+      "options": [
+        {
+          "name": "execute",
+          "displayName": "Execute",
+          "values": [
+            {
+              "displayName": "JavaScript - Execute",
+              "name": "code",
+              "type": "string",
+              "typeOptions": {
+                "editor": "jsEditor"
+              },
+              "default": "const { PromptTemplate } = require('@langchain/core/prompts');\n\nconst query = 'Tell me a joke';\nconst prompt = PromptTemplate.fromTemplate(query);\n\n// If you are allowing more than one language model input connection (-1 or\n// anything greater than 1), getInputConnectionData returns an array, so you\n// will have to change the code below it to deal with that. For example, use\n// llm[0] in the chain definition\n\nconst llm = await this.getInputConnectionData('ai_languageModel', 0);\nlet chain = prompt.pipe(llm);\nconst output = await chain.invoke();\nreturn [ {json: { output } } ];\n\n// NOTE: Old langchain imports (e.g., 'langchain/chains') are automatically\n// converted to '@langchain/classic' imports for backwards compatibility.",
+              "hint": "This code will only run and return data if a \"Main\" input & output got created.",
+              "noDataExpression": true
+            }
+          ]
+        },
+        {
+          "name": "supplyData",
+          "displayName": "Supply Data",
+          "values": [
+            {
+              "displayName": "JavaScript - Supply Data",
+              "name": "code",
+              "type": "string",
+              "typeOptions": {
+                "editor": "jsEditor"
+              },
+              "default": "const { WikipediaQueryRun } = require( '@langchain/community/tools/wikipedia_query_run');\nreturn new WikipediaQueryRun();",
+              "hint": "This code will only run and return data if an output got created which is not \"Main\".",
+              "noDataExpression": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "You can import LangChain and use all available functionality. Debug by using <code>console.log()</code> statements and viewing their output in the browser console.",
+      "name": "notice",
+      "type": "notice",
+      "default": ""
+    },
+    {
+      "displayName": "Inputs",
+      "name": "inputs",
+      "placeholder": "Add Input",
+      "type": "fixedCollection",
+      "noDataExpression": true,
+      "typeOptions": {
+        "multipleValues": true,
+        "sortable": true
       },
-      {
-        "name": "Python",
-        "value": "pythonNative",
-        "action": "Code in Python"
-      }
-    ],
-    "default": "javaScript"
-  },
-  {
-    "displayName": "Language",
-    "name": "language",
-    "type": "hidden",
-    "displayOptions": {
-      "show": {
-        "@version": [
-          1
-        ]
-      }
+      "description": "The input to add",
+      "default": {},
+      "options": [
+        {
+          "name": "input",
+          "displayName": "Input",
+          "values": [
+            {
+              "displayName": "Type",
+              "name": "type",
+              "type": "options",
+              "options": [
+                {
+                  "name": "Chain",
+                  "value": "ai_chain"
+                },
+                {
+                  "name": "Document",
+                  "value": "ai_document"
+                },
+                {
+                  "name": "Embedding",
+                  "value": "ai_embedding"
+                },
+                {
+                  "name": "Language Model",
+                  "value": "ai_languageModel"
+                },
+                {
+                  "name": "Memory",
+                  "value": "ai_memory"
+                },
+                {
+                  "name": "Output Parser",
+                  "value": "ai_outputParser"
+                },
+                {
+                  "name": "Text Splitter",
+                  "value": "ai_textSplitter"
+                },
+                {
+                  "name": "Tool",
+                  "value": "ai_tool"
+                },
+                {
+                  "name": "Vector Store",
+                  "value": "ai_vectorStore"
+                },
+                {
+                  "name": "Main",
+                  "value": "main"
+                }
+              ],
+              "noDataExpression": true,
+              "default": "",
+              "required": true,
+              "description": "The type of the input"
+            },
+            {
+              "displayName": "Max Connections",
+              "name": "maxConnections",
+              "type": "number",
+              "noDataExpression": true,
+              "default": -1,
+              "required": true,
+              "description": "How many nodes of this type are allowed to be connected. Set it to -1 for unlimited."
+            },
+            {
+              "displayName": "Required",
+              "name": "required",
+              "type": "boolean",
+              "noDataExpression": true,
+              "default": false,
+              "required": true,
+              "description": "Whether the input needs a connection"
+            }
+          ]
+        }
+      ]
     },
-    "default": "javaScript"
-  },
-  {
-    "displayName": "JavaScript",
-    "name": "jsCode",
-    "type": "string",
-    "typeOptions": {
-      "editor": "codeNodeEditor",
-      "editorLanguage": "javaScript"
-    },
-    "default": "",
-    "description": "JavaScript code to execute.<br><br>Tip: You can use luxon vars like <code>$today</code> for dates and <code>$jmespath</code> for querying JSON structures. <a href=\"https://docs.n8n.io/nodes/n8n-nodes-base.function\">Learn more</a>.",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "@version": [
-          1
-        ],
-        "mode": [
-          "runOnceForAllItems"
-        ]
-      }
+    {
+      "displayName": "Outputs",
+      "name": "outputs",
+      "placeholder": "Add Output",
+      "type": "fixedCollection",
+      "noDataExpression": true,
+      "typeOptions": {
+        "multipleValues": true,
+        "sortable": true
+      },
+      "description": "The output to add",
+      "default": {},
+      "options": [
+        {
+          "name": "output",
+          "displayName": "Output",
+          "values": [
+            {
+              "displayName": "Type",
+              "name": "type",
+              "type": "options",
+              "options": [
+                {
+                  "name": "Chain",
+                  "value": "ai_chain"
+                },
+                {
+                  "name": "Document",
+                  "value": "ai_document"
+                },
+                {
+                  "name": "Embedding",
+                  "value": "ai_embedding"
+                },
+                {
+                  "name": "Language Model",
+                  "value": "ai_languageModel"
+                },
+                {
+                  "name": "Memory",
+                  "value": "ai_memory"
+                },
+                {
+                  "name": "Output Parser",
+                  "value": "ai_outputParser"
+                },
+                {
+                  "name": "Text Splitter",
+                  "value": "ai_textSplitter"
+                },
+                {
+                  "name": "Tool",
+                  "value": "ai_tool"
+                },
+                {
+                  "name": "Vector Store",
+                  "value": "ai_vectorStore"
+                },
+                {
+                  "name": "Main",
+                  "value": "main"
+                }
+              ],
+              "noDataExpression": true,
+              "default": "",
+              "required": true,
+              "description": "The type of the input"
+            }
+          ]
+        }
+      ]
     }
-  },
-  {
-    "displayName": "JavaScript",
-    "name": "jsCode",
-    "type": "string",
-    "typeOptions": {
-      "editor": "codeNodeEditor",
-      "editorLanguage": "javaScript"
-    },
-    "default": "",
-    "description": "JavaScript code to execute.<br><br>Tip: You can use luxon vars like <code>$today</code> for dates and <code>$jmespath</code> for querying JSON structures. <a href=\"https://docs.n8n.io/nodes/n8n-nodes-base.function\">Learn more</a>.",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "@version": [
-          1
-        ],
-        "mode": [
-          "runOnceForEachItem"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "JavaScript",
-    "name": "jsCode",
-    "type": "string",
-    "typeOptions": {
-      "editor": "codeNodeEditor",
-      "editorLanguage": "javaScript"
-    },
-    "default": "",
-    "description": "JavaScript code to execute.<br><br>Tip: You can use luxon vars like <code>$today</code> for dates and <code>$jmespath</code> for querying JSON structures. <a href=\"https://docs.n8n.io/nodes/n8n-nodes-base.function\">Learn more</a>.",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "@version": [
-          2
-        ],
-        "language": [
-          "javaScript"
-        ],
-        "mode": [
-          "runOnceForAllItems"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "JavaScript",
-    "name": "jsCode",
-    "type": "string",
-    "typeOptions": {
-      "editor": "codeNodeEditor",
-      "editorLanguage": "javaScript"
-    },
-    "default": "",
-    "description": "JavaScript code to execute.<br><br>Tip: You can use luxon vars like <code>$today</code> for dates and <code>$jmespath</code> for querying JSON structures. <a href=\"https://docs.n8n.io/nodes/n8n-nodes-base.function\">Learn more</a>.",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "@version": [
-          2
-        ],
-        "language": [
-          "javaScript"
-        ],
-        "mode": [
-          "runOnceForEachItem"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Type <code>$</code> for a list of <a target=\"_blank\" href=\"https://docs.n8n.io/code-examples/methods-variables-reference/\">special vars/methods</a>. Debug by using <code>console.log()</code> statements and viewing their output in the browser console.",
-    "name": "notice",
-    "type": "notice",
-    "displayOptions": {
-      "show": {
-        "language": [
-          "javaScript"
-        ]
-      }
-    },
-    "default": ""
-  },
-  {
-    "displayName": "Python",
-    "name": "pythonCode",
-    "type": "string",
-    "typeOptions": {
-      "editor": "codeNodeEditor",
-      "editorLanguage": "python"
-    },
-    "default": "",
-    "description": "Python code to execute.<br><br>Tip: You can use built-in methods and variables like <code>_today</code> for dates and <code>_jmespath</code> for querying JSON structures. <a href=\"https://docs.n8n.io/code/builtin/\">Learn more</a>.",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "language": [
-          "python",
-          "pythonNative"
-        ],
-        "mode": [
-          "runOnceForAllItems"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Python",
-    "name": "pythonCode",
-    "type": "string",
-    "typeOptions": {
-      "editor": "codeNodeEditor",
-      "editorLanguage": "python"
-    },
-    "default": "",
-    "description": "Python code to execute.<br><br>Tip: You can use built-in methods and variables like <code>_today</code> for dates and <code>_jmespath</code> for querying JSON structures. <a href=\"https://docs.n8n.io/code/builtin/\">Learn more</a>.",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "language": [
-          "python",
-          "pythonNative"
-        ],
-        "mode": [
-          "runOnceForEachItem"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Debug by using <code>print()</code> statements and viewing their output in the browser console.<br><br>The Python option does not support <code>_</code> syntax and helpers, except for <code>_items</code> in all-items mode and <code>_item</code> in per-item mode.",
-    "name": "notice",
-    "type": "notice",
-    "displayOptions": {
-      "show": {
-        "language": [
-          "python",
-          "pythonNative"
-        ]
-      }
-    },
-    "default": ""
-  }
-]
+  ]
+}
 ```

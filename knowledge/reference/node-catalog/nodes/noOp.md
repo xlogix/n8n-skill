@@ -1,28 +1,36 @@
+---
+title: "No Operation, do nothing"
+description: "No Operation"
+---
+
 # No Operation, do nothing
+**Node Type:** nodes-base.noOp
 
-- Node name: `noOp`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/NoOp/NoOp.node.js`
-- Node version: `1`
-- Groups: `organization`
-- Description: No Operation
+## Description
+No Operation
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- None
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-- No parameters declared
-
-## Full Parameter Schema
+## Schema
 ```json
-[]
+{
+  "displayName": "No Operation, do nothing",
+  "name": "noOp",
+  "icon": "fa:arrow-right",
+  "iconColor": "gray",
+  "group": [
+    "organization"
+  ],
+  "version": 1,
+  "description": "No Operation",
+  "defaults": {
+    "name": "No Operation, do nothing",
+    "color": "#b0b0b0"
+  },
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "properties": []
+}
 ```

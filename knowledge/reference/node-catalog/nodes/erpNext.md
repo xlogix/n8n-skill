@@ -1,509 +1,503 @@
+---
+title: "ERPNext"
+description: "Consume ERPNext API"
+---
+
 # ERPNext
+**Node Type:** nodes-base.erpNext
 
-- Node name: `erpNext`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/ERPNext/ERPNext.node.js`
-- Node version: `1`
-- Groups: `output`
-- Description: Consume ERPNext API
+## Description
+Consume ERPNext API
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `erpNextApi` (required)
-
-## Resource and Operation Coverage
-### Resources
-- Document (`document`)
-
-### Operations
-- resource `document`: `create`, `delete`, `get`, `getAll`, `update`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Resource | `resource` | `options` | no | `document` |  |
-| Operation | `operation` | `options` | no | `create` |  |
-| DocType Name or ID | `docType` | `options` | no |  | DocType whose documents to retrieve. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `10` | Max number of results to return |
-| Options | `options` | `collection` | no | `{}` |  |
-| DocType Name or ID | `docType` | `options` | yes |  | DocType you would like to create. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Properties | `properties` | `fixedCollection` | yes | `{}` |  |
-| DocType Name or ID | `docType` | `options` | yes |  | The type of document you would like to get. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Document Name | `documentName` | `string` | yes |  | The name (ID) of document you would like to get |
-| DocType Name or ID | `docType` | `options` | yes |  | The type of document you would like to delete. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Document Name | `documentName` | `string` | yes |  | The name (ID) of document you would like to get |
-| DocType Name or ID | `docType` | `options` | yes |  | The type of document you would like to update. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Document Name | `documentName` | `string` | yes |  | The name (ID) of document you would like to get |
-| Properties | `properties` | `fixedCollection` | no | `{}` | Properties of request body |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Resource",
-    "name": "resource",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "Document",
-        "value": "document"
-      }
-    ],
-    "default": "document"
+{
+  "displayName": "ERPNext",
+  "name": "erpNext",
+  "icon": "file:erpnext.svg",
+  "group": [
+    "output"
+  ],
+  "version": 1,
+  "subtitle": "={{$parameter[\"resource\"] + \": \" + $parameter[\"operation\"]}}",
+  "description": "Consume ERPNext API",
+  "defaults": {
+    "name": "ERPNext"
   },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Create",
-        "value": "create",
-        "description": "Create a document",
-        "action": "Create a document"
-      },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "description": "Delete a document",
-        "action": "Delete a document"
-      },
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Retrieve a document",
-        "action": "Get a document"
-      },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Retrieve many documents",
-        "action": "Get many documents"
-      },
-      {
-        "name": "Update",
-        "value": "update",
-        "description": "Update a document",
-        "action": "Update a document"
-      }
-    ],
-    "default": "create"
-  },
-  {
-    "displayName": "DocType Name or ID",
-    "name": "docType",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getDocTypes"
-    },
-    "default": "",
-    "description": "DocType whose documents to retrieve. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
-    "placeholder": "Customer",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "erpNextApi",
+      "required": true
     }
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "typeOptions": {
-      "minValue": 1
+  ],
+  "properties": [
+    {
+      "displayName": "Resource",
+      "name": "resource",
+      "type": "options",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "Document",
+          "value": "document"
+        }
+      ],
+      "default": "document"
     },
-    "default": 10,
-    "description": "Max number of results to return",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "getAll"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Options",
-    "name": "options",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "default": {},
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "options": [
-      {
-        "displayName": "Field Names or IDs",
-        "name": "fields",
-        "type": "multiOptions",
-        "typeOptions": {
-          "loadOptionsMethod": "getDocFilters",
-          "loadOptionsDependsOn": [
-            "docType"
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
           ]
-        },
-        "default": [],
-        "description": "Comma-separated list of fields to return. Choose from the list, or specify IDs using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
-        "placeholder": "name,country"
+        }
       },
-      {
-        "displayName": "Filters",
-        "name": "filters",
-        "type": "fixedCollection",
-        "default": {},
-        "placeholder": "Add Filter",
-        "description": "Custom Properties",
-        "typeOptions": {
-          "multipleValues": true
+      "options": [
+        {
+          "name": "Create",
+          "value": "create",
+          "description": "Create a document",
+          "action": "Create a document"
         },
-        "options": [
-          {
-            "displayName": "Property",
-            "name": "customProperty",
-            "values": [
-              {
-                "displayName": "Field Name or ID",
-                "name": "field",
-                "type": "options",
-                "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-                "typeOptions": {
-                  "loadOptionsMethod": "getDocFields",
-                  "loadOptionsDependsOn": [
-                    "docType"
+        {
+          "name": "Delete",
+          "value": "delete",
+          "description": "Delete a document",
+          "action": "Delete a document"
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Retrieve a document",
+          "action": "Get a document"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Retrieve many documents",
+          "action": "Get many documents"
+        },
+        {
+          "name": "Update",
+          "value": "update",
+          "description": "Update a document",
+          "action": "Update a document"
+        }
+      ],
+      "default": "create"
+    },
+    {
+      "displayName": "DocType Name or ID",
+      "name": "docType",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getDocTypes"
+      },
+      "default": "",
+      "description": "DocType whose documents to retrieve. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
+      "placeholder": "Customer",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "typeOptions": {
+        "minValue": 1
+      },
+      "default": 10,
+      "description": "Max number of results to return",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "getAll"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Options",
+      "name": "options",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "default": {},
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "options": [
+        {
+          "displayName": "Field Names or IDs",
+          "name": "fields",
+          "type": "multiOptions",
+          "typeOptions": {
+            "loadOptionsMethod": "getDocFilters",
+            "loadOptionsDependsOn": [
+              "docType"
+            ]
+          },
+          "default": [],
+          "description": "Comma-separated list of fields to return. Choose from the list, or specify IDs using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
+          "placeholder": "name,country"
+        },
+        {
+          "displayName": "Filters",
+          "name": "filters",
+          "type": "fixedCollection",
+          "default": {},
+          "placeholder": "Add Filter",
+          "description": "Custom Properties",
+          "typeOptions": {
+            "multipleValues": true
+          },
+          "options": [
+            {
+              "displayName": "Property",
+              "name": "customProperty",
+              "values": [
+                {
+                  "displayName": "Field Name or ID",
+                  "name": "field",
+                  "type": "options",
+                  "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+                  "typeOptions": {
+                    "loadOptionsMethod": "getDocFields",
+                    "loadOptionsDependsOn": [
+                      "docType"
+                    ]
+                  },
+                  "default": ""
+                },
+                {
+                  "displayName": "Operator",
+                  "name": "operator",
+                  "type": "options",
+                  "default": "is",
+                  "options": [
+                    {
+                      "name": "EQUALS, or GREATER",
+                      "value": "equalsGreater"
+                    },
+                    {
+                      "name": "EQUALS, or LESS",
+                      "value": "equalsLess"
+                    },
+                    {
+                      "name": "IS",
+                      "value": "is"
+                    },
+                    {
+                      "name": "IS GREATER",
+                      "value": "greater"
+                    },
+                    {
+                      "name": "IS LESS",
+                      "value": "less"
+                    },
+                    {
+                      "name": "IS NOT",
+                      "value": "isNot"
+                    }
                   ]
                 },
-                "default": ""
-              },
-              {
-                "displayName": "Operator",
-                "name": "operator",
-                "type": "options",
-                "default": "is",
-                "options": [
-                  {
-                    "name": "EQUALS, or GREATER",
-                    "value": "equalsGreater"
-                  },
-                  {
-                    "name": "EQUALS, or LESS",
-                    "value": "equalsLess"
-                  },
-                  {
-                    "name": "IS",
-                    "value": "is"
-                  },
-                  {
-                    "name": "IS GREATER",
-                    "value": "greater"
-                  },
-                  {
-                    "name": "IS LESS",
-                    "value": "less"
-                  },
-                  {
-                    "name": "IS NOT",
-                    "value": "isNot"
-                  }
+                {
+                  "displayName": "Value",
+                  "name": "value",
+                  "type": "string",
+                  "default": "",
+                  "description": "Value of the operator condition"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "DocType Name or ID",
+      "name": "docType",
+      "type": "options",
+      "default": "",
+      "typeOptions": {
+        "loadOptionsMethod": "getDocTypes"
+      },
+      "required": true,
+      "description": "DocType you would like to create. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
+      "placeholder": "Customer",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "create"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Properties",
+      "name": "properties",
+      "type": "fixedCollection",
+      "placeholder": "Add Property",
+      "required": true,
+      "default": {},
+      "typeOptions": {
+        "multipleValues": true
+      },
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "create"
+          ]
+        }
+      },
+      "options": [
+        {
+          "displayName": "Property",
+          "name": "customProperty",
+          "placeholder": "Add Property",
+          "values": [
+            {
+              "displayName": "Field Name or ID",
+              "name": "field",
+              "type": "options",
+              "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+              "typeOptions": {
+                "loadOptionsMethod": "getDocFields",
+                "loadOptionsDependsOn": [
+                  "docType"
                 ]
               },
-              {
-                "displayName": "Value",
-                "name": "value",
-                "type": "string",
-                "default": "",
-                "description": "Value of the operator condition"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "displayName": "DocType Name or ID",
-    "name": "docType",
-    "type": "options",
-    "default": "",
-    "typeOptions": {
-      "loadOptionsMethod": "getDocTypes"
+              "default": []
+            },
+            {
+              "displayName": "Value",
+              "name": "value",
+              "type": "string",
+              "default": ""
+            }
+          ]
+        }
+      ]
     },
-    "required": true,
-    "description": "DocType you would like to create. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
-    "placeholder": "Customer",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "create"
-        ]
-      }
+    {
+      "displayName": "DocType Name or ID",
+      "name": "docType",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getDocTypes"
+      },
+      "default": "",
+      "description": "The type of document you would like to get. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "get"
+          ]
+        }
+      },
+      "required": true
+    },
+    {
+      "displayName": "Document Name",
+      "name": "documentName",
+      "type": "string",
+      "default": "",
+      "description": "The name (ID) of document you would like to get",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "get"
+          ]
+        }
+      },
+      "required": true
+    },
+    {
+      "displayName": "DocType Name or ID",
+      "name": "docType",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getDocTypes"
+      },
+      "default": "",
+      "description": "The type of document you would like to delete. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "delete"
+          ]
+        }
+      },
+      "required": true
+    },
+    {
+      "displayName": "Document Name",
+      "name": "documentName",
+      "type": "string",
+      "default": "",
+      "description": "The name (ID) of document you would like to get",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "delete"
+          ]
+        }
+      },
+      "required": true
+    },
+    {
+      "displayName": "DocType Name or ID",
+      "name": "docType",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getDocTypes"
+      },
+      "default": "",
+      "description": "The type of document you would like to update. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
+      },
+      "required": true
+    },
+    {
+      "displayName": "Document Name",
+      "name": "documentName",
+      "type": "string",
+      "default": "",
+      "description": "The name (ID) of document you would like to get",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
+      },
+      "required": true
+    },
+    {
+      "displayName": "Properties",
+      "name": "properties",
+      "type": "fixedCollection",
+      "placeholder": "Add Property",
+      "description": "Properties of request body",
+      "default": {},
+      "typeOptions": {
+        "multipleValues": true
+      },
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "document"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
+      },
+      "options": [
+        {
+          "displayName": "Property",
+          "name": "customProperty",
+          "values": [
+            {
+              "displayName": "Field Name or ID",
+              "name": "field",
+              "type": "options",
+              "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+              "typeOptions": {
+                "loadOptionsMethod": "getDocFields",
+                "loadOptionsDependsOn": [
+                  "docType"
+                ]
+              },
+              "default": ""
+            },
+            {
+              "displayName": "Value",
+              "name": "value",
+              "type": "string",
+              "default": ""
+            }
+          ]
+        }
+      ]
     }
-  },
-  {
-    "displayName": "Properties",
-    "name": "properties",
-    "type": "fixedCollection",
-    "placeholder": "Add Property",
-    "required": true,
-    "default": {},
-    "typeOptions": {
-      "multipleValues": true
-    },
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "create"
-        ]
-      }
-    },
-    "options": [
-      {
-        "displayName": "Property",
-        "name": "customProperty",
-        "placeholder": "Add Property",
-        "values": [
-          {
-            "displayName": "Field Name or ID",
-            "name": "field",
-            "type": "options",
-            "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-            "typeOptions": {
-              "loadOptionsMethod": "getDocFields",
-              "loadOptionsDependsOn": [
-                "docType"
-              ]
-            },
-            "default": []
-          },
-          {
-            "displayName": "Value",
-            "name": "value",
-            "type": "string",
-            "default": ""
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "displayName": "DocType Name or ID",
-    "name": "docType",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getDocTypes"
-    },
-    "default": "",
-    "description": "The type of document you would like to get. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "get"
-        ]
-      }
-    },
-    "required": true
-  },
-  {
-    "displayName": "Document Name",
-    "name": "documentName",
-    "type": "string",
-    "default": "",
-    "description": "The name (ID) of document you would like to get",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "get"
-        ]
-      }
-    },
-    "required": true
-  },
-  {
-    "displayName": "DocType Name or ID",
-    "name": "docType",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getDocTypes"
-    },
-    "default": "",
-    "description": "The type of document you would like to delete. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "delete"
-        ]
-      }
-    },
-    "required": true
-  },
-  {
-    "displayName": "Document Name",
-    "name": "documentName",
-    "type": "string",
-    "default": "",
-    "description": "The name (ID) of document you would like to get",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "delete"
-        ]
-      }
-    },
-    "required": true
-  },
-  {
-    "displayName": "DocType Name or ID",
-    "name": "docType",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getDocTypes"
-    },
-    "default": "",
-    "description": "The type of document you would like to update. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>.",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
-    },
-    "required": true
-  },
-  {
-    "displayName": "Document Name",
-    "name": "documentName",
-    "type": "string",
-    "default": "",
-    "description": "The name (ID) of document you would like to get",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
-    },
-    "required": true
-  },
-  {
-    "displayName": "Properties",
-    "name": "properties",
-    "type": "fixedCollection",
-    "placeholder": "Add Property",
-    "description": "Properties of request body",
-    "default": {},
-    "typeOptions": {
-      "multipleValues": true
-    },
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "document"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
-    },
-    "options": [
-      {
-        "displayName": "Property",
-        "name": "customProperty",
-        "values": [
-          {
-            "displayName": "Field Name or ID",
-            "name": "field",
-            "type": "options",
-            "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-            "typeOptions": {
-              "loadOptionsMethod": "getDocFields",
-              "loadOptionsDependsOn": [
-                "docType"
-              ]
-            },
-            "default": ""
-          },
-          {
-            "displayName": "Value",
-            "name": "value",
-            "type": "string",
-            "default": ""
-          }
-        ]
-      }
-    ]
-  }
-]
+  ]
+}
 ```

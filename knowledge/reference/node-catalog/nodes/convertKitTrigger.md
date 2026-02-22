@@ -1,171 +1,183 @@
+---
+title: "ConvertKit Trigger"
+description: "Handle ConvertKit events via webhooks"
+---
+
 # ConvertKit Trigger
+**Node Type:** nodes-base.convertKitTrigger
 
-- Node name: `convertKitTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/ConvertKit/ConvertKitTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Handle ConvertKit events via webhooks
+## Description
+Handle ConvertKit events via webhooks
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `convertKitApi` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Event | `event` | `options` | yes |  | The events that can trigger the webhook and whether they are enabled |
-| Form Name or ID | `formId` | `options` | yes |  | Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a> |
-| Sequence Name or ID | `courseId` | `options` | yes |  | Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a> |
-| Initiating Link | `link` | `string` | yes |  | The URL of the initiating link |
-| Product ID | `productId` | `string` | yes |  |  |
-| Tag Name or ID | `tagId` | `options` | yes |  | Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a> |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Event",
-    "name": "event",
-    "type": "options",
-    "required": true,
-    "default": "",
-    "description": "The events that can trigger the webhook and whether they are enabled",
-    "options": [
-      {
-        "name": "Form Subscribe",
-        "value": "formSubscribe"
-      },
-      {
-        "name": "Link Click",
-        "value": "linkClick"
-      },
-      {
-        "name": "Product Purchase",
-        "value": "productPurchase"
-      },
-      {
-        "name": "Purchase Created",
-        "value": "purchaseCreate"
-      },
-      {
-        "name": "Sequence Complete",
-        "value": "courseComplete"
-      },
-      {
-        "name": "Sequence Subscribe",
-        "value": "courseSubscribe"
-      },
-      {
-        "name": "Subscriber Activated",
-        "value": "subscriberActivate"
-      },
-      {
-        "name": "Subscriber Unsubscribe",
-        "value": "subscriberUnsubscribe"
-      },
-      {
-        "name": "Tag Add",
-        "value": "tagAdd"
-      },
-      {
-        "name": "Tag Remove",
-        "value": "tagRemove"
-      }
-    ]
+{
+  "displayName": "ConvertKit Trigger",
+  "name": "convertKitTrigger",
+  "icon": "file:convertKit.svg",
+  "subtitle": "={{$parameter[\"event\"]}}",
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "description": "Handle ConvertKit events via webhooks",
+  "defaults": {
+    "name": "ConvertKit Trigger"
   },
-  {
-    "displayName": "Form Name or ID",
-    "name": "formId",
-    "type": "options",
-    "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-    "typeOptions": {
-      "loadOptionsMethod": "getForms"
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "convertKitApi",
+      "required": true
+    }
+  ],
+  "webhooks": [
+    {
+      "name": "default",
+      "httpMethod": "POST",
+      "responseMode": "onReceived",
+      "path": "webhook"
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Event",
+      "name": "event",
+      "type": "options",
+      "required": true,
+      "default": "",
+      "description": "The events that can trigger the webhook and whether they are enabled",
+      "options": [
+        {
+          "name": "Form Subscribe",
+          "value": "formSubscribe"
+        },
+        {
+          "name": "Link Click",
+          "value": "linkClick"
+        },
+        {
+          "name": "Product Purchase",
+          "value": "productPurchase"
+        },
+        {
+          "name": "Purchase Created",
+          "value": "purchaseCreate"
+        },
+        {
+          "name": "Sequence Complete",
+          "value": "courseComplete"
+        },
+        {
+          "name": "Sequence Subscribe",
+          "value": "courseSubscribe"
+        },
+        {
+          "name": "Subscriber Activated",
+          "value": "subscriberActivate"
+        },
+        {
+          "name": "Subscriber Unsubscribe",
+          "value": "subscriberUnsubscribe"
+        },
+        {
+          "name": "Tag Add",
+          "value": "tagAdd"
+        },
+        {
+          "name": "Tag Remove",
+          "value": "tagRemove"
+        }
+      ]
     },
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "event": [
-          "formSubscribe"
-        ]
+    {
+      "displayName": "Form Name or ID",
+      "name": "formId",
+      "type": "options",
+      "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+      "typeOptions": {
+        "loadOptionsMethod": "getForms"
+      },
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "event": [
+            "formSubscribe"
+          ]
+        }
       }
-    }
-  },
-  {
-    "displayName": "Sequence Name or ID",
-    "name": "courseId",
-    "type": "options",
-    "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-    "typeOptions": {
-      "loadOptionsMethod": "getSequences"
     },
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "event": [
-          "courseSubscribe",
-          "courseComplete"
-        ]
+    {
+      "displayName": "Sequence Name or ID",
+      "name": "courseId",
+      "type": "options",
+      "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+      "typeOptions": {
+        "loadOptionsMethod": "getSequences"
+      },
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "event": [
+            "courseSubscribe",
+            "courseComplete"
+          ]
+        }
       }
-    }
-  },
-  {
-    "displayName": "Initiating Link",
-    "name": "link",
-    "type": "string",
-    "required": true,
-    "default": "",
-    "description": "The URL of the initiating link",
-    "displayOptions": {
-      "show": {
-        "event": [
-          "linkClick"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Product ID",
-    "name": "productId",
-    "type": "string",
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "event": [
-          "productPurchase"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Tag Name or ID",
-    "name": "tagId",
-    "type": "options",
-    "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-    "typeOptions": {
-      "loadOptionsMethod": "getTags"
     },
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "event": [
-          "tagAdd",
-          "tagRemove"
-        ]
+    {
+      "displayName": "Initiating Link",
+      "name": "link",
+      "type": "string",
+      "required": true,
+      "default": "",
+      "description": "The URL of the initiating link",
+      "displayOptions": {
+        "show": {
+          "event": [
+            "linkClick"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Product ID",
+      "name": "productId",
+      "type": "string",
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "event": [
+            "productPurchase"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Tag Name or ID",
+      "name": "tagId",
+      "type": "options",
+      "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+      "typeOptions": {
+        "loadOptionsMethod": "getTags"
+      },
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "event": [
+            "tagAdd",
+            "tagRemove"
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}
 ```

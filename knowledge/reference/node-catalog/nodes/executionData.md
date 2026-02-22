@@ -1,95 +1,117 @@
+---
+title: "Execution Data"
+description: "Add execution data for search"
+---
+
 # Execution Data
+**Node Type:** nodes-base.executionData
 
-- Node name: `executionData`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/ExecutionData/ExecutionData.node.js`
-- Node version: `[1,1.1]`
-- Groups: `input`
-- Description: Add execution data for search
+## Description
+Add execution data for search
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- None
-
-## Resource and Operation Coverage
-### Operations
-- default/all resources: `save`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Save important data using this node. It will be displayed on each execution for easy reference and you can filter by it.<br />Filtering is available on Pro and Enterprise plans. <a href='https://n8n.io/pricing/' target='_blank'>More Info</a> | `notice` | `notice` | no |  |  |
-| Operation | `operation` | `options` | no | `save` |  |
-| Data to Save | `dataToSave` | `fixedCollection` | no | `{}` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Save important data using this node. It will be displayed on each execution for easy reference and you can filter by it.<br />Filtering is available on Pro and Enterprise plans. <a href='https://n8n.io/pricing/' target='_blank'>More Info</a>",
-    "name": "notice",
-    "type": "notice",
-    "default": ""
+{
+  "displayName": "Execution Data",
+  "name": "executionData",
+  "icon": "fa:tasks",
+  "group": [
+    "input"
+  ],
+  "iconColor": "light-green",
+  "version": [
+    1,
+    1.1
+  ],
+  "description": "Add execution data for search",
+  "defaults": {
+    "name": "Execution Data",
+    "color": "#29A568"
   },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "default": "save",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "Save Highlight Data (for Search/review)",
-        "value": "save",
-        "action": "Save Highlight Data (for search/review)"
-      }
-    ]
-  },
-  {
-    "displayName": "Data to Save",
-    "name": "dataToSave",
-    "placeholder": "Add Saved Field",
-    "type": "fixedCollection",
-    "typeOptions": {
-      "multipleValueButtonText": "Add Saved Field",
-      "multipleValues": true
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "properties": [
+    {
+      "displayName": "Save important data using this node. It will be displayed on each execution for easy reference and you can filter by it.<br />Filtering is available on Pro and Enterprise plans. <a href='https://n8n.io/pricing/' target='_blank'>More Info</a>",
+      "name": "notice",
+      "type": "notice",
+      "default": ""
     },
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "save"
-        ]
-      }
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "default": "save",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "Save Highlight Data (for Search/review)",
+          "value": "save",
+          "action": "Save Highlight Data (for search/review)"
+        }
+      ]
     },
-    "default": {},
-    "options": [
-      {
-        "displayName": "Values",
-        "name": "values",
-        "values": [
-          {
-            "displayName": "Key",
-            "name": "key",
-            "type": "string",
-            "default": "",
-            "placeholder": "e.g. myKey",
-            "requiresDataPath": "single"
-          },
-          {
-            "displayName": "Value",
-            "name": "value",
-            "type": "string",
-            "default": "",
-            "placeholder": "e.g. myValue"
-          }
-        ]
-      }
-    ]
-  }
-]
+    {
+      "displayName": "Data to Save",
+      "name": "dataToSave",
+      "placeholder": "Add Saved Field",
+      "type": "fixedCollection",
+      "typeOptions": {
+        "multipleValueButtonText": "Add Saved Field",
+        "multipleValues": true
+      },
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "save"
+          ]
+        }
+      },
+      "default": {},
+      "options": [
+        {
+          "displayName": "Values",
+          "name": "values",
+          "values": [
+            {
+              "displayName": "Key",
+              "name": "key",
+              "type": "string",
+              "default": "",
+              "placeholder": "e.g. myKey",
+              "requiresDataPath": "single"
+            },
+            {
+              "displayName": "Value",
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "placeholder": "e.g. myValue"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "hints": [
+    {
+      "type": "warning",
+      "message": "Some keys are longer than 50 characters. They will be truncated.",
+      "displayCondition": "={{ $parameter.dataToSave.values.some((x) => x.key.length > 50) }}",
+      "whenToDisplay": "beforeExecution",
+      "location": "outputPane"
+    },
+    {
+      "type": "warning",
+      "message": "Some values are longer than 512 characters. They will be truncated.",
+      "displayCondition": "={{ $parameter.dataToSave.values.some((x) => x.value.length > 512) }}",
+      "whenToDisplay": "beforeExecution",
+      "location": "outputPane"
+    }
+  ]
+}
 ```

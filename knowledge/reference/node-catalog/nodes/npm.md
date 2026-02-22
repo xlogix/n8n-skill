@@ -1,323 +1,322 @@
+---
+title: "Npm"
+description: "Consume NPM registry API"
+---
+
 # Npm
+**Node Type:** nodes-base.npm
 
-- Node name: `npm`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Npm/Npm.node.js`
-- Node version: `1`
-- Groups: `input`
-- Description: Consume NPM registry API
+## Description
+Consume NPM registry API
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `npmApi` (optional)
-
-## Resource and Operation Coverage
-### Resources
-- Package (`package`)
-- Distribution Tag (`distTag`)
-
-### Operations
-- resource `distTag`: `getMany`, `update`
-- resource `package`: `getMetadata`, `getVersions`, `search`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Resource | `resource` | `options` | no | `package` |  |
-| Operation | `operation` | `options` | no | `getMetadata` |  |
-| Package Name | `packageName` | `string` | yes |  |  |
-| Package Version | `packageVersion` | `string` | yes | `latest` |  |
-| Query | `query` | `string` | yes |  | The query text used to search for packages |
-| Limit | `limit` | `number` | no | `10` | Max number of results to return |
-| Offset | `offset` | `number` | no | `0` | Offset to return results from |
-| Operation | `operation` | `options` | no | `getMany` |  |
-| Package Name | `packageName` | `string` | yes |  |  |
-| Package Version | `packageVersion` | `string` | yes |  |  |
-| Distribution Tag Name | `distTagName` | `string` | yes | `latest` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Resource",
-    "name": "resource",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "Package",
-        "value": "package"
-      },
-      {
-        "name": "Distribution Tag",
-        "value": "distTag"
-      }
-    ],
-    "default": "package"
+{
+  "displayName": "Npm",
+  "name": "npm",
+  "icon": "file:npm.svg",
+  "group": [
+    "input"
+  ],
+  "version": 1,
+  "subtitle": "={{ $parameter[\"operation\"] + \": \" + $parameter[\"resource\"] }}",
+  "description": "Consume NPM registry API",
+  "defaults": {
+    "name": "npm"
   },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "default": "getMetadata",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "package"
-        ]
-      }
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "npmApi",
+      "required": false
+    }
+  ],
+  "requestDefaults": {
+    "baseURL": "={{ $credentials.registryUrl }}"
+  },
+  "properties": [
+    {
+      "displayName": "Resource",
+      "name": "resource",
+      "type": "options",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "Package",
+          "value": "package"
+        },
+        {
+          "name": "Distribution Tag",
+          "value": "distTag"
+        }
+      ],
+      "default": "package"
     },
-    "options": [
-      {
-        "name": "Get Metadata",
-        "value": "getMetadata",
-        "action": "Returns all the metadata for a package at a specific version",
-        "description": "Returns all the metadata for a package at a specific version",
-        "routing": {
-          "request": {
-            "method": "GET",
-            "url": "=/{{ encodeURIComponent($parameter.packageName) }}/{{ $parameter.packageVersion }}"
-          }
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "default": "getMetadata",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "package"
+          ]
         }
       },
-      {
-        "name": "Get Versions",
-        "value": "getVersions",
-        "action": "Returns all the versions for a package",
-        "description": "Returns all the versions for a package",
-        "routing": {
-          "request": {
-            "method": "GET",
-            "url": "=/{{ encodeURIComponent($parameter.packageName) }}"
-          },
-          "output": {
-            "postReceive": [
-              null
-            ]
-          }
-        }
-      },
-      {
-        "name": "Search",
-        "value": "search",
-        "action": "Search for packages",
-        "description": "Search for packages",
-        "routing": {
-          "request": {
-            "method": "GET",
-            "url": "/-/v1/search",
-            "qs": {
-              "text": "={{$parameter.query}}",
-              "size": "={{$parameter.limit}}",
-              "from": "={{$parameter.offset}}",
-              "popularity": 0.99
+      "options": [
+        {
+          "name": "Get Metadata",
+          "value": "getMetadata",
+          "action": "Returns all the metadata for a package at a specific version",
+          "description": "Returns all the metadata for a package at a specific version",
+          "routing": {
+            "request": {
+              "method": "GET",
+              "url": "=/{{ encodeURIComponent($parameter.packageName) }}/{{ $parameter.packageVersion }}"
             }
-          },
-          "output": {
-            "postReceive": [
-              null
-            ]
+          }
+        },
+        {
+          "name": "Get Versions",
+          "value": "getVersions",
+          "action": "Returns all the versions for a package",
+          "description": "Returns all the versions for a package",
+          "routing": {
+            "request": {
+              "method": "GET",
+              "url": "=/{{ encodeURIComponent($parameter.packageName) }}"
+            },
+            "output": {
+              "postReceive": [
+                null
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search",
+          "value": "search",
+          "action": "Search for packages",
+          "description": "Search for packages",
+          "routing": {
+            "request": {
+              "method": "GET",
+              "url": "/-/v1/search",
+              "qs": {
+                "text": "={{$parameter.query}}",
+                "size": "={{$parameter.limit}}",
+                "from": "={{$parameter.offset}}",
+                "popularity": 0.99
+              }
+            },
+            "output": {
+              "postReceive": [
+                null
+              ]
+            }
           }
         }
-      }
-    ]
-  },
-  {
-    "displayName": "Package Name",
-    "name": "packageName",
-    "type": "string",
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "package"
-        ],
-        "operation": [
-          "getMetadata",
-          "getVersions"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Package Version",
-    "name": "packageVersion",
-    "type": "string",
-    "required": true,
-    "default": "latest",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "package"
-        ],
-        "operation": [
-          "getMetadata"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Query",
-    "name": "query",
-    "type": "string",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "package"
-        ],
-        "operation": [
-          "search"
-        ]
+      ]
+    },
+    {
+      "displayName": "Package Name",
+      "name": "packageName",
+      "type": "string",
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "package"
+          ],
+          "operation": [
+            "getMetadata",
+            "getVersions"
+          ]
+        }
       }
     },
-    "default": "",
-    "description": "The query text used to search for packages"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "default": 10,
-    "typeOptions": {
-      "minValue": 1,
-      "maxValue": 100
-    },
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "package"
-        ],
-        "operation": [
-          "search"
-        ]
+    {
+      "displayName": "Package Version",
+      "name": "packageVersion",
+      "type": "string",
+      "required": true,
+      "default": "latest",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "package"
+          ],
+          "operation": [
+            "getMetadata"
+          ]
+        }
       }
     },
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Offset",
-    "name": "offset",
-    "type": "number",
-    "default": 0,
-    "typeOptions": {
-      "minValue": 0
-    },
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "package"
-        ],
-        "operation": [
-          "search"
-        ]
-      }
-    },
-    "description": "Offset to return results from"
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "default": "getMany",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "distTag"
-        ]
-      }
-    },
-    "options": [
-      {
-        "name": "Get All",
-        "value": "getMany",
-        "action": "Returns all the dist-tags for a package",
-        "description": "Returns all the dist-tags for a package",
-        "routing": {
-          "request": {
-            "method": "GET",
-            "url": "=/-/package/{{ encodeURIComponent($parameter.packageName) }}/dist-tags"
-          }
+    {
+      "displayName": "Query",
+      "name": "query",
+      "type": "string",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "package"
+          ],
+          "operation": [
+            "search"
+          ]
         }
       },
-      {
-        "name": "Update",
-        "value": "update",
-        "action": "Update a the dist-tags for a package",
-        "description": "Update a the dist-tags for a package",
-        "routing": {
-          "request": {
-            "method": "PUT",
-            "url": "=/-/package/{{ encodeURIComponent($parameter.packageName) }}/dist-tags/{{ encodeURIComponent($parameter.distTagName) }}"
-          },
-          "send": {
-            "preSend": [
-              null
-            ]
+      "default": "",
+      "description": "The query text used to search for packages"
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "default": 10,
+      "typeOptions": {
+        "minValue": 1,
+        "maxValue": 100
+      },
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "package"
+          ],
+          "operation": [
+            "search"
+          ]
+        }
+      },
+      "description": "Max number of results to return"
+    },
+    {
+      "displayName": "Offset",
+      "name": "offset",
+      "type": "number",
+      "default": 0,
+      "typeOptions": {
+        "minValue": 0
+      },
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "package"
+          ],
+          "operation": [
+            "search"
+          ]
+        }
+      },
+      "description": "Offset to return results from"
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "default": "getMany",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "distTag"
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "Get All",
+          "value": "getMany",
+          "action": "Returns all the dist-tags for a package",
+          "description": "Returns all the dist-tags for a package",
+          "routing": {
+            "request": {
+              "method": "GET",
+              "url": "=/-/package/{{ encodeURIComponent($parameter.packageName) }}/dist-tags"
+            }
+          }
+        },
+        {
+          "name": "Update",
+          "value": "update",
+          "action": "Update a the dist-tags for a package",
+          "description": "Update a the dist-tags for a package",
+          "routing": {
+            "request": {
+              "method": "PUT",
+              "url": "=/-/package/{{ encodeURIComponent($parameter.packageName) }}/dist-tags/{{ encodeURIComponent($parameter.distTagName) }}"
+            },
+            "send": {
+              "preSend": [
+                null
+              ]
+            }
           }
         }
+      ]
+    },
+    {
+      "displayName": "Package Name",
+      "name": "packageName",
+      "type": "string",
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "distTag"
+          ],
+          "operation": [
+            "getMany",
+            "update"
+          ]
+        }
       }
-    ]
-  },
-  {
-    "displayName": "Package Name",
-    "name": "packageName",
-    "type": "string",
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "distTag"
-        ],
-        "operation": [
-          "getMany",
-          "update"
-        ]
+    },
+    {
+      "displayName": "Package Version",
+      "name": "packageVersion",
+      "type": "string",
+      "required": true,
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "distTag"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
+      }
+    },
+    {
+      "displayName": "Distribution Tag Name",
+      "name": "distTagName",
+      "type": "string",
+      "required": true,
+      "default": "latest",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "distTag"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
       }
     }
-  },
-  {
-    "displayName": "Package Version",
-    "name": "packageVersion",
-    "type": "string",
-    "required": true,
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "distTag"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
-    }
-  },
-  {
-    "displayName": "Distribution Tag Name",
-    "name": "distTagName",
-    "type": "string",
-    "required": true,
-    "default": "latest",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "distTag"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
-    }
-  }
-]
+  ]
+}
 ```

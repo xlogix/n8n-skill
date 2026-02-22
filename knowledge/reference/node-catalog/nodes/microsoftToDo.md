@@ -1,836 +1,815 @@
+---
+title: "Microsoft To Do"
+description: "Consume Microsoft To Do API."
+---
+
 # Microsoft To Do
+**Node Type:** nodes-base.microsoftToDo
 
-- Node name: `microsoftToDo`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Microsoft/ToDo/MicrosoftToDo.node.js`
-- Node version: `1`
-- Groups: `input`
-- Description: Consume Microsoft To Do API.
+## Description
+Consume Microsoft To Do API.
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `microsoftToDoOAuth2Api` (required)
-
-## Resource and Operation Coverage
-### Resources
-- Linked Resource (`linkedResource`)
-- List (`list`)
-- Task (`task`)
-
-### Operations
-- resource `linkedResource`: `create`, `delete`, `get`, `getAll`, `update`
-- resource `list`: `create`, `delete`, `get`, `getAll`, `update`
-- resource `task`: `create`, `delete`, `get`, `getAll`, `update`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Resource | `resource` | `options` | no | `task` |  |
-| Operation | `operation` | `options` | no | `get` |  |
-| Task List Name or ID | `taskListId` | `options` | yes |  | Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a> |
-| Task ID | `taskId` | `string` | yes |  |  |
-| Name | `displayName` | `string` | no |  | Field indicating title of the linked entity |
-| Application Name | `applicationName` | `string` | yes |  | App name of the source that is sending the linked entity |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-| Linked Resource ID | `linkedResourceId` | `string` | yes |  |  |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `50` | Max number of results to return |
-| Update Fields | `updateFields` | `collection` | no | `{}` |  |
-| Operation | `operation` | `options` | no | `get` |  |
-| List Name or ID | `taskListId` | `options` | yes |  | The identifier of the list, unique in the user's mailbox. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Subject | `title` | `string` | yes |  | A brief description of the task |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-| List Name or ID | `taskListId` | `options` | yes |  | The identifier of the list, unique in the user's mailbox. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>. |
-| Task ID | `taskId` | `string` | yes |  |  |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `50` | Max number of results to return |
-| Update Fields | `updateFields` | `collection` | no | `{}` |  |
-| Operation | `operation` | `options` | no | `get` |  |
-| List Name | `displayName` | `string` | yes |  | List display name |
-| List ID | `listId` | `string` | yes |  | The identifier of the list, unique in the user's mailbox |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `50` | Max number of results to return |
-| New List Name | `displayName` | `string` | yes |  | List display name |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Resource",
-    "name": "resource",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "Linked Resource",
-        "value": "linkedResource"
-      },
-      {
-        "name": "List",
-        "value": "list"
-      },
-      {
-        "name": "Task",
-        "value": "task"
-      }
-    ],
-    "default": "task"
+{
+  "displayName": "Microsoft To Do",
+  "name": "microsoftToDo",
+  "icon": "file:todo.svg",
+  "group": [
+    "input"
+  ],
+  "version": 1,
+  "subtitle": "={{$parameter[\"operation\"] + \": \" + $parameter[\"resource\"]}}",
+  "description": "Consume Microsoft To Do API.",
+  "defaults": {
+    "name": "Microsoft To Do"
   },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "linkedResource"
-        ]
-      }
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "microsoftToDoOAuth2Api",
+      "required": true
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Resource",
+      "name": "resource",
+      "type": "options",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "Linked Resource",
+          "value": "linkedResource"
+        },
+        {
+          "name": "List",
+          "value": "list"
+        },
+        {
+          "name": "Task",
+          "value": "task"
+        }
+      ],
+      "default": "task"
     },
-    "options": [
-      {
-        "name": "Create",
-        "value": "create",
-        "action": "Create a linked resource"
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "linkedResource"
+          ]
+        }
       },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "action": "Delete a linked resource"
+      "options": [
+        {
+          "name": "Create",
+          "value": "create",
+          "action": "Create a linked resource"
+        },
+        {
+          "name": "Delete",
+          "value": "delete",
+          "action": "Delete a linked resource"
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "action": "Get a linked resource"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "action": "Get many linked resources"
+        },
+        {
+          "name": "Update",
+          "value": "update",
+          "action": "Update a linked resource"
+        }
+      ],
+      "default": "get"
+    },
+    {
+      "displayName": "Task List Name or ID",
+      "name": "taskListId",
+      "type": "options",
+      "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+      "typeOptions": {
+        "loadOptionsMethod": "getTaskLists"
       },
-      {
-        "name": "Get",
-        "value": "get",
-        "action": "Get a linked resource"
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create",
+            "delete",
+            "get",
+            "getAll",
+            "update"
+          ],
+          "resource": [
+            "linkedResource"
+          ]
+        }
       },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "action": "Get many linked resources"
+      "required": true,
+      "default": ""
+    },
+    {
+      "displayName": "Task ID",
+      "name": "taskId",
+      "type": "string",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create",
+            "delete",
+            "get",
+            "getAll",
+            "update"
+          ],
+          "resource": [
+            "linkedResource"
+          ]
+        }
       },
-      {
-        "name": "Update",
-        "value": "update",
-        "action": "Update a linked resource"
-      }
-    ],
-    "default": "get"
-  },
-  {
-    "displayName": "Task List Name or ID",
-    "name": "taskListId",
-    "type": "options",
-    "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
-    "typeOptions": {
-      "loadOptionsMethod": "getTaskLists"
+      "required": true,
+      "default": ""
     },
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create",
-          "delete",
-          "get",
-          "getAll",
-          "update"
-        ],
-        "resource": [
-          "linkedResource"
-        ]
-      }
-    },
-    "required": true,
-    "default": ""
-  },
-  {
-    "displayName": "Task ID",
-    "name": "taskId",
-    "type": "string",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create",
-          "delete",
-          "get",
-          "getAll",
-          "update"
-        ],
-        "resource": [
-          "linkedResource"
-        ]
-      }
-    },
-    "required": true,
-    "default": ""
-  },
-  {
-    "displayName": "Name",
-    "name": "displayName",
-    "type": "string",
-    "default": "",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "linkedResource"
-        ]
-      }
-    },
-    "description": "Field indicating title of the linked entity"
-  },
-  {
-    "displayName": "Application Name",
-    "name": "applicationName",
-    "type": "string",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "linkedResource"
-        ]
-      }
-    },
-    "required": true,
-    "default": "",
-    "description": "App name of the source that is sending the linked entity"
-  },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "default": {},
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "linkedResource"
-        ],
-        "operation": [
-          "create"
-        ]
-      }
-    },
-    "options": [
-      {
-        "displayName": "External ID",
-        "name": "externalId",
-        "type": "string",
-        "default": "",
-        "description": "ID of the object that is associated with this task on the third-party/partner system"
+    {
+      "displayName": "Name",
+      "name": "displayName",
+      "type": "string",
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "linkedResource"
+          ]
+        }
       },
-      {
-        "displayName": "Web URL",
-        "name": "webUrl",
-        "type": "string",
-        "default": "",
-        "description": "Deeplink to the linked entity"
-      }
-    ]
-  },
-  {
-    "displayName": "Linked Resource ID",
-    "name": "linkedResourceId",
-    "type": "string",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "linkedResource"
-        ],
-        "operation": [
-          "delete",
-          "get",
-          "update"
-        ]
-      }
+      "description": "Field indicating title of the linked entity"
     },
-    "default": "",
-    "required": true
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "linkedResource"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "linkedResource"
-        ],
-        "operation": [
-          "getAll"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
-    },
-    "typeOptions": {
-      "minValue": 1,
-      "maxValue": 100
-    },
-    "default": 50,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Update Fields",
-    "name": "updateFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "default": {},
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "linkedResource"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
-    },
-    "options": [
-      {
-        "displayName": "Application Name",
-        "name": "applicationName",
-        "type": "string",
-        "default": "",
-        "description": "App name of the source that is sending the linked entity"
+    {
+      "displayName": "Application Name",
+      "name": "applicationName",
+      "type": "string",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "linkedResource"
+          ]
+        }
       },
-      {
-        "displayName": "Name",
-        "name": "displayName",
-        "type": "string",
-        "default": "",
-        "description": "Field indicating title of the linked entity"
-      },
-      {
-        "displayName": "External ID",
-        "name": "externalId",
-        "type": "string",
-        "default": "",
-        "description": "ID of the object that is associated with this task on the third-party/partner system"
-      },
-      {
-        "displayName": "Web URL",
-        "name": "webUrl",
-        "type": "string",
-        "default": "",
-        "description": "Deeplink to the linked entity"
-      }
-    ]
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "task"
-        ]
-      }
+      "required": true,
+      "default": "",
+      "description": "App name of the source that is sending the linked entity"
     },
-    "options": [
-      {
-        "name": "Create",
-        "value": "create",
-        "action": "Create a task"
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "default": {},
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "linkedResource"
+          ],
+          "operation": [
+            "create"
+          ]
+        }
       },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "action": "Delete a task"
+      "options": [
+        {
+          "displayName": "External ID",
+          "name": "externalId",
+          "type": "string",
+          "default": "",
+          "description": "ID of the object that is associated with this task on the third-party/partner system"
+        },
+        {
+          "displayName": "Web URL",
+          "name": "webUrl",
+          "type": "string",
+          "default": "",
+          "description": "Deeplink to the linked entity"
+        }
+      ]
+    },
+    {
+      "displayName": "Linked Resource ID",
+      "name": "linkedResourceId",
+      "type": "string",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "linkedResource"
+          ],
+          "operation": [
+            "delete",
+            "get",
+            "update"
+          ]
+        }
       },
-      {
-        "name": "Get",
-        "value": "get",
-        "action": "Get a task"
+      "default": "",
+      "required": true
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "linkedResource"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
       },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "action": "Get many tasks"
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit"
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "linkedResource"
+          ],
+          "operation": [
+            "getAll"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
       },
-      {
-        "name": "Update",
-        "value": "update",
-        "action": "Update a task"
-      }
-    ],
-    "default": "get"
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "taskListId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getTaskLists"
-    },
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "task"
-        ]
-      }
-    },
-    "required": true,
-    "default": "",
-    "description": "The identifier of the list, unique in the user's mailbox. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Subject",
-    "name": "title",
-    "type": "string",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "task"
-        ]
-      }
-    },
-    "required": true,
-    "default": "",
-    "description": "A brief description of the task"
-  },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "default": {},
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "task"
-        ],
-        "operation": [
-          "create"
-        ]
-      }
-    },
-    "options": [
-      {
-        "displayName": "Content",
-        "name": "content",
-        "type": "string",
-        "default": "",
-        "description": "The content of the task"
+      "typeOptions": {
+        "minValue": 1,
+        "maxValue": 100
       },
-      {
-        "displayName": "Due",
-        "name": "dueDateTime",
-        "type": "dateTime",
-        "default": "",
-        "description": "The date in the specified time zone that the task is to be finished"
+      "default": 50,
+      "description": "Max number of results to return"
+    },
+    {
+      "displayName": "Update Fields",
+      "name": "updateFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "default": {},
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "linkedResource"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
       },
-      {
-        "displayName": "Reminder",
-        "name": "reminderDateTime",
-        "type": "dateTime",
-        "default": "",
-        "description": "The date in the specified time zone that the task is to be reminded"
+      "options": [
+        {
+          "displayName": "Application Name",
+          "name": "applicationName",
+          "type": "string",
+          "default": "",
+          "description": "App name of the source that is sending the linked entity"
+        },
+        {
+          "displayName": "Name",
+          "name": "displayName",
+          "type": "string",
+          "default": "",
+          "description": "Field indicating title of the linked entity"
+        },
+        {
+          "displayName": "External ID",
+          "name": "externalId",
+          "type": "string",
+          "default": "",
+          "description": "ID of the object that is associated with this task on the third-party/partner system"
+        },
+        {
+          "displayName": "Web URL",
+          "name": "webUrl",
+          "type": "string",
+          "default": "",
+          "description": "Deeplink to the linked entity"
+        }
+      ]
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "task"
+          ]
+        }
       },
-      {
-        "displayName": "Importance",
-        "name": "importance",
-        "type": "options",
-        "options": [
-          {
-            "name": "Low",
-            "value": "low"
-          },
-          {
-            "name": "Normal",
-            "value": "normal"
-          },
-          {
-            "name": "High",
-            "value": "high"
-          }
-        ],
-        "default": "normal",
-        "description": "The importance of the task"
+      "options": [
+        {
+          "name": "Create",
+          "value": "create",
+          "action": "Create a task"
+        },
+        {
+          "name": "Delete",
+          "value": "delete",
+          "action": "Delete a task"
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "action": "Get a task"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "action": "Get many tasks"
+        },
+        {
+          "name": "Update",
+          "value": "update",
+          "action": "Update a task"
+        }
+      ],
+      "default": "get"
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "taskListId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getTaskLists"
       },
-      {
-        "displayName": "Status",
-        "name": "status",
-        "type": "options",
-        "options": [
-          {
-            "name": "Not Started",
-            "value": "notStarted"
-          },
-          {
-            "name": "In Progress",
-            "value": "inProgress"
-          },
-          {
-            "name": "Completed",
-            "value": "completed"
-          },
-          {
-            "name": "Waiting On Others",
-            "value": "waitingOnOthers"
-          },
-          {
-            "name": "Deferred",
-            "value": "deferred"
-          }
-        ],
-        "default": "notStarted",
-        "description": "Indicates the state or progress of the task"
-      }
-    ]
-  },
-  {
-    "displayName": "List Name or ID",
-    "name": "taskListId",
-    "type": "options",
-    "typeOptions": {
-      "loadOptionsMethod": "getTaskLists"
-    },
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete",
-          "get",
-          "getAll",
-          "update"
-        ],
-        "resource": [
-          "task"
-        ]
-      }
-    },
-    "required": true,
-    "default": "",
-    "description": "The identifier of the list, unique in the user's mailbox. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
-  },
-  {
-    "displayName": "Task ID",
-    "name": "taskId",
-    "type": "string",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete",
-          "get",
-          "update"
-        ],
-        "resource": [
-          "task"
-        ]
-      }
-    },
-    "required": true,
-    "default": ""
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "task"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "task"
-        ],
-        "operation": [
-          "getAll"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
-    },
-    "typeOptions": {
-      "minValue": 1,
-      "maxValue": 100
-    },
-    "default": 50,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Update Fields",
-    "name": "updateFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "default": {},
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "task"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
-    },
-    "options": [
-      {
-        "displayName": "Content",
-        "name": "content",
-        "type": "string",
-        "default": "",
-        "description": "The content of the task"
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "task"
+          ]
+        }
       },
-      {
-        "displayName": "Due Date Time",
-        "name": "dueDateTime",
-        "type": "dateTime",
-        "default": "",
-        "description": "The date in the specified time zone that the task is to be finished"
-      },
-      {
-        "displayName": "Reminder",
-        "name": "reminderDateTime",
-        "type": "dateTime",
-        "default": "",
-        "description": "The date in the specified time zone that the task is to be reminded"
-      },
-      {
-        "displayName": "Importance",
-        "name": "importance",
-        "type": "options",
-        "options": [
-          {
-            "name": "Low",
-            "value": "low"
-          },
-          {
-            "name": "Normal",
-            "value": "normal"
-          },
-          {
-            "name": "High",
-            "value": "high"
-          }
-        ],
-        "default": "normal",
-        "description": "The importance of the task"
-      },
-      {
-        "displayName": "Status",
-        "name": "status",
-        "type": "options",
-        "options": [
-          {
-            "name": "Not Started",
-            "value": "notStarted"
-          },
-          {
-            "name": "In Progress",
-            "value": "inProgress"
-          },
-          {
-            "name": "Completed",
-            "value": "completed"
-          },
-          {
-            "name": "Waiting On Others",
-            "value": "waitingOnOthers"
-          },
-          {
-            "name": "Deferred",
-            "value": "deferred"
-          }
-        ],
-        "default": "notStarted",
-        "description": "Indicates the state or progress of the task"
-      },
-      {
-        "displayName": "Subject",
-        "name": "title",
-        "type": "string",
-        "default": "",
-        "description": "A brief description of the task"
-      }
-    ]
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "list"
-        ]
-      }
+      "required": true,
+      "default": "",
+      "description": "The identifier of the list, unique in the user's mailbox. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
     },
-    "options": [
-      {
-        "name": "Create",
-        "value": "create",
-        "action": "Create a list"
+    {
+      "displayName": "Subject",
+      "name": "title",
+      "type": "string",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "task"
+          ]
+        }
       },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "action": "Delete a list"
+      "required": true,
+      "default": "",
+      "description": "A brief description of the task"
+    },
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "default": {},
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "task"
+          ],
+          "operation": [
+            "create"
+          ]
+        }
       },
-      {
-        "name": "Get",
-        "value": "get",
-        "action": "Get a list"
+      "options": [
+        {
+          "displayName": "Content",
+          "name": "content",
+          "type": "string",
+          "default": "",
+          "description": "The content of the task"
+        },
+        {
+          "displayName": "Due",
+          "name": "dueDateTime",
+          "type": "dateTime",
+          "default": "",
+          "description": "The date in the specified time zone that the task is to be finished"
+        },
+        {
+          "displayName": "Reminder",
+          "name": "reminderDateTime",
+          "type": "dateTime",
+          "default": "",
+          "description": "The date in the specified time zone that the task is to be reminded"
+        },
+        {
+          "displayName": "Importance",
+          "name": "importance",
+          "type": "options",
+          "options": [
+            {
+              "name": "Low",
+              "value": "low"
+            },
+            {
+              "name": "Normal",
+              "value": "normal"
+            },
+            {
+              "name": "High",
+              "value": "high"
+            }
+          ],
+          "default": "normal",
+          "description": "The importance of the task"
+        },
+        {
+          "displayName": "Status",
+          "name": "status",
+          "type": "options",
+          "options": [
+            {
+              "name": "Not Started",
+              "value": "notStarted"
+            },
+            {
+              "name": "In Progress",
+              "value": "inProgress"
+            },
+            {
+              "name": "Completed",
+              "value": "completed"
+            },
+            {
+              "name": "Waiting On Others",
+              "value": "waitingOnOthers"
+            },
+            {
+              "name": "Deferred",
+              "value": "deferred"
+            }
+          ],
+          "default": "notStarted",
+          "description": "Indicates the state or progress of the task"
+        }
+      ]
+    },
+    {
+      "displayName": "List Name or ID",
+      "name": "taskListId",
+      "type": "options",
+      "typeOptions": {
+        "loadOptionsMethod": "getTaskLists"
       },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "action": "Get many lists"
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete",
+            "get",
+            "getAll",
+            "update"
+          ],
+          "resource": [
+            "task"
+          ]
+        }
       },
-      {
-        "name": "Update",
-        "value": "update",
-        "action": "Update a list"
-      }
-    ],
-    "default": "get"
-  },
-  {
-    "displayName": "List Name",
-    "name": "displayName",
-    "type": "string",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "create"
-        ],
-        "resource": [
-          "list"
-        ]
-      }
+      "required": true,
+      "default": "",
+      "description": "The identifier of the list, unique in the user's mailbox. Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>."
     },
-    "required": true,
-    "default": "",
-    "description": "List display name"
-  },
-  {
-    "displayName": "List ID",
-    "name": "listId",
-    "type": "string",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "delete",
-          "get",
-          "update"
-        ],
-        "resource": [
-          "list"
-        ]
-      }
+    {
+      "displayName": "Task ID",
+      "name": "taskId",
+      "type": "string",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete",
+            "get",
+            "update"
+          ],
+          "resource": [
+            "task"
+          ]
+        }
+      },
+      "required": true,
+      "default": ""
     },
-    "required": true,
-    "default": "",
-    "description": "The identifier of the list, unique in the user's mailbox"
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "list"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "task"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit"
     },
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "list"
-        ],
-        "operation": [
-          "getAll"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "task"
+          ],
+          "operation": [
+            "getAll"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "typeOptions": {
+        "minValue": 1,
+        "maxValue": 100
+      },
+      "default": 50,
+      "description": "Max number of results to return"
     },
-    "typeOptions": {
-      "minValue": 1,
-      "maxValue": 100
+    {
+      "displayName": "Update Fields",
+      "name": "updateFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "default": {},
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "task"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
+      },
+      "options": [
+        {
+          "displayName": "Content",
+          "name": "content",
+          "type": "string",
+          "default": "",
+          "description": "The content of the task"
+        },
+        {
+          "displayName": "Due Date Time",
+          "name": "dueDateTime",
+          "type": "dateTime",
+          "default": "",
+          "description": "The date in the specified time zone that the task is to be finished"
+        },
+        {
+          "displayName": "Reminder",
+          "name": "reminderDateTime",
+          "type": "dateTime",
+          "default": "",
+          "description": "The date in the specified time zone that the task is to be reminded"
+        },
+        {
+          "displayName": "Importance",
+          "name": "importance",
+          "type": "options",
+          "options": [
+            {
+              "name": "Low",
+              "value": "low"
+            },
+            {
+              "name": "Normal",
+              "value": "normal"
+            },
+            {
+              "name": "High",
+              "value": "high"
+            }
+          ],
+          "default": "normal",
+          "description": "The importance of the task"
+        },
+        {
+          "displayName": "Status",
+          "name": "status",
+          "type": "options",
+          "options": [
+            {
+              "name": "Not Started",
+              "value": "notStarted"
+            },
+            {
+              "name": "In Progress",
+              "value": "inProgress"
+            },
+            {
+              "name": "Completed",
+              "value": "completed"
+            },
+            {
+              "name": "Waiting On Others",
+              "value": "waitingOnOthers"
+            },
+            {
+              "name": "Deferred",
+              "value": "deferred"
+            }
+          ],
+          "default": "notStarted",
+          "description": "Indicates the state or progress of the task"
+        },
+        {
+          "displayName": "Subject",
+          "name": "title",
+          "type": "string",
+          "default": "",
+          "description": "A brief description of the task"
+        }
+      ]
     },
-    "default": 50,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "New List Name",
-    "name": "displayName",
-    "type": "string",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "update"
-        ],
-        "resource": [
-          "list"
-        ]
-      }
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "Create",
+          "value": "create",
+          "action": "Create a list"
+        },
+        {
+          "name": "Delete",
+          "value": "delete",
+          "action": "Delete a list"
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "action": "Get a list"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "action": "Get many lists"
+        },
+        {
+          "name": "Update",
+          "value": "update",
+          "action": "Update a list"
+        }
+      ],
+      "default": "get"
     },
-    "required": true,
-    "default": "",
-    "description": "List display name"
-  }
-]
+    {
+      "displayName": "List Name",
+      "name": "displayName",
+      "type": "string",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "create"
+          ],
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "required": true,
+      "default": "",
+      "description": "List display name"
+    },
+    {
+      "displayName": "List ID",
+      "name": "listId",
+      "type": "string",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "delete",
+            "get",
+            "update"
+          ],
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "required": true,
+      "default": "",
+      "description": "The identifier of the list, unique in the user's mailbox"
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "list"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit"
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "list"
+          ],
+          "operation": [
+            "getAll"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "typeOptions": {
+        "minValue": 1,
+        "maxValue": 100
+      },
+      "default": 50,
+      "description": "Max number of results to return"
+    },
+    {
+      "displayName": "New List Name",
+      "name": "displayName",
+      "type": "string",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "update"
+          ],
+          "resource": [
+            "list"
+          ]
+        }
+      },
+      "required": true,
+      "default": "",
+      "description": "List display name"
+    }
+  ]
+}
 ```

@@ -1,402 +1,413 @@
+---
+title: "Strapi"
+description: "Consume Strapi API"
+---
+
 # Strapi
+**Node Type:** nodes-base.strapi
 
-- Node name: `strapi`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Strapi/Strapi.node.js`
-- Node version: `1`
-- Groups: `input`
-- Description: Consume Strapi API
+## Description
+Consume Strapi API
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `strapiApi` (required)
-- `strapiTokenApi` (required)
-
-## Resource and Operation Coverage
-### Resources
-- Entry (`entry`)
-
-### Operations
-- resource `entry`: `create`, `delete`, `get`, `getAll`, `update`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Authentication | `authentication` | `options` | no | `password` |  |
-| Resource | `resource` | `options` | no | `entry` |  |
-| Operation | `operation` | `options` | no | `get` |  |
-| Content Type | `contentType` | `string` | yes |  | Name of the content type |
-| Columns | `columns` | `string` | no |  | Comma-separated list of the properties which should used as columns for the new rows |
-| Content Type | `contentType` | `string` | yes |  | Name of the content type |
-| Entry ID | `entryId` | `string` | yes |  | The ID of the entry to delete |
-| Content Type | `contentType` | `string` | yes |  | Name of the content type |
-| Entry ID | `entryId` | `string` | yes |  | The ID of the entry to get |
-| Content Type | `contentType` | `string` | yes |  | Name of the content type |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `50` | Max number of results to return |
-| Options | `options` | `collection` | no | `{}` |  |
-| Content Type | `contentType` | `string` | yes |  | Name of the content type |
-| Update Key | `updateKey` | `string` | yes | `id` | Name of the property which decides which rows in the database should be updated. Normally that would be "id". |
-| Columns | `columns` | `string` | no |  | Comma-separated list of the properties which should used as columns for the new rows |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Authentication",
-    "name": "authentication",
-    "type": "options",
-    "options": [
-      {
-        "name": "Username & Password",
-        "value": "password"
-      },
-      {
-        "name": "API Token",
-        "value": "token"
-      }
-    ],
-    "default": "password"
+{
+  "displayName": "Strapi",
+  "name": "strapi",
+  "icon": "file:strapi.svg",
+  "group": [
+    "input"
+  ],
+  "version": 1,
+  "subtitle": "={{$parameter[\"operation\"] + \": \" + $parameter[\"resource\"]}}",
+  "description": "Consume Strapi API",
+  "defaults": {
+    "name": "Strapi"
   },
-  {
-    "displayName": "Resource",
-    "name": "resource",
-    "noDataExpression": true,
-    "type": "options",
-    "options": [
-      {
-        "name": "Entry",
-        "value": "entry"
-      }
-    ],
-    "default": "entry"
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "noDataExpression": true,
-    "type": "options",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ]
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "strapiApi",
+      "required": true,
+      "testedBy": "strapiApiTest",
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "password"
+          ]
+        }
       }
     },
-    "options": [
-      {
-        "name": "Create",
-        "value": "create",
-        "description": "Create an entry",
-        "action": "Create an entry"
-      },
-      {
-        "name": "Delete",
-        "value": "delete",
-        "description": "Delete an entry",
-        "action": "Delete an entry"
-      },
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Get an entry",
-        "action": "Get an entry"
-      },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Get many entries",
-        "action": "Get many entries"
-      },
-      {
-        "name": "Update",
-        "value": "update",
-        "description": "Update an entry",
-        "action": "Update an entry"
+    {
+      "name": "strapiTokenApi",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "token"
+          ]
+        }
       }
-    ],
-    "default": "get"
-  },
-  {
-    "displayName": "Content Type",
-    "name": "contentType",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "create"
-        ]
-      }
-    },
-    "description": "Name of the content type"
-  },
-  {
-    "displayName": "Columns",
-    "name": "columns",
-    "type": "string",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "create"
-        ]
-      }
-    },
-    "default": "",
-    "placeholder": "id,name,description",
-    "description": "Comma-separated list of the properties which should used as columns for the new rows"
-  },
-  {
-    "displayName": "Content Type",
-    "name": "contentType",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "delete"
-        ]
-      }
-    },
-    "description": "Name of the content type"
-  },
-  {
-    "displayName": "Entry ID",
-    "name": "entryId",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "delete"
-        ]
-      }
-    },
-    "description": "The ID of the entry to delete"
-  },
-  {
-    "displayName": "Content Type",
-    "name": "contentType",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "get"
-        ]
-      }
-    },
-    "description": "Name of the content type"
-  },
-  {
-    "displayName": "Entry ID",
-    "name": "entryId",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "get"
-        ]
-      }
-    },
-    "description": "The ID of the entry to get"
-  },
-  {
-    "displayName": "Content Type",
-    "name": "contentType",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "description": "Name of the content type"
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "getAll"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
-    },
-    "typeOptions": {
-      "minValue": 1,
-      "maxValue": 100
-    },
-    "default": 50,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Options",
-    "name": "options",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "default": {},
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "getAll"
-        ]
-      }
-    },
-    "options": [
-      {
-        "displayName": "Publication State",
-        "name": "publicationState",
-        "type": "options",
-        "options": [
-          {
-            "name": "Live",
-            "value": "live"
-          },
-          {
-            "name": "Preview",
-            "value": "preview"
-          }
-        ],
-        "default": "",
-        "description": "Only select entries matching the publication state provided"
-      },
-      {
-        "displayName": "Sort Fields",
-        "name": "sort",
-        "type": "string",
-        "typeOptions": {
-          "multipleValues": true,
-          "multipleValueButtonText": "Add Sort Field"
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Authentication",
+      "name": "authentication",
+      "type": "options",
+      "options": [
+        {
+          "name": "Username & Password",
+          "value": "password"
         },
-        "default": "",
-        "placeholder": "name:asc",
-        "description": "Name of the fields to sort the data by. By default will be sorted ascendingly. To modify that behavior, you have to add the sort direction after the name of sort field preceded by a colon. For example: <code>name:asc</code>."
+        {
+          "name": "API Token",
+          "value": "token"
+        }
+      ],
+      "default": "password"
+    },
+    {
+      "displayName": "Resource",
+      "name": "resource",
+      "noDataExpression": true,
+      "type": "options",
+      "options": [
+        {
+          "name": "Entry",
+          "value": "entry"
+        }
+      ],
+      "default": "entry"
+    },
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "noDataExpression": true,
+      "type": "options",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ]
+        }
       },
-      {
-        "displayName": "Where (JSON)",
-        "name": "where",
-        "type": "string",
-        "default": "",
-        "description": "JSON query to filter the data. <a href=\"https://strapi.io/documentation/developer-docs/latest/developer-resources/content-api/content-api.html#filters\">More info</a>."
-      }
-    ]
-  },
-  {
-    "displayName": "Content Type",
-    "name": "contentType",
-    "type": "string",
-    "default": "",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
+      "options": [
+        {
+          "name": "Create",
+          "value": "create",
+          "description": "Create an entry",
+          "action": "Create an entry"
+        },
+        {
+          "name": "Delete",
+          "value": "delete",
+          "description": "Delete an entry",
+          "action": "Delete an entry"
+        },
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Get an entry",
+          "action": "Get an entry"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Get many entries",
+          "action": "Get many entries"
+        },
+        {
+          "name": "Update",
+          "value": "update",
+          "description": "Update an entry",
+          "action": "Update an entry"
+        }
+      ],
+      "default": "get"
     },
-    "description": "Name of the content type"
-  },
-  {
-    "displayName": "Update Key",
-    "name": "updateKey",
-    "type": "string",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
+    {
+      "displayName": "Content Type",
+      "name": "contentType",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "create"
+          ]
+        }
+      },
+      "description": "Name of the content type"
     },
-    "default": "id",
-    "required": true,
-    "description": "Name of the property which decides which rows in the database should be updated. Normally that would be \"id\"."
-  },
-  {
-    "displayName": "Columns",
-    "name": "columns",
-    "type": "string",
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "entry"
-        ],
-        "operation": [
-          "update"
-        ]
-      }
+    {
+      "displayName": "Columns",
+      "name": "columns",
+      "type": "string",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "create"
+          ]
+        }
+      },
+      "default": "",
+      "placeholder": "id,name,description",
+      "description": "Comma-separated list of the properties which should used as columns for the new rows"
     },
-    "default": "",
-    "placeholder": "id,name,description",
-    "description": "Comma-separated list of the properties which should used as columns for the new rows"
-  }
-]
+    {
+      "displayName": "Content Type",
+      "name": "contentType",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "delete"
+          ]
+        }
+      },
+      "description": "Name of the content type"
+    },
+    {
+      "displayName": "Entry ID",
+      "name": "entryId",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "delete"
+          ]
+        }
+      },
+      "description": "The ID of the entry to delete"
+    },
+    {
+      "displayName": "Content Type",
+      "name": "contentType",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "get"
+          ]
+        }
+      },
+      "description": "Name of the content type"
+    },
+    {
+      "displayName": "Entry ID",
+      "name": "entryId",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "get"
+          ]
+        }
+      },
+      "description": "The ID of the entry to get"
+    },
+    {
+      "displayName": "Content Type",
+      "name": "contentType",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "description": "Name of the content type"
+    },
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit"
+    },
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "getAll"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "typeOptions": {
+        "minValue": 1,
+        "maxValue": 100
+      },
+      "default": 50,
+      "description": "Max number of results to return"
+    },
+    {
+      "displayName": "Options",
+      "name": "options",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "default": {},
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "getAll"
+          ]
+        }
+      },
+      "options": [
+        {
+          "displayName": "Publication State",
+          "name": "publicationState",
+          "type": "options",
+          "options": [
+            {
+              "name": "Live",
+              "value": "live"
+            },
+            {
+              "name": "Preview",
+              "value": "preview"
+            }
+          ],
+          "default": "",
+          "description": "Only select entries matching the publication state provided"
+        },
+        {
+          "displayName": "Sort Fields",
+          "name": "sort",
+          "type": "string",
+          "typeOptions": {
+            "multipleValues": true,
+            "multipleValueButtonText": "Add Sort Field"
+          },
+          "default": "",
+          "placeholder": "name:asc",
+          "description": "Name of the fields to sort the data by. By default will be sorted ascendingly. To modify that behavior, you have to add the sort direction after the name of sort field preceded by a colon. For example: <code>name:asc</code>."
+        },
+        {
+          "displayName": "Where (JSON)",
+          "name": "where",
+          "type": "string",
+          "default": "",
+          "description": "JSON query to filter the data. <a href=\"https://strapi.io/documentation/developer-docs/latest/developer-resources/content-api/content-api.html#filters\">More info</a>."
+        }
+      ]
+    },
+    {
+      "displayName": "Content Type",
+      "name": "contentType",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
+      },
+      "description": "Name of the content type"
+    },
+    {
+      "displayName": "Update Key",
+      "name": "updateKey",
+      "type": "string",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
+      },
+      "default": "id",
+      "required": true,
+      "description": "Name of the property which decides which rows in the database should be updated. Normally that would be \"id\"."
+    },
+    {
+      "displayName": "Columns",
+      "name": "columns",
+      "type": "string",
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "entry"
+          ],
+          "operation": [
+            "update"
+          ]
+        }
+      },
+      "default": "",
+      "placeholder": "id,name,description",
+      "description": "Comma-separated list of the properties which should used as columns for the new rows"
+    }
+  ]
+}
 ```

@@ -1,370 +1,367 @@
+---
+title: "Unleashed Software"
+description: "Consume Unleashed Software API"
+---
+
 # Unleashed Software
+**Node Type:** nodes-base.unleashedSoftware
 
-- Node name: `unleashedSoftware`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/UnleashedSoftware/UnleashedSoftware.node.js`
-- Node version: `1`
-- Groups: `transform`
-- Description: Consume Unleashed Software API
+## Description
+Consume Unleashed Software API
 
-## Inputs
-- `main`
-
-## Outputs
-- `main`
-
-## Credentials
-- `unleashedSoftwareApi` (required)
-
-## Resource and Operation Coverage
-### Resources
-- Sales Order (`salesOrder`)
-- Stock On Hand (`stockOnHand`)
-
-### Operations
-- resource `salesOrder`: `getAll`
-- resource `stockOnHand`: `get`, `getAll`
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Resource | `resource` | `options` | no | `salesOrder` |  |
-| Operation | `operation` | `options` | no | `getAll` |  |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `100` | Max number of results to return |
-| Filters | `filters` | `collection` | no | `{}` |  |
-| Operation | `operation` | `options` | no | `getAll` |  |
-| Product ID | `productId` | `string` | no |  |  |
-| Return All | `returnAll` | `boolean` | no | `false` | Whether to return all results or only up to a given limit |
-| Limit | `limit` | `number` | no | `100` | Max number of results to return |
-| Filters | `filters` | `collection` | no | `{}` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Resource",
-    "name": "resource",
-    "type": "options",
-    "noDataExpression": true,
-    "options": [
-      {
-        "name": "Sales Order",
-        "value": "salesOrder"
-      },
-      {
-        "name": "Stock On Hand",
-        "value": "stockOnHand"
-      }
-    ],
-    "default": "salesOrder"
+{
+  "displayName": "Unleashed Software",
+  "name": "unleashedSoftware",
+  "group": [
+    "transform"
+  ],
+  "subtitle": "={{$parameter[\"operation\"] + \":\" + $parameter[\"resource\"]}}",
+  "icon": "file:unleashedSoftware.png",
+  "version": 1,
+  "description": "Consume Unleashed Software API",
+  "defaults": {
+    "name": "Unleashed Software"
   },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "salesOrder"
-        ]
-      }
+  "usableAsTool": true,
+  "inputs": [
+    "main"
+  ],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "unleashedSoftwareApi",
+      "required": true
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Resource",
+      "name": "resource",
+      "type": "options",
+      "noDataExpression": true,
+      "options": [
+        {
+          "name": "Sales Order",
+          "value": "salesOrder"
+        },
+        {
+          "name": "Stock On Hand",
+          "value": "stockOnHand"
+        }
+      ],
+      "default": "salesOrder"
     },
-    "options": [
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Get many sales orders",
-        "action": "Get many sales orders"
-      }
-    ],
-    "default": "getAll"
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "salesOrder"
-        ]
-      }
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "salesOrder"
+          ]
+        }
+      },
+      "options": [
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Get many sales orders",
+          "action": "Get many sales orders"
+        }
+      ],
+      "default": "getAll"
     },
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "salesOrder"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "salesOrder"
+          ]
+        }
+      },
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit"
     },
-    "typeOptions": {
-      "minValue": 1,
-      "maxValue": 1000
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "salesOrder"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "typeOptions": {
+        "minValue": 1,
+        "maxValue": 1000
+      },
+      "default": 100,
+      "description": "Max number of results to return"
     },
-    "default": 100,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Filters",
-    "name": "filters",
-    "type": "collection",
-    "placeholder": "Add Filter",
-    "default": {},
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "salesOrder"
-        ]
-      }
+    {
+      "displayName": "Filters",
+      "name": "filters",
+      "type": "collection",
+      "placeholder": "Add Filter",
+      "default": {},
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "salesOrder"
+          ]
+        }
+      },
+      "options": [
+        {
+          "displayName": "Customer ID",
+          "name": "customerId",
+          "type": "string",
+          "default": "",
+          "placeholder": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+          "description": "Only returns orders for a specified Customer GUID. The CustomerId can be specified as a list of comma-separated GUIDs."
+        },
+        {
+          "displayName": "Customer Code",
+          "name": "customerCode",
+          "type": "string",
+          "default": "",
+          "description": "Returns orders that start with the specific customer code"
+        },
+        {
+          "displayName": "End Date",
+          "name": "endDate",
+          "type": "dateTime",
+          "default": "",
+          "description": "Returns orders with order date before the specified date. UTC."
+        },
+        {
+          "displayName": "Modified Since",
+          "name": "modifiedSince",
+          "type": "dateTime",
+          "default": "",
+          "description": "Returns orders created or edited after a specified date, must be UTC format"
+        },
+        {
+          "displayName": "Order Number",
+          "name": "orderNumber",
+          "type": "string",
+          "default": "",
+          "description": "Returns a single order with the specified order number. If set, it overrides all other filters."
+        },
+        {
+          "displayName": "Order Status",
+          "name": "orderStatus",
+          "type": "multiOptions",
+          "options": [
+            {
+              "name": "Backordered",
+              "value": "Backordered"
+            },
+            {
+              "name": "Completed",
+              "value": "Completed"
+            },
+            {
+              "name": "Deleted",
+              "value": "Deleted"
+            },
+            {
+              "name": "Parked",
+              "value": "Parked"
+            },
+            {
+              "name": "Placed",
+              "value": "Placed"
+            }
+          ],
+          "default": [],
+          "description": "Returns orders with the specified status. If no orderStatus filter is specified, then we exclude \"Deleted\" by default."
+        },
+        {
+          "displayName": "Start Date",
+          "name": "startDate",
+          "type": "dateTime",
+          "default": "",
+          "description": "Returns orders with order date after the specified date. UTC."
+        }
+      ]
     },
-    "options": [
-      {
-        "displayName": "Customer ID",
-        "name": "customerId",
-        "type": "string",
-        "default": "",
-        "placeholder": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-        "description": "Only returns orders for a specified Customer GUID. The CustomerId can be specified as a list of comma-separated GUIDs."
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "noDataExpression": true,
+      "displayOptions": {
+        "show": {
+          "resource": [
+            "stockOnHand"
+          ]
+        }
       },
-      {
-        "displayName": "Customer Code",
-        "name": "customerCode",
-        "type": "string",
-        "default": "",
-        "description": "Returns orders that start with the specific customer code"
-      },
-      {
-        "displayName": "End Date",
-        "name": "endDate",
-        "type": "dateTime",
-        "default": "",
-        "description": "Returns orders with order date before the specified date. UTC."
-      },
-      {
-        "displayName": "Modified Since",
-        "name": "modifiedSince",
-        "type": "dateTime",
-        "default": "",
-        "description": "Returns orders created or edited after a specified date, must be UTC format"
-      },
-      {
-        "displayName": "Order Number",
-        "name": "orderNumber",
-        "type": "string",
-        "default": "",
-        "description": "Returns a single order with the specified order number. If set, it overrides all other filters."
-      },
-      {
-        "displayName": "Order Status",
-        "name": "orderStatus",
-        "type": "multiOptions",
-        "options": [
-          {
-            "name": "Backordered",
-            "value": "Backordered"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed"
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted"
-          },
-          {
-            "name": "Parked",
-            "value": "Parked"
-          },
-          {
-            "name": "Placed",
-            "value": "Placed"
-          }
-        ],
-        "default": [],
-        "description": "Returns orders with the specified status. If no orderStatus filter is specified, then we exclude \"Deleted\" by default."
-      },
-      {
-        "displayName": "Start Date",
-        "name": "startDate",
-        "type": "dateTime",
-        "default": "",
-        "description": "Returns orders with order date after the specified date. UTC."
-      }
-    ]
-  },
-  {
-    "displayName": "Operation",
-    "name": "operation",
-    "type": "options",
-    "noDataExpression": true,
-    "displayOptions": {
-      "show": {
-        "resource": [
-          "stockOnHand"
-        ]
-      }
+      "options": [
+        {
+          "name": "Get",
+          "value": "get",
+          "description": "Get a stock on hand",
+          "action": "Get a stock on hand"
+        },
+        {
+          "name": "Get Many",
+          "value": "getAll",
+          "description": "Get many stocks on hand",
+          "action": "Get many stocks on hand"
+        }
+      ],
+      "default": "getAll"
     },
-    "options": [
-      {
-        "name": "Get",
-        "value": "get",
-        "description": "Get a stock on hand",
-        "action": "Get a stock on hand"
+    {
+      "displayName": "Product ID",
+      "name": "productId",
+      "type": "string",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "get"
+          ],
+          "resource": [
+            "stockOnHand"
+          ]
+        }
       },
-      {
-        "name": "Get Many",
-        "value": "getAll",
-        "description": "Get many stocks on hand",
-        "action": "Get many stocks on hand"
-      }
-    ],
-    "default": "getAll"
-  },
-  {
-    "displayName": "Product ID",
-    "name": "productId",
-    "type": "string",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "get"
-        ],
-        "resource": [
-          "stockOnHand"
-        ]
-      }
+      "default": ""
     },
-    "default": ""
-  },
-  {
-    "displayName": "Return All",
-    "name": "returnAll",
-    "type": "boolean",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "stockOnHand"
-        ]
-      }
+    {
+      "displayName": "Return All",
+      "name": "returnAll",
+      "type": "boolean",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "stockOnHand"
+          ]
+        }
+      },
+      "default": false,
+      "description": "Whether to return all results or only up to a given limit"
     },
-    "default": false,
-    "description": "Whether to return all results or only up to a given limit"
-  },
-  {
-    "displayName": "Limit",
-    "name": "limit",
-    "type": "number",
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "stockOnHand"
-        ],
-        "returnAll": [
-          false
-        ]
-      }
+    {
+      "displayName": "Limit",
+      "name": "limit",
+      "type": "number",
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "stockOnHand"
+          ],
+          "returnAll": [
+            false
+          ]
+        }
+      },
+      "typeOptions": {
+        "minValue": 1,
+        "maxValue": 1000
+      },
+      "default": 100,
+      "description": "Max number of results to return"
     },
-    "typeOptions": {
-      "minValue": 1,
-      "maxValue": 1000
-    },
-    "default": 100,
-    "description": "Max number of results to return"
-  },
-  {
-    "displayName": "Filters",
-    "name": "filters",
-    "type": "collection",
-    "placeholder": "Add Filter",
-    "default": {},
-    "displayOptions": {
-      "show": {
-        "operation": [
-          "getAll"
-        ],
-        "resource": [
-          "stockOnHand"
-        ]
-      }
-    },
-    "options": [
-      {
-        "displayName": "As at Date",
-        "name": "asAtDate",
-        "type": "dateTime",
-        "default": "",
-        "description": "Returns the stock on hand for a specific date"
+    {
+      "displayName": "Filters",
+      "name": "filters",
+      "type": "collection",
+      "placeholder": "Add Filter",
+      "default": {},
+      "displayOptions": {
+        "show": {
+          "operation": [
+            "getAll"
+          ],
+          "resource": [
+            "stockOnHand"
+          ]
+        }
       },
-      {
-        "displayName": "Is Assembled",
-        "name": "IsAssembled",
-        "type": "boolean",
-        "default": false,
-        "description": "Whether the AvailableQty will also include the quantity that can be assembled"
-      },
-      {
-        "displayName": "Modified Since",
-        "name": "modifiedSince",
-        "type": "dateTime",
-        "default": "",
-        "description": "Returns stock on hand values modified after a specific date"
-      },
-      {
-        "displayName": "Order By",
-        "name": "orderBy",
-        "type": "string",
-        "default": "",
-        "description": "Orders the list by a specific column, by default the list is ordered by productCode"
-      },
-      {
-        "displayName": "Product ID",
-        "name": "productId",
-        "type": "string",
-        "default": "",
-        "description": "Returns products with the specific Product Guid. You can enter multiple product IDs separated by commas."
-      },
-      {
-        "displayName": "Warehouse Code",
-        "name": "warehouseCode",
-        "type": "string",
-        "default": "",
-        "description": "Returns stock on hand for a specific warehouse code"
-      },
-      {
-        "displayName": "Warehouse Name",
-        "name": "warehouseName",
-        "type": "string",
-        "default": "",
-        "description": "Returns stock on hand for a specific warehouse name"
-      }
-    ]
-  }
-]
+      "options": [
+        {
+          "displayName": "As at Date",
+          "name": "asAtDate",
+          "type": "dateTime",
+          "default": "",
+          "description": "Returns the stock on hand for a specific date"
+        },
+        {
+          "displayName": "Is Assembled",
+          "name": "IsAssembled",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the AvailableQty will also include the quantity that can be assembled"
+        },
+        {
+          "displayName": "Modified Since",
+          "name": "modifiedSince",
+          "type": "dateTime",
+          "default": "",
+          "description": "Returns stock on hand values modified after a specific date"
+        },
+        {
+          "displayName": "Order By",
+          "name": "orderBy",
+          "type": "string",
+          "default": "",
+          "description": "Orders the list by a specific column, by default the list is ordered by productCode"
+        },
+        {
+          "displayName": "Product ID",
+          "name": "productId",
+          "type": "string",
+          "default": "",
+          "description": "Returns products with the specific Product Guid. You can enter multiple product IDs separated by commas."
+        },
+        {
+          "displayName": "Warehouse Code",
+          "name": "warehouseCode",
+          "type": "string",
+          "default": "",
+          "description": "Returns stock on hand for a specific warehouse code"
+        },
+        {
+          "displayName": "Warehouse Name",
+          "name": "warehouseName",
+          "type": "string",
+          "default": "",
+          "description": "Returns stock on hand for a specific warehouse name"
+        }
+      ]
+    }
+  ]
+}
 ```

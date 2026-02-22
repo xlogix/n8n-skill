@@ -1,214 +1,245 @@
+---
+title: "Airtable Trigger"
+description: "Starts the workflow when Airtable events occur"
+---
+
 # Airtable Trigger
+**Node Type:** nodes-base.airtableTrigger
 
-- Node name: `airtableTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Airtable/AirtableTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Starts the workflow when Airtable events occur
+## Description
+Starts the workflow when Airtable events occur
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `airtableApi` (required)
-- `airtableTokenApi` (required)
-- `airtableOAuth2Api` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Authentication | `authentication` | `options` | no | `airtableApi` |  |
-| Base | `baseId` | `resourceLocator` | yes | `{"mode":"url","value":""}` | The Airtable Base in which to operate on |
-| Table | `tableId` | `resourceLocator` | yes | `{"mode":"url","value":""}` |  |
-| Trigger Field | `triggerField` | `string` | yes |  | A Created Time or Last Modified Time field that will be used to sort records. If you do not have a Created Time or Last Modified Time field in your schema, please create one, because without this field trigger will not work correctly. |
-| Download Attachments | `downloadAttachments` | `boolean` | no | `false` | Whether the attachment fields define in 'Download Fields' will be downloaded |
-| Download Fields | `downloadFieldNames` | `string` | yes |  | Name of the fields of type 'attachment' that should be downloaded. Multiple ones can be defined separated by comma. Case sensitive. |
-| Additional Fields | `additionalFields` | `collection` | no | `{}` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Authentication",
-    "name": "authentication",
-    "type": "options",
-    "options": [
-      {
-        "name": "API Key",
-        "value": "airtableApi"
-      },
-      {
-        "name": "Access Token",
-        "value": "airtableTokenApi"
-      },
-      {
-        "name": "OAuth2",
-        "value": "airtableOAuth2Api"
-      }
-    ],
-    "default": "airtableApi"
+{
+  "displayName": "Airtable Trigger",
+  "name": "airtableTrigger",
+  "icon": "file:airtable.svg",
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "description": "Starts the workflow when Airtable events occur",
+  "subtitle": "={{$parameter[\"event\"]}}",
+  "defaults": {
+    "name": "Airtable Trigger"
   },
-  {
-    "displayName": "Base",
-    "name": "baseId",
-    "type": "resourceLocator",
-    "default": {
-      "mode": "url",
-      "value": ""
+  "credentials": [
+    {
+      "name": "airtableApi",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "airtableApi"
+          ]
+        }
+      }
     },
-    "required": true,
-    "description": "The Airtable Base in which to operate on",
-    "modes": [
-      {
-        "displayName": "By URL",
-        "name": "url",
-        "type": "string",
-        "placeholder": "https://airtable.com/app12DiScdfes/tblAAAAAAAAAAAAA/viwHdfasdfeieg5p",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "https://airtable.com/([a-zA-Z0-9]{2,})/.*",
-              "errorMessage": "Not a valid Airtable Base URL"
+    {
+      "name": "airtableTokenApi",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "airtableTokenApi"
+          ]
+        }
+      }
+    },
+    {
+      "name": "airtableOAuth2Api",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "authentication": [
+            "airtableOAuth2Api"
+          ]
+        }
+      }
+    }
+  ],
+  "polling": true,
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "properties": [
+    {
+      "displayName": "Authentication",
+      "name": "authentication",
+      "type": "options",
+      "options": [
+        {
+          "name": "API Key",
+          "value": "airtableApi"
+        },
+        {
+          "name": "Access Token",
+          "value": "airtableTokenApi"
+        },
+        {
+          "name": "OAuth2",
+          "value": "airtableOAuth2Api"
+        }
+      ],
+      "default": "airtableApi"
+    },
+    {
+      "displayName": "Base",
+      "name": "baseId",
+      "type": "resourceLocator",
+      "default": {
+        "mode": "url",
+        "value": ""
+      },
+      "required": true,
+      "description": "The Airtable Base in which to operate on",
+      "modes": [
+        {
+          "displayName": "By URL",
+          "name": "url",
+          "type": "string",
+          "placeholder": "https://airtable.com/app12DiScdfes/tblAAAAAAAAAAAAA/viwHdfasdfeieg5p",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "https://airtable.com/([a-zA-Z0-9]{2,})/.*",
+                "errorMessage": "Not a valid Airtable Base URL"
+              }
             }
+          ],
+          "extractValue": {
+            "type": "regex",
+            "regex": "https://airtable.com/([a-zA-Z0-9]{2,})"
           }
-        ],
-        "extractValue": {
-          "type": "regex",
-          "regex": "https://airtable.com/([a-zA-Z0-9]{2,})"
+        },
+        {
+          "displayName": "ID",
+          "name": "id",
+          "type": "string",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "[a-zA-Z0-9]{2,}",
+                "errorMessage": "Not a valid Airtable Base ID"
+              }
+            }
+          ],
+          "placeholder": "appD3dfaeidke",
+          "url": "=https://airtable.com/{{$value}}"
+        }
+      ]
+    },
+    {
+      "displayName": "Table",
+      "name": "tableId",
+      "type": "resourceLocator",
+      "default": {
+        "mode": "url",
+        "value": ""
+      },
+      "required": true,
+      "modes": [
+        {
+          "displayName": "By URL",
+          "name": "url",
+          "type": "string",
+          "placeholder": "https://airtable.com/app12DiScdfes/tblAAAAAAAAAAAAA/viwHdfasdfeieg5p",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})/.*",
+                "errorMessage": "Not a valid Airtable Table URL"
+              }
+            }
+          ],
+          "extractValue": {
+            "type": "regex",
+            "regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})"
+          }
+        },
+        {
+          "displayName": "ID",
+          "name": "id",
+          "type": "string",
+          "validation": [
+            {
+              "type": "regex",
+              "properties": {
+                "regex": "[a-zA-Z0-9]{2,}",
+                "errorMessage": "Not a valid Airtable Table ID"
+              }
+            }
+          ],
+          "placeholder": "tbl3dirwqeidke"
+        }
+      ]
+    },
+    {
+      "displayName": "Trigger Field",
+      "name": "triggerField",
+      "type": "string",
+      "default": "",
+      "description": "A Created Time or Last Modified Time field that will be used to sort records. If you do not have a Created Time or Last Modified Time field in your schema, please create one, because without this field trigger will not work correctly.",
+      "required": true
+    },
+    {
+      "displayName": "Download Attachments",
+      "name": "downloadAttachments",
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the attachment fields define in 'Download Fields' will be downloaded"
+    },
+    {
+      "displayName": "Download Fields",
+      "name": "downloadFieldNames",
+      "type": "string",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "downloadAttachments": [
+            true
+          ]
         }
       },
-      {
-        "displayName": "ID",
-        "name": "id",
-        "type": "string",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "[a-zA-Z0-9]{2,}",
-              "errorMessage": "Not a valid Airtable Base ID"
-            }
-          }
-        ],
-        "placeholder": "appD3dfaeidke",
-        "url": "=https://airtable.com/{{$value}}"
-      }
-    ]
-  },
-  {
-    "displayName": "Table",
-    "name": "tableId",
-    "type": "resourceLocator",
-    "default": {
-      "mode": "url",
-      "value": ""
+      "default": "",
+      "description": "Name of the fields of type 'attachment' that should be downloaded. Multiple ones can be defined separated by comma. Case sensitive."
     },
-    "required": true,
-    "modes": [
-      {
-        "displayName": "By URL",
-        "name": "url",
-        "type": "string",
-        "placeholder": "https://airtable.com/app12DiScdfes/tblAAAAAAAAAAAAA/viwHdfasdfeieg5p",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})/.*",
-              "errorMessage": "Not a valid Airtable Table URL"
-            }
-          }
-        ],
-        "extractValue": {
-          "type": "regex",
-          "regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})"
+    {
+      "displayName": "Additional Fields",
+      "name": "additionalFields",
+      "type": "collection",
+      "placeholder": "Add Field",
+      "default": {},
+      "options": [
+        {
+          "displayName": "Fields",
+          "name": "fields",
+          "type": "string",
+          "requiresDataPath": "multiple",
+          "default": "",
+          "description": "Fields to be included in the response. Multiple ones can be set separated by comma. Example: <code>name, id</code>. By default just the trigger field will be included."
+        },
+        {
+          "displayName": "Formula",
+          "name": "formula",
+          "type": "string",
+          "default": "",
+          "description": "Formulas may involve functions, numeric operations, logical operations, and text operations that operate on fields. More info <a href=\"https://support.airtable.com/hc/en-us/articles/203255215-Formula-Field-Reference\">here</a>."
+        },
+        {
+          "displayName": "View ID",
+          "name": "viewId",
+          "type": "string",
+          "default": "",
+          "description": "The name or ID of a view in the table. If set, only the records in that view will be returned."
         }
-      },
-      {
-        "displayName": "ID",
-        "name": "id",
-        "type": "string",
-        "validation": [
-          {
-            "type": "regex",
-            "properties": {
-              "regex": "[a-zA-Z0-9]{2,}",
-              "errorMessage": "Not a valid Airtable Table ID"
-            }
-          }
-        ],
-        "placeholder": "tbl3dirwqeidke"
-      }
-    ]
-  },
-  {
-    "displayName": "Trigger Field",
-    "name": "triggerField",
-    "type": "string",
-    "default": "",
-    "description": "A Created Time or Last Modified Time field that will be used to sort records. If you do not have a Created Time or Last Modified Time field in your schema, please create one, because without this field trigger will not work correctly.",
-    "required": true
-  },
-  {
-    "displayName": "Download Attachments",
-    "name": "downloadAttachments",
-    "type": "boolean",
-    "default": false,
-    "description": "Whether the attachment fields define in 'Download Fields' will be downloaded"
-  },
-  {
-    "displayName": "Download Fields",
-    "name": "downloadFieldNames",
-    "type": "string",
-    "required": true,
-    "displayOptions": {
-      "show": {
-        "downloadAttachments": [
-          true
-        ]
-      }
-    },
-    "default": "",
-    "description": "Name of the fields of type 'attachment' that should be downloaded. Multiple ones can be defined separated by comma. Case sensitive."
-  },
-  {
-    "displayName": "Additional Fields",
-    "name": "additionalFields",
-    "type": "collection",
-    "placeholder": "Add Field",
-    "default": {},
-    "options": [
-      {
-        "displayName": "Fields",
-        "name": "fields",
-        "type": "string",
-        "requiresDataPath": "multiple",
-        "default": "",
-        "description": "Fields to be included in the response. Multiple ones can be set separated by comma. Example: <code>name, id</code>. By default just the trigger field will be included."
-      },
-      {
-        "displayName": "Formula",
-        "name": "formula",
-        "type": "string",
-        "default": "",
-        "description": "Formulas may involve functions, numeric operations, logical operations, and text operations that operate on fields. More info <a href=\"https://support.airtable.com/hc/en-us/articles/203255215-Formula-Field-Reference\">here</a>."
-      },
-      {
-        "displayName": "View ID",
-        "name": "viewId",
-        "type": "string",
-        "default": "",
-        "description": "The name or ID of a view in the table. If set, only the records in that view will be returned."
-      }
-    ]
-  }
-]
+      ]
+    }
+  ]
+}
 ```

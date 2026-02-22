@@ -1,58 +1,75 @@
+---
+title: "Jotform Trigger"
+description: "Handle Jotform events via webhooks"
+---
+
 # Jotform Trigger
+**Node Type:** nodes-base.jotFormTrigger
 
-- Node name: `jotFormTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/JotForm/JotFormTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Handle Jotform events via webhooks
+## Description
+Handle Jotform events via webhooks
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `jotFormApi` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Form Name or ID | `form` | `options` | yes |  | Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a> |
-| Resolve Data | `resolveData` | `boolean` | no | `true` | By default does the webhook-data use internal keys instead of the names. If this option gets activated, it will resolve the keys automatically to the actual names. |
-| Only Answers | `onlyAnswers` | `boolean` | no | `true` | Whether to return only the answers of the form and not any of the other data |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Form Name or ID",
-    "name": "form",
-    "type": "options",
-    "required": true,
-    "typeOptions": {
-      "loadOptionsMethod": "getForms"
+{
+  "displayName": "Jotform Trigger",
+  "name": "jotFormTrigger",
+  "icon": {
+    "light": "file:jotform.svg",
+    "dark": "file:jotform.dark.svg"
+  },
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "description": "Handle Jotform events via webhooks",
+  "defaults": {
+    "name": "Jotform Trigger"
+  },
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "credentials": [
+    {
+      "name": "jotFormApi",
+      "required": true
+    }
+  ],
+  "webhooks": [
+    {
+      "name": "default",
+      "httpMethod": "POST",
+      "responseMode": "onReceived",
+      "path": "webhook"
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Form Name or ID",
+      "name": "form",
+      "type": "options",
+      "required": true,
+      "typeOptions": {
+        "loadOptionsMethod": "getForms"
+      },
+      "default": "",
+      "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>"
     },
-    "default": "",
-    "description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>"
-  },
-  {
-    "displayName": "Resolve Data",
-    "name": "resolveData",
-    "type": "boolean",
-    "default": true,
-    "description": "By default does the webhook-data use internal keys instead of the names. If this option gets activated, it will resolve the keys automatically to the actual names."
-  },
-  {
-    "displayName": "Only Answers",
-    "name": "onlyAnswers",
-    "type": "boolean",
-    "default": true,
-    "description": "Whether to return only the answers of the form and not any of the other data"
-  }
-]
+    {
+      "displayName": "Resolve Data",
+      "name": "resolveData",
+      "type": "boolean",
+      "default": true,
+      "description": "By default does the webhook-data use internal keys instead of the names. If this option gets activated, it will resolve the keys automatically to the actual names."
+    },
+    {
+      "displayName": "Only Answers",
+      "name": "onlyAnswers",
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to return only the answers of the form and not any of the other data"
+    }
+  ]
+}
 ```

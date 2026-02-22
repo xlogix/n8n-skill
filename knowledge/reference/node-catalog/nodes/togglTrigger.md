@@ -1,44 +1,53 @@
+---
+title: "Toggl Trigger"
+description: "Starts the workflow when Toggl events occur"
+---
+
 # Toggl Trigger
+**Node Type:** nodes-base.togglTrigger
 
-- Node name: `togglTrigger`
-- n8n-nodes-base version: `2.7.2`
-- Source file: `n8n-nodes-base/dist/nodes/Toggl/TogglTrigger.node.js`
-- Node version: `1`
-- Groups: `trigger`
-- Description: Starts the workflow when Toggl events occur
+## Description
+Starts the workflow when Toggl events occur
 
-## Inputs
-- None declared
-
-## Outputs
-- `main`
-
-## Credentials
-- `togglApi` (required)
-
-## Resource and Operation Coverage
-- Not modeled via `resource`/`operation` fields
-
-## Parameters
-| Display Name | Name | Type | Required | Default | Description |
-|---|---|---|---|---|---|
-| Event | `event` | `options` | yes | `newTimeEntry` |  |
-
-## Full Parameter Schema
+## Schema
 ```json
-[
-  {
-    "displayName": "Event",
-    "name": "event",
-    "type": "options",
-    "options": [
-      {
-        "name": "New Time Entry",
-        "value": "newTimeEntry"
-      }
-    ],
-    "required": true,
-    "default": "newTimeEntry"
-  }
-]
+{
+  "displayName": "Toggl Trigger",
+  "name": "togglTrigger",
+  "icon": "file:toggl.png",
+  "group": [
+    "trigger"
+  ],
+  "version": 1,
+  "description": "Starts the workflow when Toggl events occur",
+  "defaults": {
+    "name": "Toggl Trigger"
+  },
+  "credentials": [
+    {
+      "name": "togglApi",
+      "required": true
+    }
+  ],
+  "polling": true,
+  "inputs": [],
+  "outputs": [
+    "main"
+  ],
+  "properties": [
+    {
+      "displayName": "Event",
+      "name": "event",
+      "type": "options",
+      "options": [
+        {
+          "name": "New Time Entry",
+          "value": "newTimeEntry"
+        }
+      ],
+      "required": true,
+      "default": "newTimeEntry"
+    }
+  ]
+}
 ```
