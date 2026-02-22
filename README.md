@@ -1,5 +1,7 @@
 # n8n-skill
 
+*Created by Abhishek Uniyal (xlogix)*
+
 This repository is a **custom skill** designed specifically for AI Agents (like Codex, Antigravity, Cursor, Windsurf, ChatGPT, and Claude). 
 
 By giving your AI agent this skill, it learns exactly how to build, debug, and design [n8n](https://n8n.io) workflows perfectly.
@@ -14,7 +16,7 @@ n8n has over 500+ built-in nodes. When you ask an AI to build a workflow, it usu
 
 ## How to add this skill to your AI
 
-I (Abhishek Uniyal / xlogix) have made it effortless to make your AI an n8n expert:
+I've made it effortless to make your AI an n8n expert:
 
 ### 1. For IDEs (Cursor / Windsurf)
 
