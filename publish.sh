@@ -25,15 +25,15 @@ fi
 echo "🌿 Switching to main branch..."
 git checkout main
 
-# 5. Rsync the generated files cleanly to the main knowledge folder
+# 5. Rsync the generated files cleanly to the main references folder
 # Using --delete ensures that if a node was removed from n8n, it is deleted here too
-echo "📂 Transferring generated nodes to the main knowledge folder..."
-mkdir -p knowledge/reference/node-catalog/nodes/
-rsync -av --delete output/knowledge/reference/node-catalog/nodes/ knowledge/reference/node-catalog/nodes/
+echo "📂 Transferring generated nodes to the main references folder..."
+mkdir -p references/node-catalog/nodes/
+rsync -av --delete output/references/node-catalog/nodes/ references/node-catalog/nodes/
 
 # 6. Stage the files on main
 echo "✅ Staging new node updates..."
-git add knowledge/reference/node-catalog/nodes/
+git add references/node-catalog/nodes/
 
 # 7. Show the user the diff summary
 echo ""

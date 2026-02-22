@@ -8,8 +8,7 @@ const PACKAGES = ["n8n-nodes-base", "@n8n/n8n-nodes-langchain"];
 const OUTPUT_DIR = path.join(
     __dirname,
     "output",
-    "knowledge",
-    "reference",
+    "references",
     "node-catalog",
     "nodes",
 );
@@ -110,7 +109,7 @@ async function run() {
     }
 
     console.log(
-        `\nSuccess! Generated ${generatedCount} node definition files in ./output/knowledge/`,
+        `\nSuccess! Generated ${generatedCount} node definition files in ./output/references/`,
     );
 }
 
