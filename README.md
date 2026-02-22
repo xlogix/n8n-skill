@@ -24,7 +24,9 @@ Simply clone or download this repository (`https://github.com/xlogix/n8n-skill`)
 
 ### 2. For Chat Apps (ChatGPT / Claude Web)
 
-Copy the text found in `.agents/system-prompt.md` and paste it as the "Custom Instructions" or the initial system prompt in your chat session.
+**Step 1:** Copy the text found in `.agents/system-prompt.md` and paste it as the "Custom Instructions" or the initial system prompt in your chat session.
+**Step 2:** When you ask the AI to build a workflow, it will ask you for the instruction manuals. 
+**Step 3:** Go to this repository, download the specific `.md` files for the nodes you want to use from `knowledge/reference/node-catalog/nodes/`, and upload them to the chat. The AI will then build the workflow perfectly.
 
 ### 3. For Claude Desktop
 
